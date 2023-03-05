@@ -1,0 +1,35 @@
+/*input Label*/
+
+.InputLabel{
+    width: 80%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 1rem;
+}
+
+
+.Input{
+    width: 100%;
+    box-shadow : 0 0 3px 0 rgba(0,0,0,0.5);
+    border-radius: 25px;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.Input input{
+    width: 100%;
+    max-width: 400px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0E0E0F;
+    padding: 0 20px;
+    background-color: #E7E7E7;
+}

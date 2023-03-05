@@ -1,0 +1,67 @@
+/*Bottom Navigation styles*/
+
+.BottomNavigation{
+    width: 92%;
+    height: 60px;
+    max-width:  500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    bottom: 15px;
+    right : 15px;
+    z-index: 1;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+     animation: fadeIn 0.5s ease-in-out;
+     transform-origin: 100% 0%;
+     text-decoration: none;
+}
+
+.BottomNavigationHide{
+    height: 7%;
+    max-width:  500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 15px;
+    right : 15px;
+    z-index: 1;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+     animation: fadeOut 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scaleX(0)
+    }
+    100% {
+        opacity: 1;
+        transform: scaleX(1)
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: scaleX(1)
+    }
+    100% {
+        opacity: 0;
+        transform: scaleX(0)
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .BottomNavigation{
+        padding-right: 40px;
+        justify-content: space-around;
+    }
+}

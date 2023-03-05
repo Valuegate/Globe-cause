@@ -1,0 +1,27 @@
+/*About City styles*/
+
+.AboutCity{
+    width: 100%;
+    height: 100vh;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius:  25px 25px 0 0 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.Map{
+    width: 90%;
+    height: 300px;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius:  25px 25px 0 0 ;
+}
+.Rating{
+    width : 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}

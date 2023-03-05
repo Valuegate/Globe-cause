@@ -1,0 +1,56 @@
+/* cityCard styles */
+
+.CityCard{
+
+    width: 150px;
+    height: 150px;
+    max-width: 200px;
+    max-height: 200px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+    cursor: pointer;
+    margin-bottom:  10%;
+    position: relative;
+}
+
+.CityCard:hover{
+    transform: scale(1.1);
+    box-shadow:  0 0 5px 0 rgba(0,0,0,0.5);
+}
+.CityCardImage{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.CityCardImage img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.CityCardImageOverlay{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow:  0 0 3px rgba(0,0,0,0.5);
+}
+.CityCardImageOverlay:hover{
+    text-shadow:  0 0 3px rgba(0,0,0,0.8);
+}
+@media screen and (min-width: 768px) {
+    .CityCard{
+        margin: 0 10px;
+        margin-bottom: 40px;
+        width: 200px;
+        height: 200px;
+    }
+}

@@ -1,0 +1,13 @@
+/*Secondary Tab Navigation styles*/
+
+.SecondaryTabNavigation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding : 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}

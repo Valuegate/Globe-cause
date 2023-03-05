@@ -1,0 +1,25 @@
+.AccountButton{
+    width: 80%;
+    height: 50px;
+    border: none;
+    font-size: 1.2rem;
+    /* box-shadow:  0 0 3px 0 rgba(0,0,0,0.5); */
+    margin: 15px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.NameContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.NameContainer p{
+    margin: 0 10px;
+}
+@media screen and (min-width: 768px) {
+    .AccountButton{
+        width: 600px;
+    }
+}
