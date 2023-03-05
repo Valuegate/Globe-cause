@@ -1,0 +1,17 @@
+/*Authentication Button*/
+.AuthenticationButton{
+    width: 80%;
+    height: 50px;
+    max-width: 400px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+    cursor: pointer;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 15px 0;
+    background-image: linear-gradient(to right, #1F4490, #00A9E1);
+    color: #fff;
+}
