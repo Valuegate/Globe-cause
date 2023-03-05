@@ -1,0 +1,25 @@
+/*Sign in Button*/
+
+.SignInButton{
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+    cursor: pointer;
+background-image: linear-gradient(to right, #1F4490, #00A9E1);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.SignInButton:hover{
+    transform: scale(1.1);
+    box-shadow:  0 0 5px 0 rgba(0,0,0,0.5);
+}

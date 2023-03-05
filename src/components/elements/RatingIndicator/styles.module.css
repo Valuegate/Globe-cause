@@ -1,0 +1,41 @@
+/*Rating Indictaor styles*/
+
+.RatingIndicator{
+    width: 50%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F5F5F5;
+    border-radius: 25px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.3);
+}
+.Rating{
+  /* width: 50%; */
+    height: 100%;
+    border-radius: 25px 0px 0px 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
+    animation: ratingAnimation 1s ease-in-out;
+    transform-origin: 0% 100%;
+}
+.Rating p{
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 20px;
+    text-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+}
+
+@keyframes ratingAnimation {
+    
+    0%{
+        transform: scaleX(0);
+    }
+    100%{
+        transform: scaleX(1);
+    }
+}

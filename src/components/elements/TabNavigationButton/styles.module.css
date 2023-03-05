@@ -1,0 +1,21 @@
+
+/*Tab Navigation Button styles*/
+
+.TabNavigationButton{
+    padding: 0 20px;
+    border-radius: 25px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin:  0 10px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+    cursor: pointer;
+    background-color: #ffffff;
+    font-weight:  600;
+}
+.TabNavigationButton:hover{
+    transform: scale(1.1);
+    box-shadow:  0 0 5px 0 rgba(0,0,0,0.5);
+}

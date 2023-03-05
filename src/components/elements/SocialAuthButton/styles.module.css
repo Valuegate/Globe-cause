@@ -1,0 +1,21 @@
+/*Social Auth Button*/
+
+.SocialAuthButton{
+    width: 80%;
+    height: 50px;
+    max-width: 400px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+    cursor: pointer;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 15px 0;
+}
+.SocialAuthButton:hover{
+    transform: scale(1.1);
+    box-shadow:  0 0 5px 0 rgba(0,0,0,0.5);
+}
+

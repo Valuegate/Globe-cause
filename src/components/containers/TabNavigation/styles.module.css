@@ -1,0 +1,44 @@
+
+
+/*Tab Navigation styles*/
+
+.TabNavigation{
+    width: auto;
+    height: 7%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 30px;
+    padding-bottom: 10px;
+     padding-left: 70px;
+     padding-right: 20px;
+     overflow-x: scroll;
+     overflow-y: hidden;
+     white-space: nowrap;
+     -webkit-overflow-scrolling: touch;
+     scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.TabNavigation::-webkit-scrollbar{
+    display: none;
+    width: 0px;
+    height: 0px;
+}
+
+
+@media screen and (min-width: 768px) {
+    .TabNavigation{
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+    
+
+    
+
+
+
+
