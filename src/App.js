@@ -8,6 +8,7 @@ import CityDetail from "./pages/Home/CityDetail/CityDetail";
 import EditProfile from "./pages/Account/EditProfile/EditProfile";
 import ChangePassword from "./pages/Account/ChangePassword/ChangePassword";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import OrganizationDetail from "./pages/Home/OrganizationDetail/OrganizationDetail";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Splash />} />
           <Route path="/home" element={<Home />} />
           <Route path="/organizations" element={<Organizations />} />
+          <Route path="/organization/:organizationId" element={<OrganizationDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="/login" element={<Login />} />
           <Route path="/city/:cityId" element={<CityDetail />} />
