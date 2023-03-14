@@ -10,9 +10,9 @@
     margin-bottom: 1.5rem;
 }
 
-.ImageContainer{
+/* .ImageContainer{
     width: 30%;
-}
+} */
 .Image{
     width: 100px;
     height: 100px;
@@ -20,6 +20,7 @@
 }
 .MessageContainer{
     width: 80%;
+    margin-left: .5rem;
 }
 .Username{
     font-size: 12px;
@@ -36,5 +37,10 @@
 .Box {
     width: 100%;
     padding: .5rem;
+    justify-content: flex-start;
+}
+.Image{
+    width: 40px;
+    height: 43px;
 }
 }

@@ -2,11 +2,12 @@ import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import {  useMemo, useState } from "react";
 import styles from "./styles.module.css";
 
-import SecondaryTabNavigation from "../SecondaryTabNavigation/SecondaryTabNavigation";
+import SecondaryTabNavigation from "../SecondaryTabNavigation/OrganizationSecondaryTabNavigation";
 import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
 import ChatContainer from "../ChatContainer/ChatContainer";
 import img from '../../../assets/myPhoto.JPG'
 import imgmap from '../../../assets/IMAGE.png'
+import photos from "../../../Demo/Api/Photos";
 import InputContainer from "../InputContainer/InputContainer";
 
 const AboutOrganization = ({ image,name,country,description }) => {
@@ -67,12 +68,11 @@ const AboutOrganization = ({ image,name,country,description }) => {
       return (
         <div className={styles.Photos}>
           {
-            chatList.map((message,i)=>(
-<ChatContainer image={img} key={i+1} username='Captain Michael' message={message}/>
+            photos.map((message,i)=>(
+            <img src={message.image} className={styles.Image} key={i+1} alt=''/>
             ))
           }
           
-          <InputContainer setMessage={setMessage} setChatList={setChatList} chatList={chatList} message={message} />
         </div>
       );
     }

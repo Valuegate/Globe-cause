@@ -1,7 +1,6 @@
 .Container{
-    width: 100%;
+    width: 90%;
     height: 4rem;
-    max-width: 1200px;
     max-height: 10vh;
     background-color: #1F4490;
     display:flex;

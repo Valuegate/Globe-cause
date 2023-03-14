@@ -26,7 +26,7 @@ const CityDetail = () => {
       style={{ backgroundImage: `url(${city.image})` }}
     >
       <CityHeader city={city.name} country={city.country} />
-      <AboutCity ratings={city.ratings} />
+      <AboutCity description="The Nature Conservancy is a global conservation organization. Our mission is to conserve the lands and waters on which all life depends."  ratings={city.ratings} />
       <BackButton color="#ffffff" to="/home" />
     </div>
   );

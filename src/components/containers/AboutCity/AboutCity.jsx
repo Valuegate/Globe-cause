@@ -10,8 +10,9 @@ import OrganizationContainer from "../OrganizationContainer/OrganizationContaine
 import ChatContainer from "../ChatContainer/ChatContainer";
 import img from '../../../assets/myPhoto.JPG'
 import InputContainer from "../InputContainer/InputContainer";
+import photos from "../../../Demo/Api/Photos";
 
-const AboutCity = ({ ratings }) => {
+const AboutCity = ({ ratings,description }) => {
   const [ratingsValue, setRatingValue] = useState([]);
   const [tab, setTab] = useState("About");
 
@@ -65,6 +66,17 @@ const AboutCity = ({ ratings }) => {
               />
             );
           })}
+           <div style={{padding:'1rem'}}>
+            <p style={{fontWeight:'700'}} >Description</p>
+            <p style={{fontWeight:'400',fontSize:'14px'}}>{description}</p>
+          </div>
+          <div className={styles.ImageContainer} >
+              {
+            photos.map((message,i)=>(
+            <img src={message.image} className={styles.Image} key={i+1} alt=''/>
+            ))
+          }
+          </div>
         </>
       );
     } else if (tab === "Organizations") {
