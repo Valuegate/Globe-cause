@@ -71,6 +71,7 @@ const AboutCity = ({ ratings,description }) => {
             <p style={{fontWeight:'400',fontSize:'14px'}}>{description}</p>
           </div>
           <div className={styles.ImageContainer} >
+            <p style={{fontWeight:'700'}} >Photos</p>
               {
             photos.map((message,i)=>(
             <img src={message.image} className={styles.Image} key={i+1} alt=''/>

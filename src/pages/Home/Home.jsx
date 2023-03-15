@@ -9,6 +9,7 @@ import Cities from "../../components/containers/Cities/Cities";
 import BottomNavigation from "../../components/containers/BottomNavigation/BottomNavigation";
 
 import NavigationButton from "../../components/elements/NavigationButton/NavigationButton";
+import ToggleButton from "../../components/elements/ToggleButton/ToggleButton";
 // import SignInButton from "../../components/elements/SignInButton";
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
   return (
     <div className={styles.Home}>
       <Intro />
+      <ToggleButton/>
       <Search />
       <Cities />
       {/* <Link to="/login" style={{ textDecoration: "none" }}>

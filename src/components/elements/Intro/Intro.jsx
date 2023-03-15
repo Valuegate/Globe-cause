@@ -21,9 +21,9 @@ const Intro = () => {
       <div className={styles.IntroImage}>
         <img src={staff} alt="IntroImage" />
       </div>
-      <div className={styles.Notification} >
+      <div  >
         <Link to='/notifications'>
-        <img src={notification} alt=''/>
+        <img className={styles.Notification} src={notification} alt=''/>
         </Link>
       </div>
       {/* <div className={styles.Notification}>
