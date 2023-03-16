@@ -13,6 +13,7 @@ import OrganizationDetail from "./pages/Home/OrganizationDetail/OrganizationDeta
 import Notification from "./pages/Account/Notifications/Notifications";
 import About from "./pages/Account/About/About";
 import PrivacyPolicy from "./pages/Account/PrivacyPolicy/PrivacyPolicy";
+import Help from "./pages/Account/HelpCenter/Help";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path="/account/notifications" element={<Notification/>} />
           <Route path="/account/about" element={<About/>} />
           <Route path="/account/privacy" element={<PrivacyPolicy/>} />
+          
+          <Route path="/account/help-center" element={<Help/>} />
           
           <Route path="/city/:cityId" element={<CityDetail />} />
           <Route path="/account/edit-profile" element={<EditProfile />} />

@@ -1,5 +1,7 @@
 import React from 'react'
-import BackButton from '../../../components/elements/BackButton/BackButton'
+
+import {Link} from 'react-router-dom'
+import arrow from '../../../assets/Vectuor.png'
 import ToggleButton from '../../../components/elements/ToggleButton/ToggleButton'
 import styles from './styles.module.css'
 
@@ -17,9 +19,12 @@ const notification = ['General notification', 'sound','vibrate','sound update']
 const Notification = () => {
   return (
     <div >
-        <div  className={styles.ChangePassword}>
-            <BackButton color="#0E0E0F" to="/account" />
-            <h2 className={styles.PageHeader}>Notification</h2>
+         <div className={styles.HeaderContainer} >
+            <Link to='/account'>
+            <img src={arrow} alt="" />
+            </Link>
+            <p style={{fontWeight:'700',textAlign:'center',fontSize:'20px'}} >Notification
+            </p>
         </div>
         {
             notification.map((index, i)=>{

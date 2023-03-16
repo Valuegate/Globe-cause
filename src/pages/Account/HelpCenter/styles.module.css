@@ -25,7 +25,8 @@
     border-radius: 10px;
     height: 3rem;
     display: flex;
-    padding: 1rem;
+    margin-bottom: 1rem;
+    padding: .5rem;
     align-items: center;
 }
 
