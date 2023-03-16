@@ -11,6 +11,8 @@ import ChangePassword from "./pages/Account/ChangePassword/ChangePassword";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OrganizationDetail from "./pages/Home/OrganizationDetail/OrganizationDetail";
 import Notification from "./pages/Account/Notifications/Notifications";
+import About from "./pages/Account/About/About";
+import PrivacyPolicy from "./pages/Account/PrivacyPolicy/PrivacyPolicy";
 
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
           <Route path='/notifications' element={<Notifications/>}/>
           
           <Route path="/account/notifications" element={<Notification/>} />
+          <Route path="/account/about" element={<About/>} />
+          <Route path="/account/privacy" element={<PrivacyPolicy/>} />
+          
           <Route path="/city/:cityId" element={<CityDetail />} />
           <Route path="/account/edit-profile" element={<EditProfile />} />
           <Route path="/account/change-password" element={<ChangePassword />} />
