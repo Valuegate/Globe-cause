@@ -1,0 +1,11 @@
+.Home {
+    width: 100%;
+    background-color: #1F4490;
+    background-image: url("../../assets/banner.png");
+}
+
+.CommunityHeader{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

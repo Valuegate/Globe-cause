@@ -9,6 +9,7 @@ import Cities from "../../components/containers/Cities/Cities";
 import BottomNavigation from "../../components/containers/BottomNavigation/BottomNavigation";
 
 import NavigationButton from "../../components/elements/NavigationButton/NavigationButton";
+import Patners from "../../components/containers/Patners/Patners";
 // import SignInButton from "../../components/elements/SignInButton";
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
     <div className={styles.Home}>
       <Intro />
       <Search />
+      <Patners/>
       <Cities />
       {/* <Link to="/login" style={{ textDecoration: "none" }}>
         <SignInButton />
