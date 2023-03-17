@@ -1,0 +1,38 @@
+.Container{
+    width: 22px;
+    height: 13px;
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+    background-color: rgba(14, 14, 15, 0.5);
+}
+
+.Button{
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #fff;
+}
+
+.ContainerActive{
+    width: 22px;
+        height: 13px;
+        border-radius: 100px;
+        position: relative;
+        display: flex;
+        cursor: pointer;
+        transition: ease-in-out .3s;
+        background-color: #1F4490;
+}
+
+.ButtonActive{    
+    transition: ease-in-out .3s;
+    width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        position: absolute;
+        right: -1.1%;
+        float: right;
+        background-color: #fff;
+}

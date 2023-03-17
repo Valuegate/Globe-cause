@@ -1,0 +1,51 @@
+.Container{
+    padding: .75rem;
+    width: 85%;
+    margin: auto;
+}
+.HeaderContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .5rem;
+}
+
+
+.HeaderContainer>p {
+    display: flex;
+    width: 85%;
+    justify-content: flex-start;
+}
+.ChangePassword {
+    display: flex;
+}
+.VideoResponsive {
+    overflow: hidden;
+    position: relative;
+    height: 340px;
+}
+
+.VideoResponsive iframe {
+    left: 0;
+    top: 0;
+    height: 340px;
+    width: 100%;
+    position: absolute;
+}
+
+@media screen and (max-width: 468px) {
+    .VideoResponsive {
+            height: 140px;
+        }
+                .HeaderContainer>Link>img {
+        
+                    margin-left: 2rem;
+                }
+    .VideoResponsive iframe {
+        height: 140px;
+    }
+    .ChangePassword {
+        margin-bottom: 0;
+    }
+}

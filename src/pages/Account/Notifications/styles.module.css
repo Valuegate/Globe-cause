@@ -1,0 +1,39 @@
+.Container{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+    align-items: center;
+    padding: .5rem;
+    height: 3.5rem;
+}
+
+.Container>p{
+    font-size: 1.1em;
+    font-weight: 400;
+    float: left;
+    text-transform: capitalize;
+}
+
+.HeaderContainer {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+
+.HeaderContainer>p {
+    display: flex;
+    width: 85%;
+    justify-content: flex-start;
+}
+
+@media screen and (min-width: 768px) {
+    .ChangePassword {
+        margin-bottom: 0;
+    }
+
+}

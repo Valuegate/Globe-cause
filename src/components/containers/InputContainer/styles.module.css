@@ -1,0 +1,38 @@
+.Container{
+    width: 90%;
+    height: 4rem;
+    max-height: 10vh;
+    background-color: #1F4490;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    
+}
+
+.Input{
+    border-radius:50px ;
+    border:1px solid #fff;
+    outline: none;
+    color:#fff !important;
+    padding: 1rem;
+    width: 100%;
+    max-width: 70% ;
+    background-color: transparent;
+    display:block;
+}
+
+.Button{
+    background-color: transparent;
+    color: none;
+    border: none;
+    outline: none;
+}
+
+@media screen and (max-width: 468px) {
+    .Container{
+        width: 100%;
+    }
+}

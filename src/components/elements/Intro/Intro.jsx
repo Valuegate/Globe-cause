@@ -1,7 +1,8 @@
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 import staff from "../../../assets/staff.png";
-
+import notification from '../../../assets/notification.png'
 import styles from "./styles.module.css";
+import {Link} from 'react-router-dom'
 
 const Intro = () => {
   return (
@@ -19,6 +20,11 @@ const Intro = () => {
       </div>
       <div className={styles.IntroImage}>
         <img src={staff} alt="IntroImage" />
+      </div>
+      <div  >
+        <Link to='/notifications'>
+        <img className={styles.Notification} src={notification} alt=''/>
+        </Link>
       </div>
       {/* <div className={styles.Notification}>
         <NotificationsIcon fontSize="large" />
