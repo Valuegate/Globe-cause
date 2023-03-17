@@ -1,43 +1,60 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../firebase";
+
 import CityCard from "../../elements/CityCard/CityCard";
 import styles from "./styles.module.css";
 import TabNavigation from "../TabNavigation/TabNavigation";
 
-import cities from "../../../Demo/Api/Cities";
+// import cities from "../../../Demo/Api/Cities";
 
 const Cities = () => {
-  const [cityFilter, setCityFilter] = useState("All");
+  const [cityFilter, setCityFilter] = useState("Portugal");
+  const [portugal, setPortugal] = useState([]);
+
+  const fetchPost = async () => {
+    await getDocs(collection(db, `locations_${cityFilter.toLowerCase()}`)).then(
+      (querySnapshot) => {
+        const newData = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setPortugal(newData);
+        // console.log(countries[0]?.countriesList[0]);
+      }
+    );
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
 
   const filterCities = (city) => {
-    if (cityFilter === "All") {
-      return true;
-    } else {
-      return city.country === cityFilter;
-    }
+    setCityFilter(city);
   };
 
   const NavigationActive = (country) => {
     setCityFilter(country);
+    fetchPost();
+    console.log("NavigationActive", country);
   };
 
   return (
     <div className={styles.Cities}>
       <TabNavigation click={NavigationActive} cityFilter={cityFilter} />
       <div className={styles.CitiesContainer}>
-        {cities.map(
-          (city, key) =>
-            filterCities(city) && (
-              <Link
-                to={`/city/${city.id}`}
-                style={{ textDecoration: "none" }}
-                key={key}
-                state={{ id: city.id }}
-              >
-                <CityCard city={city} />
-              </Link>
-            )
-        )}
+        {portugal.map((city, key) => (
+          <Link
+            to={`/city/${city.id}`}
+            style={{ textDecoration: "none" }}
+            key={key}
+            state={{ id: city.id }}
+          >
+            <CityCard city={city} />
+          </Link>
+        ))}
       </div>
     </div>
   );

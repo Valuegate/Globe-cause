@@ -21,7 +21,7 @@ const accountSettings = [
   {
     title: "Notifications",
     icon: NotificationsIcon,
-    link: "/account/notifications",
+    link: "/account/notification-settings",
   },
   {
     title: "About",
@@ -41,7 +41,7 @@ const accountSettings = [
   },
   {
     title: "Dark Mode",
-    icon:  DarkModeIcon,
+    icon: DarkModeIcon,
     link: "/account/dark-mode",
   },
   {
@@ -50,7 +50,7 @@ const accountSettings = [
     link: "/account/help-center",
   },
   {
-    title: "Log Out",
+    title: "Logout",
     icon: LogoutIcon,
     link: "/account/logout",
   },

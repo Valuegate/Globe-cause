@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../hooks/auth/UserAuthContext";
 
 import styles from "./styles.module.css";
 
@@ -9,6 +11,24 @@ import Label from "../../components/elements/Label/Label";
 import AuthenticationButton from "../../components/elements/AuthenticationButton/AuthenticationButton";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { logIn } = useUserAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await logIn(email, password);
+      navigate("/home");
+    } catch (err) {
+      setError(err.message);
+      console.log(err.message);
+    }
+  };
+
   return (
     <div className={styles.Login}>
       <HeaderText text="Login" />
@@ -23,16 +43,24 @@ const Login = () => {
         bg="#FFFFFF"
         color="#0E0E0F"
       />
-      <div className={styles.Inputs}>
-        <InputLabel label="Email" type="email" placeholder="Enter your email" />
-        <InputLabel
-          label="Password"
-          type="password"
-          placeholder="Enter your password"
-        />
-      </div>
-      <Label text="Forgot password?" />
-      <AuthenticationButton text="Login" />
+      <form className={styles.Login} onSubmit={handleSubmit}>
+        <div className={styles.Inputs}>
+          <InputLabel
+            label="Email"
+            type="email"
+            placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <InputLabel
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <Label text="Forgot password?" />
+        <AuthenticationButton text="Login" submit={"submit"} />
+      </form>
       <div className={styles.SignupLabel}>
         <Label text="Don't have an account?" />
         <Link to="/signup" style={{ textDecoration: "none" }}>
