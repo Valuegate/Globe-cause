@@ -10,8 +10,11 @@ import InputLabel from "../../components/elements/InputLabel/InputLabel";
 import Label from "../../components/elements/Label/Label";
 import AuthenticationButton from "../../components/elements/AuthenticationButton/AuthenticationButton";
 
+import ErrorPopup from "../../components/containers/ErrorPopup/ErrorPopup";
+
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false)
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { logIn } = useUserAuth();
@@ -19,9 +22,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     setError("");
     try {
       await logIn(email, password);
+      setLoading(false)
       navigate("/home");
     } catch (err) {
       setError(err.message);
@@ -31,6 +36,8 @@ const Login = () => {
 
   return (
     <div className={styles.Login}>
+      {loading ? <ErrorPopup message='success' color='green' /> : null }
+      
       <HeaderText text="Login" />
       <SocialAuthButton
         text="CONTINUE WITH FACEBOOK"

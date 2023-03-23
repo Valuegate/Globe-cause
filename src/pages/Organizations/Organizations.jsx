@@ -18,7 +18,7 @@ const Organizations = () => {
     <div className={styles.Organizations}>
       <HeaderText text="Organizations" />
       <Search />
-      <TabNavigation />
+      {/* <TabNavigation /> */}
       <OrganizationContainer />
       <BottomNavigation navigationState={navigationState} />
       <NavigationButton onClick={bottomNavigation} />

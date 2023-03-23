@@ -3,6 +3,8 @@ import styles from "./styles.module.css";
 
 import { useState, useEffect } from "react";
 
+import TabNavigation from "../TabNavigation/TabNavigation";
+
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 
@@ -31,8 +33,14 @@ const OrganizationContainer = () => {
     fetchPost();
   }, []);
 
+    const NavigationActive = (country) => {
+    setOrgFilter(country);
+    fetchPost();
+  };
+
   return (
     <div className={styles.Organizations}>
+            <TabNavigation click={NavigationActive} cityFilter={orgFilter} />
       {organizations.map((organization,key) => (
           <Link
                 to={`/organization/${organization.id}`}

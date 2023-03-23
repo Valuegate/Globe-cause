@@ -72,6 +72,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+             <Route path="/account/about" element={
+              <ProtectedRoute>
+             <About/>
+             </ProtectedRoute>} />
+          <Route path="/account/privacy" element={ 
+          <ProtectedRoute>
+          <PrivacyPolicy/>
+          </ProtectedRoute>} />
             <Route
               path="/account/change-password"
               element={

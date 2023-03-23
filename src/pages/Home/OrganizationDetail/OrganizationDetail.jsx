@@ -16,13 +16,11 @@ const OrganizationDetail = () => {
 
   const organizationId = location.state.id;
 
- //console.log(organizationId);
   const fetchPost = async () => {
     await getDoc(doc(db, "organization_portugal", organizationId)).then(
       (querySnapshot) => {
         const newData = querySnapshot.data();
         setCity(newData);
-        // console.log(newData);
       }
     );
   };

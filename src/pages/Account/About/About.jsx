@@ -13,7 +13,7 @@ const About = () => {
             <p style={{fontWeight:'700',textAlign:'center',fontSize:'20px'}} >About</p>
         </div>
         <div className={styles.VideoResponsive}>            
-            <iframe src='https://www.youtube.com/embed/TZSFP4x8VJ8'
+            <iframe src='https://sivolunteering.com/wp-content/uploads/2022/10/SIV.mp4'
         frameBorder='0'
         allow='autoplay; encrypted-media'
         allowFullScreen
