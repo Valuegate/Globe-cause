@@ -9,6 +9,7 @@
     cursor: pointer;
     margin-bottom:  25px;
     margin-right: 5px;
+    padding: 5px;
 }
 .OrganizationCard:hover{
     transform: scale(1.1);
@@ -27,7 +28,7 @@
     text-align: center;
     margin: 0;
     padding: 5px;
-    color: #4A4B4B
+    color: #4A4B4B;
 }
 .OrganizationCardImage{
     width: 80%;

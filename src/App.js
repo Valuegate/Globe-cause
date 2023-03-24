@@ -88,6 +88,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/account/about" element={<About />} />
+            <Route path="/account/privacy" element={<PrivacyPolicy />} />
+            <Route
+              path="/organization/:organizationId"
+              element={<OrganizationDetail />}
+            />
+            <Route path="/account/help-center" element={<Help />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Routes>
         </Router>
       </UserAuthContextProvider>
@@ -96,7 +104,6 @@ function App() {
           <Route path="/" element={<Splash />} />
           <Route path="/home" element={<Home />} />
           <Route path="/organizations" element={<Organizations />} />
-          <Route path="/organization/:organizationId" element={<OrganizationDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="/login" element={<Login />} />
           <Route path='/notifications' element={<Notifications/>}/>

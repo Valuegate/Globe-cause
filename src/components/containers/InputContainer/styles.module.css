@@ -1,5 +1,6 @@
 .Container{
-    width: 90%;
+    width: 100%;
+    max-width: 1200px;
     height: 4rem;
     max-height: 10vh;
     background-color: #1F4490;
@@ -31,8 +32,8 @@
     outline: none;
 }
 
-@media screen and (max-width: 468px) {
+/* @media screen and (max-width: 468px) {
     .Container{
         width: 100%;
     }
-}
+} */

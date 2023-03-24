@@ -1,7 +1,10 @@
-import organizations from "../../../Demo/Api/Organizations";
+// import organizations from "../../../Demo/Api/Organizations";
 import styles from "./styles.module.css";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 import CityHeader from "../../../components/elements/CityHeader/CityHeader";
 import AboutOrganization from "../../../components/containers/AboutOrganization/AboutOrganization";
@@ -9,24 +12,42 @@ import BackButton from "../../../components/elements/BackButton/BackButton";
 
 const OrganizationDetail = () => {
   const location = useLocation();
-  const [organization, setCity] = useState({});
+  const [organization, setOrganization] = useState({});
+
+  const filter = location.state.filter;
 
   const organizationId = location.state.id;
 
- //console.log(organizationId);
+  //console.log(organizationId);
+
+  const fetchPost = async () => {
+    await getDoc(doc(db, `organisations_portugal`, organizationId)).then(
+      (querySnapshot) => {
+        const newData = querySnapshot.data();
+        setOrganization(newData);
+        console.log(newData);
+      }
+    );
+  };
 
   useEffect(() => {
-    const organization = organizations.find((organization) => organization.id === organizationId);
-    setCity(organization);
+    fetchPost();
   }, [organizationId]);
 
   return (
     <div
-      className={styles.CityDetail}
+      className={[styles.CityDetail]}
+      style={{ backgroundImage: `url(${organization.cover_image})` }}
     >
-      <CityHeader city='' country=''/>
-      <AboutOrganization image={organization.image} description={organization.description} country={organization.country} name={organization.name} ratings={organization.id} />
-      <BackButton color="#ffffff" to="/home" />
+      <CityHeader city="" country="" />
+      <AboutOrganization
+        image={organization.cover_image}
+        description={organization.short_description}
+        country={"Portugal"}
+        name={organization.name}
+        ratings={organization.id}
+      />
+      <BackButton color="#ffffff" to="/organizations" />
     </div>
   );
 };

@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 
+import { db } from "../../../firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
+
 import HeaderText from "../../../components/elements/HeaderText/HeaderText";
 import SocialAuthButton from "../../../components/elements/SocialAuthButton/SocialAuthButton";
 import InputLabel from "../../../components/elements/InputLabel/InputLabel";
@@ -13,7 +16,28 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
-  const { signUp } = useUserAuth();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
+
+  const { signUp, user } = useUserAuth();
+
+  const createProfile = async ({ id }) => {
+    await setDoc(doc(db, "volunteers", id), {
+      country: country,
+      date_created: new Date(),
+      email_address: email,
+      name: name,
+      phone_number: phone,
+      profile_image_url: "",
+    })
+      .then(() => {
+        console.log("Document successfully written!");
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+  };
 
   const navigate = useNavigate();
 
@@ -22,6 +46,7 @@ const SignUp = () => {
     setError("");
     try {
       await signUp(email, password);
+      createProfile({ id: user.uid });
       navigate("/home");
     } catch (err) {
       setError(err.message);
@@ -50,6 +75,9 @@ const SignUp = () => {
             label="Name"
             type="text"
             placeholder="Enter your fullname"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           />
           <InputLabel
             label="Email"
@@ -69,6 +97,13 @@ const SignUp = () => {
             label="Phone Number"
             type="number"
             placeholder="Enter your phone number"
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <InputLabel
+            label="Country"
+            type="text"
+            placeholder="Enter your country"
+            onChange={(e) => setCountry(e.target.value)}
           />
         </div>
         <Label text="Forgot password?" />

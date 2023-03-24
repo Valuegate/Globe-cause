@@ -11,17 +11,19 @@ import AboutCity from "../../../components/containers/AboutCity/AboutCity";
 import BackButton from "../../../components/elements/BackButton/BackButton";
 
 const CityDetail = () => {
+  
   const location = useLocation();
   const [city, setCity] = useState([]);
 
   const cityId = location.state.id;
+  const filter = location.state.filter;
 
   const fetchPost = async () => {
-    await getDoc(doc(db, "locations_portugal", cityId)).then(
+    await getDoc(doc(db, `locations_${filter.toLowerCase()}`, cityId)).then(
       (querySnapshot) => {
         const newData = querySnapshot.data();
         setCity(newData);
-        // console.log(newData);
+        console.log(newData);
       }
     );
   };
@@ -29,7 +31,6 @@ const CityDetail = () => {
   useEffect(() => {
     fetchPost();
   }, []);
-
 
   useEffect(() => {
     // const city = cities.find((city) => city.id === cityId);
@@ -43,7 +44,11 @@ const CityDetail = () => {
     >
       {console.log(city)}
       <CityHeader city={city.city} country={city.country} />
-      <AboutCity ratings={city.ratings} />
+      <AboutCity
+        description={city.short_description}
+        photos={city.photos_links}
+        ratings={city}
+      />
       <BackButton color="#ffffff" to="/home" />
     </div>
   );

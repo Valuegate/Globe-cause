@@ -12,32 +12,32 @@ import TabNavigation from "../TabNavigation/TabNavigation";
 
 const Cities = () => {
   const [cityFilter, setCityFilter] = useState("Portugal");
-  const [portugal, setPortugal] = useState([]);
+  const [cities, setCities] = useState([]);
 
-  const fetchPost = async () => {
-    await getDocs(collection(db, `locations_${cityFilter.toLowerCase()}`)).then(
+  const fetchPost = async (country) => {
+    await getDocs(collection(db, `locations_${country.toLowerCase()}`)).then(
       (querySnapshot) => {
         const newData = querySnapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }));
-        setPortugal(newData);
+        setCities(newData);
         // console.log(countries[0]?.countriesList[0]);
       }
     );
   };
 
   useEffect(() => {
-    fetchPost();
+    fetchPost(cityFilter);
   }, []);
 
-  const filterCities = (city) => {
-    setCityFilter(city);
-  };
+  // const filterCities = (city) => {
+  //   setCityFilter(city);
+  // };
 
   const NavigationActive = (country) => {
     setCityFilter(country);
-    fetchPost();
+    fetchPost(country);
     console.log("NavigationActive", country);
   };
 
@@ -45,12 +45,12 @@ const Cities = () => {
     <div className={styles.Cities}>
       <TabNavigation click={NavigationActive} cityFilter={cityFilter} />
       <div className={styles.CitiesContainer}>
-        {portugal.map((city, key) => (
+        {cities.map((city, key) => (
           <Link
             to={`/city/${city.id}`}
             style={{ textDecoration: "none" }}
             key={key}
-            state={{ id: city.id }}
+            state={{ id: city.id, filter: cityFilter }}
           >
             <CityCard city={city} />
           </Link>
