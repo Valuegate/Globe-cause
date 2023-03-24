@@ -13,9 +13,11 @@ const EditProfile = () => {
         <InputLabel label="Email" type="email" placeholder="Edit email" />
         <InputLabel label="Phone Number" type="text" placeholder="Edit phone" />
       </div>
+      
       <AuthenticationButton text="update" />
       <Label text="Change Password" color="#1F4490" />
       <BackButton color="#0E0E0F" to="/account" />
+      
     </div>
   );
 };

@@ -2,7 +2,6 @@ import React from 'react'
 import InputLabel from '../../elements/InputLabel/InputLabel'
 import styles from "./styles.module.css";
 
-import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
 
 
 const ProfileSetup1 = () => {
@@ -16,7 +15,6 @@ const ProfileSetup1 = () => {
         <InputLabel label='Country' type='text' placeholder='' />
         <InputLabel label='City' type='text' placeholder='' />
         <InputLabel label='Village' type='text' placeholder='' />
-         <AuthenticationButton text="update" />
     </div>
   )
 }

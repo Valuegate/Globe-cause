@@ -22,6 +22,7 @@ import OrganizationDetail from "./pages/Home/OrganizationDetail/OrganizationDeta
 import About from "./pages/Account/About/About";
 import PrivacyPolicy from "./pages/Account/PrivacyPolicy/PrivacyPolicy";
 import Help from "./pages/Account/HelpCenter/Help";
+import ProfileSetup from "./components/containers/ProfileSetup/ProfileSetup";
 
 function App() {
   return (
@@ -96,6 +97,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/profile" element={<ProfileSetup/>} />
           </Routes>
         </Router>
       </UserAuthContextProvider>
