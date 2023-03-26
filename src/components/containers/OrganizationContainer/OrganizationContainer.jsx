@@ -1,59 +1,61 @@
 import styles from "./styles.module.css";
 // import organizations from "../../../Demo/Api/Organizations";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import TabNavigation from "../TabNavigation/TabNavigation";
+import { Link } from "react-router-dom";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 
-import {Link} from 'react-router-dom'
-
 import OrganizationCard from "../../elements/OrganizationCard/OrganizationCard";
+import TabNavigation from "../TabNavigation/TabNavigation";
 
 const OrganizationContainer = () => {
-  const [organizations, setOrganization] = useState([]);
-  const [orgFilter, setOrgFilter]=useState('Portugal');
+  const [organizationFilter, setOrganizationFilter] = useState("Portugal");
+  const [organizations, setOrganizations] = useState([]);
 
+  const truncate = (str, n) => {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  };
 
-  const fetchPost = async () =>{
-    await getDocs(collection(db, `locations_${orgFilter.toLowerCase()}`)).then(
-      (query)=>{
-        const newData = query.docs.map((doc) =>({
+  const fetchPost = async (country) => {
+    await getDocs(collection(db, `organisations_${country.toLowerCase()}`)).then(
+      (querySnapshot) => {
+        const newData = querySnapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }));
-        setOrganization(newData);
+        setOrganizations(newData);
       }
-    )
-  }
+    );
+  };
 
-   useEffect(() => {
-    fetchPost();
+  useEffect(() => {
+    fetchPost(organizationFilter);
   }, []);
 
-    const NavigationActive = (country) => {
-    setOrgFilter(country);
-    fetchPost();
+   const NavigationActive = (country) => {
+    setOrganizationFilter(country);
+    fetchPost(country);
   };
 
   return (
     <div className={styles.Organizations}>
-            <TabNavigation click={NavigationActive} cityFilter={orgFilter} />
-      {organizations.map((organization,key) => (
-          <Link
-                to={`/organization/${organization.id}`}
-                style={{ textDecoration: "none",display:'block' }}
-                key={key}
-                state={{ id: organization.id }}
-              >
-        <OrganizationCard
-          name={organization.city}
-          image={organization.main_image_link}
-          key={organization.id}
-          country={organization.city}
-        />
+      <TabNavigation click={NavigationActive} cityFilter={organizationFilter} />
+      {organizations.map((organization, key) => (
+        <Link
+          to={`/organization/${organization.id}`}
+          style={{ textDecoration: "none", display: "block" }}
+          key={key}
+          state={{ id: organization.id, filter: organizationFilter }}
+        >
+          <OrganizationCard
+            name={truncate(organization.name, 20)}
+            image={organization.logo_link}
+            key={organization.id}
+            country={organization.city}
+          />
         </Link>
       ))}
     </div>

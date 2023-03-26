@@ -28,7 +28,6 @@ const TabNavigation = ({ click, country, cityFilter }) => {
     fetchPost();
   }, []);
 
-
   return (
     <div className={styles.TabNavigation}>
       {countries.map((country, key) =>

@@ -16,9 +16,15 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false)
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
   const [error, setError] = useState("");
+
   const { logIn } = useUserAuth();
   const navigate = useNavigate();
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

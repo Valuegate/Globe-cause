@@ -31,7 +31,7 @@
 
 @media screen and (min-width: 768px) {
     .TabNavigation{
-        width: 80%;
+        width: 100%;
         margin-bottom: 20px;
     }
 }

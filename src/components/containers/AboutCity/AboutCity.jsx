@@ -8,30 +8,27 @@ import Label from "../../elements/Label/Label";
 import RatingContainer from "../RatingContainer/RatingContainer";
 import OrganizationContainer from "../OrganizationContainer/OrganizationContainer";
 import ChatContainer from "../ChatContainer/ChatContainer";
-import img from '../../../assets/myPhoto.JPG'
+import img from "../../../assets/myPhoto.JPG";
 import InputContainer from "../InputContainer/InputContainer";
-import photos from "../../../Demo/Api/Photos";
+// import photos from "../../../Demo/Api/Photos";
 
-const AboutCity = ({ ratings,description }) => {
-  const [ratingsValue, setRatingValue] = useState([]);
+const AboutCity = ({ ratings, description, photos, conditions }) => {
+  ratings.conditions && console.log(Object.keys(ratings.conditions));
+ 
+
   const [tab, setTab] = useState("About");
 
-  const [message, setMessage] = useState('');
-    const [chatList, setChatList] = useState([]);
+  const [message, setMessage] = useState("");
+  const [chatList, setChatList] = useState([]);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
   });
-  const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);
+  const center = useMemo(() => ({ lat: 38.736946, lng: -9.142685 }), []);
 
   useEffect(() => {
-    for (let rating in ratings) {
-      setRatingValue((prev) => [
-        ...prev,
-        { rating: ratings[rating], title: rating },
-      ]);
-    }
-  }, [ratings]);
+   
+  }, []);
 
   const handleTabChange = (tab) => {
     setTab(tab);
@@ -54,29 +51,61 @@ const AboutCity = ({ ratings,description }) => {
               <></>
             )}
           </div>
-          <div className={styles.Rating}>
+          <div className={styles.Heading}>
             <Label text="Rating" />
           </div>
-          {ratingsValue.map((rating, index) => {
-            return (
-              <RatingContainer
-                rating={rating.rating}
-                title={rating.title}
-                key={index}
-              />
-            );
-          })}
-           <div style={{padding:'1rem'}}>
-            <p style={{fontWeight:'700'}} >Description</p>
-            <p style={{fontWeight:'400',fontSize:'14px'}}>{description}</p>
+
+          {ratings.conditions &&
+            Object.keys(ratings.conditions)?.map((rating, index) => {
+              return (
+                <RatingContainer
+                  rating={ratings.conditions[rating]}
+                  title={rating}
+                  key={index}
+                />
+              );
+            })}
+          {ratings.connectivity &&
+            Object.keys(ratings.connectivity)?.map((rating, index) => {
+              return (
+                <RatingContainer
+                  rating={ratings.connectivity[rating]}
+                  title={rating}
+                  key={index}
+                />
+              );
+            })}
+          {ratings.living_cost &&
+            Object.keys(ratings.living_cost)?.map((rating, index) => {
+              return (
+                <RatingContainer
+                  rating={ratings.living_cost[rating]}
+                  title={rating}
+                  key={index}
+                />
+              );
+            })}
+          {ratings.social_life &&
+            Object.keys(ratings.social_life)?.map((rating, index) => {
+              return (
+                <RatingContainer
+                  rating={ratings.social_life[rating]}
+                  title={rating}
+                  key={index}
+                />
+              );
+            })}
+          <div className={styles.Heading}>
+            <Label text="Description" />
           </div>
-          <div className={styles.ImageContainer} >
-            <p style={{fontWeight:'700'}} >Photos</p>
-              {
-            photos.map((message,i)=>(
-            <img src={message.image} className={styles.Image} key={i+1} alt=''/>
-            ))
-          }
+          <div className={styles.Description}>{description}</div>
+          <div className={styles.Heading}>
+            <Label text="Photos" />
+          </div>
+          <div className={styles.ImageContainer}>
+            {photos?.map((photo, i) => (
+              <img src={photo} className={styles.Image} key={i} alt="" />
+            ))}
           </div>
         </>
       );
@@ -89,13 +118,22 @@ const AboutCity = ({ ratings,description }) => {
     } else if (tab === "Chat") {
       return (
         <div className={styles.Photos}>
-          {
-            chatList.map((message,i)=>(
-<ChatContainer image={img} key={i+1} username='Captain Michael' message={message}/>
-            ))
-          }
-          
-          <InputContainer setMessage={setMessage} setChatList={setChatList} chatList={chatList} message={message} />
+          {chatList.map((message, i) => (
+            <ChatContainer
+              image={img}
+              key={i + 1}
+              username="Captain Michael"
+              message={message}
+            />
+          ))}
+          <div style={{ width: "100%" }}>
+            <InputContainer
+              setMessage={setMessage}
+              setChatList={setChatList}
+              chatList={chatList}
+              message={message}
+            />
+          </div>
         </div>
       );
     }

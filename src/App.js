@@ -112,7 +112,6 @@ function App() {
           <Route path="/" element={<Splash />} />
           <Route path="/home" element={<Home />} />
           <Route path="/organizations" element={<Organizations />} />
-          <Route path="/organization/:organizationId" element={<OrganizationDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="/login" element={<Login />} />
           <Route path='/notifications' element={<Notifications/>}/>
