@@ -104,6 +104,7 @@ function App() {
               </ProtectedRoute>} />
           
             <Route path="/profile" element={<ProfileSetup/>} />
+            <Route path='/notifications' element={<Notifications/>}/>
           </Routes>
         </Router>
       </UserAuthContextProvider>
