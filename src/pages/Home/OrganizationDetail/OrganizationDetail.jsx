@@ -34,10 +34,10 @@ const OrganizationDetail = () => {
   return (
     <div
       className={styles.CityDetail}
-       style={{ backgroundImage: `url(${organization.main_image_link})` }}
+       style={{ backgroundImage: `url(${organization?.cover_link})` }}
     >
       <CityHeader city='' country=''/>
-      <AboutOrganization image={organization.main_image_link} description={organization.short_description} country={organization.city} name={organization.name} ratings={organization.id} />
+      <AboutOrganization image={organization?.cover_link} description={organization?.short_description} country={organization?.city} name={organization?.name} ratings={organization?.id} />
       <BackButton color="#ffffff" to="/home" />
     </div>
   );

@@ -97,6 +97,12 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/organization/:organizationId" 
+            element={
+            <ProtectedRoute>
+              <OrganizationDetail />
+              </ProtectedRoute>} />
+          
             <Route path="/profile" element={<ProfileSetup/>} />
           </Routes>
         </Router>
