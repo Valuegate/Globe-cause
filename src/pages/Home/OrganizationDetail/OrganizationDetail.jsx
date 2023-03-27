@@ -45,9 +45,15 @@ const OrganizationDetail = () => {
       <AboutOrganization
         image={organization?.cover_image}
         description={organization?.short_description}
-        country={"Portugal"}
-        name={organization?.name}
+        country={organization?.name}
+        name={organization?.city}
         ratings={organization?.id}
+        email={organization?.email}
+        facebook={organization?.facebook}
+        web={organization?.website}
+        twitter={organization?.twitter}
+        phone={organization?.phone}
+        linkedin={organization?.linkedIn}
       />
       <BackButton color="#ffffff" />
     </div>
