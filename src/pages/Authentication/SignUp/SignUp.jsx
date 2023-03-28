@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 
@@ -22,7 +22,7 @@ const SignUp = () => {
 
   const { signUp, user } = useUserAuth();
 
-  const createProfile = async ({ id }) => {
+  const createProfile = async (id) => {
     await setDoc(doc(db, "volunteers", id), {
       country: country,
       date_created: new Date(),
@@ -46,14 +46,19 @@ const SignUp = () => {
     setError("");
     try {
       await signUp(email, password);
-      createProfile({ id: user.uid });
-      navigate("/home");
     } catch (err) {
       setError(err.message);
       console.log(email);
       console.log(err.message);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      createProfile(user.uid);
+      navigate("/account");
+    }
+  }, [user]);
 
   return (
     <div className={styles.SignUp}>

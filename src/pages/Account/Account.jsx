@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext";
 import { useNavigate } from "react-router-dom";
+
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 import styles from "./styles.module.css";
 import accountSettings from "../../Demo/More/accountSettings";
@@ -16,8 +19,12 @@ import LogoutButton from "../../components/elements/LogoutButton/LogoutButton";
 
 const Account = () => {
   const [navigationState, setNavigationState] = useState(0);
+  const [userDetails, setUserDetails] = useState([]);
 
   const { logOut, user } = useUserAuth();
+
+  console.log(user?.uid);
+
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
@@ -31,11 +38,25 @@ const Account = () => {
   const bottomNavigation = () => {
     setNavigationState(!navigationState);
   };
+
+  const fetchPost = async (id) => {
+    await getDoc(doc(db, "volunteers", id)).then((querySnapshot) => {
+      const newData = querySnapshot.data();
+      setUserDetails(newData);
+      // console.log(newData);
+      console.log(userDetails);
+    });
+  };
+
+  useEffect(() => {
+    fetchPost( user?.uid);
+  }, []);
+
   return (
     <div className={styles.Account}>
       <ProfilePicture src={photo} />
-      <Label text="Musaddiq Yerima Askira" />
-      <p style={{ marginTop: "-15px" }}>musaddiqaskira@gmail.com</p>
+      <Label text={userDetails.name} />
+      <p style={{ marginTop: "-15px" }}>{userDetails.email_address}</p>
       <HorizontalLine width="80%" />
       <BottomNavigation navigationState={navigationState} />
       <NavigationButton onClick={bottomNavigation} />
