@@ -4,6 +4,11 @@ import { useUserAuth } from "../../hooks/auth/UserAuthContext";
 
 import styles from "./styles.module.css";
 
+import {FiEye, FiEyeOff} from 'react-icons/fi'
+
+import { signInWithGoogle } from '../../firebase';
+
+
 import HeaderText from "../../components/elements/HeaderText/HeaderText";
 import SocialAuthButton from "../../components/elements/SocialAuthButton/SocialAuthButton";
 import InputLabel from "../../components/elements/InputLabel/InputLabel";
@@ -21,8 +26,34 @@ const Login = () => {
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
 
+  
+    const [passwordType, setPasswordType] = useState("password");
+    const handlePasswordChange =(evnt)=>{
+        setPassword(evnt.target.value);
+    }
+    const togglePassword =()=>{
+      if(passwordType==="password")
+      {
+       setPasswordType("text")
+       return;
+      }
+      setPasswordType("password")
+    }
+
   const { logIn } = useUserAuth();
   const navigate = useNavigate();
+
+  const handleGoogleLogin = async (e) =>{
+    e.preventDefault();
+    setLoading(true)
+    try{
+      await signInWithGoogle();
+      setLoading(false)
+      navigate('/home');
+    } catch (err){
+      setError(err.message)
+    }
+  }
 
   
 
@@ -52,6 +83,7 @@ const Login = () => {
       />
       <SocialAuthButton text="CONTINUE WITH APPLE" bg="#0E0E0F" color="#ffff" />
       <SocialAuthButton
+      onclick={handleGoogleLogin}
         text="CONTINUE WITH GOOGLE"
         bg="#FFFFFF"
         color="#0E0E0F"
@@ -64,12 +96,20 @@ const Login = () => {
             placeholder="Enter your email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <InputLabel
-            label="Password"
-            type="password"
+          <div style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%'}} >
+            <InputLabel
+            label=""
+            type={passwordType}
             placeholder="Enter your password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
+            style={{border:'none',background:'none'}}
           />
+          <div onClick={togglePassword} style={{height:'50px',display:'flex',alignItems:'center',justifyContent:'center',width:'50px',cursor:'pointer'}} >
+            {passwordType==="password"?<FiEyeOff/>:<FiEye/>}
+          </div>
+          
+          </div>
+          
         </div>
         <Label text="Forgot password?" />
         <AuthenticationButton text="Login" submit={"submit"} />
