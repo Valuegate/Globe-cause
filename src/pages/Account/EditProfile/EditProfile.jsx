@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { db } from "../../../firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import {  doc, setDoc } from "firebase/firestore";
 
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 

@@ -1,9 +1,9 @@
-import cities from "../../../Demo/Api/Cities";
+// import cities from "../../../Demo/Api/Cities";
 import styles from "./styles.module.css";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 
 import CityHeader from "../../../components/elements/CityHeader/CityHeader";
