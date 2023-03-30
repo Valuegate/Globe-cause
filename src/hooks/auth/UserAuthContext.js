@@ -4,7 +4,9 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-  
+  updateEmail,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
 import { auth } from "../../firebase";
 
@@ -23,6 +25,29 @@ export function UserAuthContextProvider({ children }) {
     return signOut(auth);
   }
 
+  const reauthenticate = (currentPassword) => {
+    const user = auth.currentUser;
+    const cred = EmailAuthProvider.credential(user.email, currentPassword);
+    return reauthenticateWithCredential(user, cred);
+  };
+
+  // function updateEmailAddress(email) {
+  //   return updateEmail(auth.currentUser, email);
+  // }
+
+  const updateEmailAddress = (email, currentPassword) => {
+    reauthenticate(currentPassword)
+      .then(() => {
+        const user = auth.currentUser;
+        updateEmail(user, email).then(() => {
+          console.log("Email updated!");
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       console.log("Auth", currentuser);
@@ -35,7 +60,9 @@ export function UserAuthContextProvider({ children }) {
   }, []);
 
   return (
-    <userAuthContext.Provider value={{ user, logIn, signUp, logOut }}>
+    <userAuthContext.Provider
+      value={{ user, logIn, signUp, logOut, updateEmailAddress }}
+    >
       {children}
     </userAuthContext.Provider>
   );
