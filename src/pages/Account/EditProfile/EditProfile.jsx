@@ -51,6 +51,7 @@ const EditProfile = () => {
   return (
     <div className={styles.EditProfile}>
       <h3 className={styles.PageHeader}>Edit Profile</h3>
+
       <form className={styles.InputContainer}>
         <InputLabel
           label="Name"
@@ -81,6 +82,7 @@ const EditProfile = () => {
 
       <Label text="Change Password" color="#1F4490" />
       <BackButton color="#0E0E0F" to="/account" />
+      
     </div>
   );
 };

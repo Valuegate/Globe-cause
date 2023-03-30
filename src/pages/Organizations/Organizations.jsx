@@ -5,7 +5,6 @@ import BottomNavigation from "../../components/containers/BottomNavigation/Botto
 import NavigationButton from "../../components/elements/NavigationButton/NavigationButton";
 import Search from "../../components/elements/Search/Search";
 import HeaderText from "../../components/elements/HeaderText/HeaderText";
-import TabNavigation from "../../components/containers/TabNavigation/TabNavigation";
 import OrganizationContainer from "../../components/containers/OrganizationContainer/OrganizationContainer";
 
 const Organizations = () => {
@@ -18,7 +17,7 @@ const Organizations = () => {
     <div className={styles.Organizations}>
       <HeaderText text="Organizations" />
       <Search />
-      <TabNavigation />
+      {/* <TabNavigation /> */}
       <OrganizationContainer />
       <BottomNavigation navigationState={navigationState} />
       <NavigationButton onClick={bottomNavigation} />

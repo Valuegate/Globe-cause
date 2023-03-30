@@ -14,40 +14,48 @@ const OrganizationDetail = () => {
   const location = useLocation();
   const [organization, setOrganization] = useState({});
 
-  const filter = location.state.filter;
+  const filter = location.state?.filter;
 
-  const organizationId = location.state.id;
+  const organizationId = location.state?.id;
 
   //console.log(organizationId);
 
   const fetchPost = async () => {
-    await getDoc(doc(db, `organisations_portugal`, organizationId)).then(
+    await getDoc(doc(db, `organisations_${filter.toLowerCase()}`, organizationId)).then(
       (querySnapshot) => {
         const newData = querySnapshot.data();
         setOrganization(newData);
-        console.log(newData);
       }
     );
   };
 
   useEffect(() => {
     fetchPost();
+  }, []);
+   useEffect(() => {
+    // const city = cities.find((city) => city.id === cityId);
+    // setCity(city);
   }, [organizationId]);
-
   return (
     <div
       className={[styles.CityDetail]}
-      style={{ backgroundImage: `url(${organization.cover_image})` }}
+      style={{ backgroundImage: `url(${organization?.cover_image})` }}
     >
       <CityHeader city="" country="" />
       <AboutOrganization
-        image={organization.cover_image}
-        description={organization.short_description}
-        country={"Portugal"}
-        name={organization.name}
-        ratings={organization.id}
+        image={organization?.cover_image}
+        description={organization?.short_description}
+        country={organization?.name}
+        name={organization?.city}
+        ratings={organization?.id}
+        email={organization?.email}
+        facebook={organization?.facebook}
+        web={organization?.website}
+        twitter={organization?.twitter}
+        phone={organization?.phone}
+        linkedin={organization?.linkedIn}
       />
-      <BackButton color="#ffffff" to="/organizations" />
+      <BackButton color="#ffffff" />
     </div>
   );
 };

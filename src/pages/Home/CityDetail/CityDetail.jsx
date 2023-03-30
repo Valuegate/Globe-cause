@@ -15,15 +15,14 @@ const CityDetail = () => {
   const location = useLocation();
   const [city, setCity] = useState([]);
 
-  const cityId = location.state.id;
-  const filter = location.state.filter;
+  const cityId = location.state?.id;
+  const filter = location.state?.filter;
 
   const fetchPost = async () => {
     await getDoc(doc(db, `locations_${filter.toLowerCase()}`, cityId)).then(
       (querySnapshot) => {
         const newData = querySnapshot.data();
         setCity(newData);
-        console.log(newData);
       }
     );
   };
@@ -49,7 +48,7 @@ const CityDetail = () => {
         photos={city.photos_links}
         ratings={city}
       />
-      <BackButton color="#ffffff" to="/home" />
+      <BackButton color="#ffffff"  />
     </div>
   );
 };

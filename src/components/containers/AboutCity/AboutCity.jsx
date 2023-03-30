@@ -56,27 +56,27 @@ const AboutCity = ({ ratings, description, photos, conditions }) => {
           </div>
 
           {ratings.conditions &&
-            Object.keys(ratings.conditions)?.map((rating, index) => {
+            Object.keys(ratings?.conditions)?.map((rating, index) => {
               return (
                 <RatingContainer
-                  rating={ratings.conditions[rating]}
+                  rating={ratings?.conditions[rating]}
                   title={rating}
                   key={index}
                 />
               );
             })}
-          {ratings.connectivity &&
-            Object.keys(ratings.connectivity)?.map((rating, index) => {
+          {/* {ratings.connectivity &&
+            Object.keys(ratings?.connectivity)?.map((rating, index) => {
               return (
                 <RatingContainer
-                  rating={ratings.connectivity[rating]}
+                  rating={ratings?.connectivity[rating]}
                   title={rating}
                   key={index}
                 />
               );
-            })}
+            })} */}
           {ratings.living_cost &&
-            Object.keys(ratings.living_cost)?.map((rating, index) => {
+            Object.keys(ratings?.living_cost)?.map((rating, index) => {
               return (
                 <RatingContainer
                   rating={ratings.living_cost[rating]}
@@ -86,10 +86,10 @@ const AboutCity = ({ ratings, description, photos, conditions }) => {
               );
             })}
           {ratings.social_life &&
-            Object.keys(ratings.social_life)?.map((rating, index) => {
+            Object.keys(ratings?.social_life)?.map((rating, index) => {
               return (
                 <RatingContainer
-                  rating={ratings.social_life[rating]}
+                  rating={ratings?.social_life[rating]}
                   title={rating}
                   key={index}
                 />

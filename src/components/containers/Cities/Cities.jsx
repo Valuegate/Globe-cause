@@ -38,7 +38,6 @@ const Cities = () => {
   const NavigationActive = (country) => {
     setCityFilter(country);
     fetchPost(country);
-    console.log("NavigationActive", country);
   };
 
   return (

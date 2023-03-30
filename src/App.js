@@ -22,6 +22,7 @@ import OrganizationDetail from "./pages/Home/OrganizationDetail/OrganizationDeta
 import About from "./pages/Account/About/About";
 import PrivacyPolicy from "./pages/Account/PrivacyPolicy/PrivacyPolicy";
 import Help from "./pages/Account/HelpCenter/Help";
+import ProfileSetup from "./components/containers/ProfileSetup/ProfileSetup";
 
 function App() {
   return (
@@ -72,6 +73,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+             <Route path="/account/about" element={
+              <ProtectedRoute>
+             <About/>
+             </ProtectedRoute>} />
+          <Route path="/account/privacy" element={ 
+          <ProtectedRoute>
+          <PrivacyPolicy/>
+          </ProtectedRoute>} />
             <Route
               path="/account/change-password"
               element={
@@ -88,14 +97,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/account/about" element={<About />} />
-            <Route path="/account/privacy" element={<PrivacyPolicy />} />
-            <Route
-              path="/organization/:organizationId"
-              element={<OrganizationDetail />}
-            />
-            <Route path="/account/help-center" element={<Help />} />
-            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/organization/:organizationId" 
+            element={
+            <ProtectedRoute>
+              <OrganizationDetail />
+              </ProtectedRoute>} />
+          
+            <Route path="/profile" element={<ProfileSetup/>} />
+            <Route path='/notifications' element={<Notifications/>}/>
           </Routes>
         </Router>
       </UserAuthContextProvider>

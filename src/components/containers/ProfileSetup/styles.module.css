@@ -1,0 +1,109 @@
+.ProfileContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.EditProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.EditProfile3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    margin: auto;
+}
+
+.Text{
+    color:'#0E0E0F';
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.Image{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.InputContainer {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.Finish{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Line{
+    width: 18.75rem;
+    height: 1px;
+    position: absolute;
+    margin-top: 1.75rem;
+    background: rgba(14, 14, 15, 0.5);
+}
+.Timeline{
+    width: 18.75rem;
+    height: 1px;
+    display: flex;
+        justify-content: space-between;
+}
+
+.Phase{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid rgba(14, 14, 15, 0.5);
+    color: rgba(14, 14, 15, 0.5);
+}
+
+@media screen and (max-width: 468px) {
+    /* .EditProfile {
+        margin-bottom: 0;
+        height: 100vh;
+    } */
+
+           .EditProfile3 {
+               display: flex;
+               flex-direction: column;
+               align-items: flex-start;
+               justify-content: center;
+               width: 100%;
+               height: 100%;
+               margin: auto;
+               padding: 1rem;
+           }
+
+    .InputContainer {
+        margin-top: 20px;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+        padding: 100px 0;
+    }
+}
