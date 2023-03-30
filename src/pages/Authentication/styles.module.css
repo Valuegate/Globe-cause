@@ -22,3 +22,33 @@
     justify-content: center;
     align-items: center;
 }
+
+.PasswordToggleContainer{
+    height: 45px;
+    margin-left: 20rem;
+    margin-top: 4rem;
+    background:#e8f0fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    cursor: pointer;
+    position: absolute;
+}
+
+@media screen and (max-width: 768px) {
+    .PasswordToggleContainer {
+        margin-left: 20rem;
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .PasswordToggleContainer{
+        margin-left: 15rem;
+    }
+}
+@media screen and (max-width: 368px) {
+    .PasswordToggleContainer {
+        margin-left: 11rem;
+    }
+}

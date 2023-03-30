@@ -98,13 +98,13 @@ const Login = () => {
           />
           <div style={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%'}} >
             <InputLabel
-            label=""
+            label="Password"
             type={passwordType}
             placeholder="Enter your password"
             onChange={handlePasswordChange}
             style={{border:'none',background:'none'}}
           />
-          <div onClick={togglePassword} style={{height:'50px',display:'flex',alignItems:'center',justifyContent:'center',width:'50px',cursor:'pointer'}} >
+          <div onClick={togglePassword} className={styles.PasswordToggleContainer}>
             {passwordType==="password"?<FiEyeOff/>:<FiEye/>}
           </div>
           
