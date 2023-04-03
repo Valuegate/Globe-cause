@@ -6,8 +6,11 @@ import NavigationButton from "../../components/elements/NavigationButton/Navigat
 import Search from "../../components/elements/Search/Search";
 import HeaderText from "../../components/elements/HeaderText/HeaderText";
 import OrganizationContainer from "../../components/containers/OrganizationContainer/OrganizationContainer";
+import { useTranslation } from 'react-i18next';
 
 const Organizations = () => {
+   const {t} = useTranslation();
+
   const [navigationState, setNavigationState] = useState(0);
 
   const bottomNavigation = () => {
@@ -15,7 +18,7 @@ const Organizations = () => {
   };
   return (
     <div className={styles.Organizations}>
-      <HeaderText text="Organizations" />
+      <HeaderText text={t('Example.2')} />
       <Search />
       {/* <TabNavigation /> */}
       <OrganizationContainer />

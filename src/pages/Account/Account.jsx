@@ -55,8 +55,8 @@ const Account = () => {
   return (
     <div className={styles.Account}>
       <ProfilePicture src={photo} />
-      <Label text={userDetails.name} />
-      <p style={{ marginTop: "-15px" }}>{userDetails.email_address}</p>
+      <Label text={userDetails?.name || 'Your Name'} />
+      <p style={{ marginTop: "-15px" }}>{userDetails?.email_address || 'Your Email'}</p>
       <HorizontalLine width="80%" />
       <BottomNavigation navigationState={navigationState} />
       <NavigationButton onClick={bottomNavigation} />
