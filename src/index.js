@@ -15,8 +15,12 @@ import translationHD from "./pages/Account/locales/hindi/translation.json";
 import translationMN from "./pages/Account/locales/mn/translation.json";
 import translationSP from "./pages/Account/locales/sp/translation.json";
 import translationPG from "./pages/Account/locales/pg/translation.json";
+import translationAB from "./pages/Account/locales/ab/translation.json";
+import translationID from "./pages/Account/locales/id/translation.json";
+import translationGM from "./pages/Account/locales/gm/translation.json";
+import translationKR from "./pages/Account/locales/kr/translation.json";
 
-const Languages = ['en','tr'];
+const Languages = ['en','mn','hindi','sp','ab','id','gm','pg','kr'];
 const resources = {
   en: {
     translation: translationEN,
@@ -32,6 +36,18 @@ const resources = {
   },
   sp: {
     translation: translationSP,
+  },
+  ab: {
+    translation: translationAB,
+  },
+  id: {
+    translation: translationID,
+  },
+  gm: {
+    translation: translationGM,
+  },
+  kr: {
+    translation: translationKR,
   },
 };
 i18n
