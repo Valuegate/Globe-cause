@@ -4,7 +4,7 @@ import Label from "../Label/Label";
 import imge from '../../../assets/Group 11966.png'
 
 const InputImage = ({ label, placeholder, onChange }) => {
- const [image, setImage] = useState(imge)
+ const [image, setImage] = useState([imge,])
 
 const onImageChange = (event) => {
  if (event.target.files && event.target.files[0]) {

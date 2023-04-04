@@ -26,6 +26,7 @@ import PrivacyPolicy from "./pages/Account/PrivacyPolicy/PrivacyPolicy";
 import Help from "./pages/Account/HelpCenter/Help";
 import ProfileSetup from "./components/containers/ProfileSetup/ProfileSetup";
 import Language from './pages/Account/Language/Language';
+import Community from './pages/MyCommunity/Community';
 
 function App() {
   return (
@@ -66,6 +67,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CityDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/community"
+              element={
+                <ProtectedRoute>
+                  <Community/>
                 </ProtectedRoute>
               }
             />
