@@ -27,6 +27,7 @@ const ChangePassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
+      checkPassword();
       updatePassword(currentPassword, newPassword);
       navigate("/account");
     } catch (err) {
@@ -37,9 +38,10 @@ const ChangePassword = () => {
   return (
     <form className={styles.ChangePassword} onSubmit={handleSubmit}>
       <h3 className={styles.PageHeader}>Change Password</h3>
-      <div className={styles.Form}>
+      <form onSubmit={handleSubmit} className={styles.Form}>
         <InputLabel
           label="Current Password"
+          value={currentPassword}
           type="password"
           placeholder="Current Password"
           onChange={(e) => setCurrentPassword(e.target.value)}
@@ -47,17 +49,19 @@ const ChangePassword = () => {
         <InputLabel
           label="New Password"
           type="password"
-          placeholder="New Password"
+          value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
+          placeholder="New Password"
         />
         <InputLabel
           label="Confirm New Password"
           type="password"
+          value={confirmNewPassword}
           placeholder="Confirm New Password"
           onChange={(e) => setConfirmNewPassword(e.target.value)}
         />
-      </div>
-      <AuthenticationButton text="update" onclick={handleSubmit} />
+      </form>
+      <AuthenticationButton submit={"submit"} text="update" />
       <BackButton color="#0E0E0F" to="/account" />
     </form>
   );

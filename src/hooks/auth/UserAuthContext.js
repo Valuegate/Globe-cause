@@ -8,6 +8,8 @@ import {
   reauthenticateWithCredential,
   EmailAuthProvider,
   updatePassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../firebase";
 
@@ -22,6 +24,13 @@ export function UserAuthContextProvider({ children }) {
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
+
+  function googleSignIn() {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider);
+  }
+
+
   function logOut() {
     return signOut(auth);
   }
@@ -82,6 +91,7 @@ export function UserAuthContextProvider({ children }) {
         logOut,
         updateEmailAddress,
         updatePassword,
+        googleSignIn,
       }}
     >
       {children}

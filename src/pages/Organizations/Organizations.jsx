@@ -5,11 +5,12 @@ import BottomNavigation from "../../components/containers/BottomNavigation/Botto
 import NavigationButton from "../../components/elements/NavigationButton/NavigationButton";
 import Search from "../../components/elements/Search/Search";
 import HeaderText from "../../components/elements/HeaderText/HeaderText";
-import TabNavigation from "../../components/containers/TabNavigation/TabNavigation";
 import OrganizationContainer from "../../components/containers/OrganizationContainer/OrganizationContainer";
 
 const Organizations = () => {
   const [navigationState, setNavigationState] = useState(0);
+  const [filter, setFilter] = useState("");
+
 
   const bottomNavigation = () => {
     setNavigationState(!navigationState);
@@ -17,11 +18,14 @@ const Organizations = () => {
   return (
     <div className={styles.Organizations}>
       <HeaderText text="Organizations" />
-      <Search />
-      <TabNavigation />
-      <OrganizationContainer />
+      <Search setFilter={setFilter} />
+      {/* <TabNavigation /> */}
+      <OrganizationContainer filter={filter} />
       <BottomNavigation navigationState={navigationState} />
-      <NavigationButton onClick={bottomNavigation} />
+      <NavigationButton
+        onClick={bottomNavigation}
+        navigationState={navigationState}
+      />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 .Heading{
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 4.5rem;
     margin-bottom: 1rem;
     color: #ffffff;
     font-size: 2rem;
@@ -10,12 +10,13 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    margin-bottom: 3rem;
     justify-content: space-evenly;
 }
 
 .FlexContainer>img{
-    width: 15%;
-    height: 4.5rem;
+    width: 10%;
+    height: 4rem;
 }
 
 @media screen and (max-width: 468px) {

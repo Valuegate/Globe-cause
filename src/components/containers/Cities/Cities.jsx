@@ -10,9 +10,19 @@ import TabNavigation from "../TabNavigation/TabNavigation";
 
 // import cities from "../../../Demo/Api/Cities";
 
-const Cities = () => {
+const Cities = ({ filter }) => {
   const [cityFilter, setCityFilter] = useState("Portugal");
   const [cities, setCities] = useState([]);
+
+  const searchCities = (city) => {
+    if (city === "") {
+      return cities;
+    }
+    return cities.filter((cityItem) => {
+      const cityName = cityItem.city.toLowerCase();
+      return cityName.includes(city.toLowerCase()) ? cityItem : null;
+    });
+  };
 
   const fetchPost = async (country) => {
     await getDocs(collection(db, `locations_${country.toLowerCase()}`)).then(
@@ -38,14 +48,13 @@ const Cities = () => {
   const NavigationActive = (country) => {
     setCityFilter(country);
     fetchPost(country);
-    console.log("NavigationActive", country);
   };
 
   return (
     <div className={styles.Cities}>
       <TabNavigation click={NavigationActive} cityFilter={cityFilter} />
       <div className={styles.CitiesContainer}>
-        {cities.map((city, key) => (
+        {searchCities(filter).map((city, key) => (
           <Link
             to={`/city/${city.id}`}
             style={{ textDecoration: "none" }}

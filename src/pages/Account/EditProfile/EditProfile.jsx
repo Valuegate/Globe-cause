@@ -4,11 +4,11 @@ import styles from "./styles.module.css";
 import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
 import Label from "../../../components/elements/Label/Label";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { db } from "../../../firebase";
-import {  doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 
@@ -21,6 +21,27 @@ const EditProfile = () => {
   const navigate = useNavigate();
 
   const { user, updateEmailAddress } = useUserAuth();
+
+  const getProfile = async (id) => {
+    const docRef = doc(db, "volunteers", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      setName(docSnap.data().name);
+      setEmail(docSnap.data().email_address);
+      setPhone(docSnap.data().phone_number);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      getProfile(user.uid);
+    }
+  }, [user]);
 
   const updateProfile = async ({ id }) => {
     await setDoc(doc(db, "volunteers", id), {
@@ -51,22 +72,26 @@ const EditProfile = () => {
   return (
     <div className={styles.EditProfile}>
       <h3 className={styles.PageHeader}>Edit Profile</h3>
+
       <form className={styles.InputContainer}>
         <InputLabel
           label="Name"
           type="text"
+          value={name}
           placeholder="Edit name"
           onChange={(e) => setName(e.target.value)}
         />
         <InputLabel
           label="Email"
           type="email"
+          value={email}
           placeholder="Change email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <InputLabel
           label="Phone Number"
           type="text"
+          value={phone}
           placeholder="Edit phone"
           onChange={(e) => setPhone(e.target.value)}
         />

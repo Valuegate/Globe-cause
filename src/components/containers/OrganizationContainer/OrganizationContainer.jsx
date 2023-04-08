@@ -9,39 +9,58 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 
 import OrganizationCard from "../../elements/OrganizationCard/OrganizationCard";
+import TabNavigation from "../TabNavigation/TabNavigation";
 
-const OrganizationContainer = () => {
+const OrganizationContainer = ({ filter }) => {
+  const [organizationFilter, setOrganizationFilter] = useState("Portugal");
   const [organizations, setOrganizations] = useState([]);
 
   const truncate = (str, n) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   };
 
-  const fetchPost = async () => {
-    await getDocs(collection(db, `organisations_portugal`)).then(
-      (querySnapshot) => {
-        const newData = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setOrganizations(newData);
-        console.log(newData);
-      }
-    );
+  const searchOrganizations = (organization) => {
+    if (organization === "") {
+      return organizations;
+    }
+    return organizations.filter((organizationItem) => {
+      const cityName = organizationItem.name.toLowerCase();
+      return cityName.includes(organization.toLowerCase())
+        ? organizationItem
+        : null;
+    });
+  };
+
+  const fetchPost = async (country) => {
+    await getDocs(
+      collection(db, `organisations_${country.toLowerCase()}`)
+    ).then((querySnapshot) => {
+      const newData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setOrganizations(newData);
+    });
   };
 
   useEffect(() => {
-    fetchPost();
+    fetchPost(organizationFilter);
   }, []);
+
+  const NavigationActive = (country) => {
+    setOrganizationFilter(country);
+    fetchPost(country);
+  };
 
   return (
     <div className={styles.Organizations}>
-      {organizations.map((organization, key) => (
+      <TabNavigation click={NavigationActive} cityFilter={organizationFilter} />
+      {searchOrganizations(filter).map((organization, key) => (
         <Link
           to={`/organization/${organization.id}`}
           style={{ textDecoration: "none", display: "block" }}
           key={key}
-          state={{ id: organization.id, filter: "Portugal" }}
+          state={{ id: organization.id, filter: organizationFilter }}
         >
           <OrganizationCard
             name={truncate(organization.name, 20)}

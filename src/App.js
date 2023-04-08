@@ -22,6 +22,7 @@ import OrganizationDetail from "./pages/Home/OrganizationDetail/OrganizationDeta
 import About from "./pages/Account/About/About";
 import PrivacyPolicy from "./pages/Account/PrivacyPolicy/PrivacyPolicy";
 import Help from "./pages/Account/HelpCenter/Help";
+import ProfileSetup from "./components/containers/ProfileSetup/ProfileSetup";
 
 function App() {
   return (
@@ -73,6 +74,22 @@ function App() {
               }
             />
             <Route
+              path="/account/about"
+              element={
+                <ProtectedRoute>
+                  <About />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/account/privacy"
+              element={
+                <ProtectedRoute>
+                  <PrivacyPolicy />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/account/change-password"
               element={
                 <ProtectedRoute>
@@ -88,13 +105,24 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/account/about" element={<About />} />
-            <Route path="/account/privacy" element={<PrivacyPolicy />} />
             <Route
               path="/organization/:organizationId"
-              element={<OrganizationDetail />}
+              element={
+                <ProtectedRoute>
+                  <OrganizationDetail />
+                </ProtectedRoute>
+              }
             />
-            <Route path="/account/help-center" element={<Help />} />
+            <Route
+              path="/account/help-center"
+              element={
+                <ProtectedRoute>
+                  <Help />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route path="/profile" element={<ProfileSetup />} />
             <Route path="/notifications" element={<Notifications />} />
           </Routes>
         </Router>
@@ -112,7 +140,7 @@ function App() {
           <Route path="/account/about" element={<About/>} />
           <Route path="/account/privacy" element={<PrivacyPolicy/>} />
           
-          <Route path="/account/help-center" element={<Help/>} />
+          
           
           <Route path="/city/:cityId" element={<CityDetail />} />
           <Route path="/account/edit-profile" element={<EditProfile />} />

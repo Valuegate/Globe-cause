@@ -55,11 +55,11 @@ const Account = () => {
   return (
     <div className={styles.Account}>
       <ProfilePicture src={photo} />
-      <Label text={userDetails.name} />
-      <p style={{ marginTop: "-15px" }}>{userDetails.email_address}</p>
+      <Label text={userDetails?.name} />
+      <p style={{ marginTop: "-15px" }}>{userDetails?.email_address}</p>
       <HorizontalLine width="80%" />
       <BottomNavigation navigationState={navigationState} />
-      <NavigationButton onClick={bottomNavigation} />
+      <NavigationButton onClick={bottomNavigation} navigationState={navigationState} />
 
       {accountSettings.map((item, key) => {
         if (item.title === "Logout") {

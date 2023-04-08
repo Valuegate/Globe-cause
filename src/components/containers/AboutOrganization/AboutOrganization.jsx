@@ -7,10 +7,17 @@ import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
 import ChatContainer from "../ChatContainer/ChatContainer";
 import img from '../../../assets/myPhoto.JPG'
 import imgmap from '../../../assets/IMAGE.png'
+import msg from '../../../assets/msg.png'
+import wb from '../../../assets/wb.png'
+import twit from '../../../assets/twit.png'
+import ph from '../../../assets/ph.png'
+import fb from '../../../assets/f.png'
+import link from '../../../assets/link.png'
+import loc from '../../../assets/loc.png'
 import photos from "../../../Demo/Api/Photos";
 import InputContainer from "../InputContainer/InputContainer";
 
-const AboutOrganization = ({ image,name,country,description }) => {
+const AboutOrganization = ({ image,name,country,description, email, facebook, web, twitter, phone, linkedin }) => {
   const [tab, setTab] = useState("About");
 
   const [message, setMessage] = useState('');
@@ -26,7 +33,7 @@ const AboutOrganization = ({ image,name,country,description }) => {
     setTab(tab);
   };
 
-  const Content = () => {
+  const Content = ({email, facebook, web, twitter, phone, linkedin}) => {
     if (tab === "About") {
       return (
         <div className={styles.AboutContentContainer}>
@@ -48,6 +55,16 @@ const AboutOrganization = ({ image,name,country,description }) => {
           <div>
             <p style={{fontWeight:'700'}} >Short description</p>
             <p style={{fontWeight:'400',fontSize:'14px'}}>{description}</p>
+              <div className={styles.Link} >
+                <a href={email} target='_blank' > <img src={msg} alt="" /> </a>
+                {/* <a href={facebook} target='_blank' > <img src={fb} alt="" /> </a> */}
+                <a href={web} target='_blank'> <img src={wb} alt="" /> </a>
+                <a href={twitter} target='_blank'> <img src={twit} alt="" /> </a>
+                <a tel={phone} target='_blank'> <img src={ph} alt="" /> </a>
+                <a href={linkedin} target='_blank'> <img src={link} alt="" /> </a>
+                {/* <a> <img src={loc} alt="" /> </a> */}
+
+              </div>
           </div>
         </div>
       );
@@ -90,7 +107,7 @@ const AboutOrganization = ({ image,name,country,description }) => {
         </div>
       <SecondaryTabNavigation onClick={handleTabChange} tab={tab} />
       <HorizontalLine />
-      <Content />
+      <Content email={email} facebook={facebook} web={web} twitter={twitter} phone={phone} linkedin={linkedin} />
     </div>
   );
 };

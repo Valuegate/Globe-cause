@@ -1,0 +1,32 @@
+.Container{
+    width: 30%;
+    padding : 0 1rem;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    animation: ease-in;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    box-shadow:  0 0 5px 0 rgba(0,0,0,0.8);
+}
+
+.Important{
+    padding: .25rem;
+    background: #fff;
+    width: 1rem;
+    height: 1rem;
+    margin: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.Container>p{
+    font-weight: 600;
+}

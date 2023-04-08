@@ -14,6 +14,8 @@ import Patners from "../../components/containers/Patners/Patners";
 
 const Home = () => {
   const [navigationState, setNavigationState] = useState(0);
+  const [filter, setFilter] = useState("");
+
 
   const bottomNavigation = () => {
     setNavigationState(!navigationState);
@@ -22,9 +24,9 @@ const Home = () => {
   return (
     <div className={styles.Home}>
       <Intro />
-      <Search />
-      <Patners/>
-      <Cities />
+      <Search setFilter={setFilter} />
+      <Patners />
+      <Cities filter={filter} />
       {/* <Link to="/login" style={{ textDecoration: "none" }}>
         <SignInButton />
       </Link> */}

@@ -20,7 +20,7 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
 
-  const { signUp, user } = useUserAuth();
+  const { signUp, user, googleSignIn } = useUserAuth();
 
   const createProfile = async (id) => {
     await setDoc(doc(db, "volunteers", id), {
@@ -73,6 +73,7 @@ const SignUp = () => {
         text="CONTINUE WITH GOOGLE"
         bg="#FFFFFF"
         color="#0E0E0F"
+        onclick={googleSignIn}
       />
       <form className={styles.SignUp} onSubmit={handleSubmit}>
         <div className={styles.Inputs}>
