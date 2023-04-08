@@ -37,6 +37,12 @@
      animation: fadeOut 1s ease-in-out;
 }
 
+.Icon{
+    padding: 0 25px; 
+}
+
+
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -63,5 +69,10 @@
     .BottomNavigation{
         padding-right: 40px;
         justify-content: space-around;
+    }
+    .Icon{
+        display:none;
+        padding-left: 40px;
+        font-size: 2rem;
     }
 }

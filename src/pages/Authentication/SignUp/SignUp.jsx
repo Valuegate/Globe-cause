@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 
 import { db } from "../../../firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import {  doc, setDoc } from "firebase/firestore";
 
 import HeaderText from "../../../components/elements/HeaderText/HeaderText";
 import SocialAuthButton from "../../../components/elements/SocialAuthButton/SocialAuthButton";
