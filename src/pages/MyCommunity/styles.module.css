@@ -11,7 +11,7 @@
 } */
 
 .Container {
-    padding: 1.75rem;
+    max-width: 1200px;
     margin: auto;
     background-color: #1F4490;
         background-image: url("../../assets/banner.png");
@@ -64,3 +64,10 @@
 ::-webkit-scrollbar {
     width: 1px;
 }
+
+/* @media screen and (max-width: 768px) {
+    .Container{
+        padding: 0;
+    }
+} */
+
