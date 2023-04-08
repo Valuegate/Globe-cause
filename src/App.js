@@ -1,3 +1,5 @@
+import {Suspense} from 'react'
+
 import { UserAuthContextProvider } from "./hooks/auth/UserAuthContext";
 
 import ProtectedRoute from "./pages/Authentication/ProtectedRoutes";
@@ -23,10 +25,13 @@ import About from "./pages/Account/About/About";
 import PrivacyPolicy from "./pages/Account/PrivacyPolicy/PrivacyPolicy";
 import Help from "./pages/Account/HelpCenter/Help";
 import ProfileSetup from "./components/containers/ProfileSetup/ProfileSetup";
+import Language from './pages/Account/Language/Language';
+import Community from './pages/MyCommunity/Community';
 
 function App() {
   return (
     <div className="App">
+       <Suspense fallback="loading">
       <UserAuthContextProvider>
         <Router>
           <Routes>
@@ -62,6 +67,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CityDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/community"
+              element={
+                <ProtectedRoute>
+                  <Community/>
                 </ProtectedRoute>
               }
             />
@@ -105,28 +118,23 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/organization/:organizationId"
-              element={
-                <ProtectedRoute>
-                  <OrganizationDetail />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/account/help-center"
-              element={
-                <ProtectedRoute>
-                  <Help />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route path="/profile" element={<ProfileSetup />} />
-            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/account/language"
+             element={<ProtectedRoute>
+              <Language/>
+            </ProtectedRoute>} />
+            <Route path="/organization/:organizationId" 
+            element={
+            <ProtectedRoute>
+              <OrganizationDetail />
+              </ProtectedRoute>} />
+          
+            <Route path="/profile" element={<ProfileSetup/>} />
+            <Route path='/notifications' element={<Notifications/>}/>
+            
           </Routes>
         </Router>
       </UserAuthContextProvider>
+      </Suspense>
       {/* <Router>
         <Routes>
           <Route path="/" element={<Splash />} />

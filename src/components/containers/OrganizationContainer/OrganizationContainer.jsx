@@ -25,9 +25,7 @@ const OrganizationContainer = ({ filter }) => {
     }
     return organizations.filter((organizationItem) => {
       const cityName = organizationItem.name.toLowerCase();
-      return cityName.includes(organization.toLowerCase())
-        ? organizationItem
-        : null;
+      return cityName.includes("a".toLowerCase()) ? organizationItem : null;
     });
   };
 
@@ -55,21 +53,23 @@ const OrganizationContainer = ({ filter }) => {
   return (
     <div className={styles.Organizations}>
       <TabNavigation click={NavigationActive} cityFilter={organizationFilter} />
-      {searchOrganizations(filter).map((organization, key) => (
-        <Link
-          to={`/organization/${organization.id}`}
-          style={{ textDecoration: "none", display: "block" }}
-          key={key}
-          state={{ id: organization.id, filter: organizationFilter }}
-        >
-          <OrganizationCard
-            name={truncate(organization.name, 20)}
-            image={organization.logo_link}
-            key={organization.id}
-            country={organization.city}
-          />
-        </Link>
-      ))}
+      <div className={styles.OrganizationsContainer}>
+        {searchOrganizations(filter).map((organization, key) => (
+          <Link
+            to={`/organization/${organization.id}`}
+            style={{ textDecoration: "none", display: "block" }}
+            key={key}
+            state={{ id: organization.id, filter: organizationFilter }}
+          >
+            <OrganizationCard
+              name={truncate(organization.name, 20)}
+              image={organization.logo_link}
+              key={organization.id}
+              country={organization.city}
+            />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

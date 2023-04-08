@@ -6,26 +6,25 @@ import NavigationButton from "../../components/elements/NavigationButton/Navigat
 import Search from "../../components/elements/Search/Search";
 import HeaderText from "../../components/elements/HeaderText/HeaderText";
 import OrganizationContainer from "../../components/containers/OrganizationContainer/OrganizationContainer";
+import { useTranslation } from "react-i18next";
 
 const Organizations = () => {
-  const [navigationState, setNavigationState] = useState(0);
   const [filter, setFilter] = useState("");
+  const { t } = useTranslation();
 
+  const [navigationState, setNavigationState] = useState(0);
 
   const bottomNavigation = () => {
     setNavigationState(!navigationState);
   };
   return (
     <div className={styles.Organizations}>
-      <HeaderText text="Organizations" />
+      <HeaderText text={t("Example.2")} />
       <Search setFilter={setFilter} />
       {/* <TabNavigation /> */}
-      <OrganizationContainer filter={filter} />
+      <OrganizationContainer />
       <BottomNavigation navigationState={navigationState} />
-      <NavigationButton
-        onClick={bottomNavigation}
-        navigationState={navigationState}
-      />
+      <NavigationButton onClick={bottomNavigation} />
     </div>
   );
 };

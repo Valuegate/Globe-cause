@@ -1,0 +1,54 @@
+.Container {
+    padding: .75rem;
+    width: 85%;
+    margin: auto;
+}
+
+.HeaderContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .5rem;
+}
+
+
+.HeaderContainer>p {
+    display: flex;
+    width: 85%;
+    justify-content: flex-start;
+}
+
+
+.Form{
+width: 100%;
+height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Label{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 468px) {
+    .VideoResponsive {
+        height: 140px;
+    }
+
+    .HeaderContainer>Link>img {
+
+        margin-left: 2rem;
+    }
+
+    .VideoResponsive iframe {
+        height: 140px;
+    }
+
+    .ChangePassword {
+        margin-bottom: 0;
+    }
+}

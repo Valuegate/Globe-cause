@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 import styles from "./styles.module.css";
 
@@ -26,12 +28,26 @@ const Login = () => {
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
 
+  const [accountType, setAccountType] = useState("volunteer");
+
   const { user } = useUserAuth();
 
   const [passwordType, setPasswordType] = useState("password");
+
+  const fetchAccountType = async (uid) => {
+    const docRef = doc(db, "volunteers", uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      return;
+    }
+  };
+
   const handlePasswordChange = (evnt) => {
     setPassword(evnt.target.value);
   };
+
   const togglePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
@@ -64,6 +80,7 @@ const Login = () => {
     setError("");
     try {
       await logIn(email, password);
+      await fetchAccountType(user.uid);
       setLoading(false);
       navigate("/home");
     } catch (err) {
@@ -131,30 +148,25 @@ const Login = () => {
             height: "120px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-              width: "50%",
-            }}
-          >
-            <input type="radio" />
-            <Label text="Volunteer" />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-              width: "50%",
-            }}
-          >
-            <input type="radio" />
-            <Label text="Organization" />
-          </div>
+          <input
+            type="radio"
+            id="volunteer"
+            name="account_type"
+            value="volunteer"
+            defaultChecked
+            onClick={() => setAccountType("volunteer")}
+          />
+          <label htmlFor="volunteer">Volunteer</label>
+          <br />
+          <input
+            type="radio"
+            id="oranization"
+            name="account_type"
+            value="organization"
+            onClick={() => setAccountType("organization")}
+          />
+          <label htmlFor="organization">Organization</label>
+          <br />
         </div>
         <Label text="Forgot password?" />
         <AuthenticationButton text="Login" submit={"submit"} />
