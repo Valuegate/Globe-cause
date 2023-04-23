@@ -16,7 +16,6 @@ import InputLabel from "../../components/elements/InputLabel/InputLabel";
 import Label from "../../components/elements/Label/Label";
 import AuthenticationButton from "../../components/elements/AuthenticationButton/AuthenticationButton";
 
-import ErrorPopup from "../../components/containers/ErrorPopup/ErrorPopup";
 import { flexbox } from "@mui/system";
 
 const Login = () => {
@@ -27,6 +26,7 @@ const Login = () => {
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
   const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
 
   const [accountType, setAccountType] = useState("volunteer");
 
@@ -81,17 +81,19 @@ const Login = () => {
     try {
       await logIn(email, password);
       await fetchAccountType(user.uid);
+      setMsg('Successful!!!')
       setLoading(false);
       navigate("/home");
     } catch (err) {
       setError(err.message);
       console.log(err.message);
+      
     }
   };
 
   return (
     <div className={styles.Login}>
-      {loading ? <ErrorPopup message="success" color="green" /> : null}
+     
 
       <HeaderText text="Login" />
       <SocialAuthButton
@@ -169,8 +171,10 @@ const Login = () => {
           <br />
         </div>
         <Label text="Forgot password?" />
+        <p style={{color:'orange'}} >{error||msg}</p>
         <AuthenticationButton text="Login" submit={"submit"} />
       </form>
+      
       <div className={styles.SignupLabel}>
         <Label text="Don't have an account?" />
         <Link to="/signup" style={{ textDecoration: "none" }}>

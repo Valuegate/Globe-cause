@@ -39,24 +39,24 @@ const Account = () => {
     setNavigationState(!navigationState);
   };
 
-  const fetchPost = async (id) => {
+ 
+
+  useEffect(() => {
+     const fetchPost = async (id) => {
     await getDoc(doc(db, "volunteers", id)).then((querySnapshot) => {
       const newData = querySnapshot.data();
       setUserDetails(newData);
-      // console.log(newData);
       console.log(userDetails);
     });
   };
-
-  useEffect(() => {
-    fetchPost( user?.uid);
+    fetchPost( user.uid);
   }, []);
 
   return (
     <div className={styles.Account}>
-      <ProfilePicture  />
+      <ProfilePicture userDetail={userDetails}  pic={userDetails?.profile_image_url} />
       <Label text={userDetails?.name || 'Your Name'} />
-      <p style={{ marginTop: "-15px" }}>{userDetails?.email_address || 'Your Email'}</p>
+      <p style={{ marginTop: "-15px" }}>{userDetails?.email || userDetails?.email_address || 'Your Email'}</p>
       <HorizontalLine width="80%" />
       <BottomNavigation navigationState={navigationState} />
       <NavigationButton onClick={bottomNavigation} navigationState={navigationState} />

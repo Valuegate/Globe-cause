@@ -19,7 +19,7 @@ const Cities = ({ filter }) => {
       return cities;
     }
     return cities.filter((cityItem) => {
-      const cityName = cityItem.city.toLowerCase();
+      const cityName = cityItem.city?.toLowerCase();
       return cityName.includes(city.toLowerCase()) ? cityItem : null;
     });
   };

@@ -24,7 +24,7 @@ const OrganizationContainer = ({ filter }) => {
       return organizations;
     }
     return organizations.filter((organizationItem) => {
-      const cityName = organizationItem.name.toLowerCase();
+      const cityName = organizationItem.name?.toLowerCase();
       return cityName.includes("a".toLowerCase()) ? organizationItem : null;
     });
   };

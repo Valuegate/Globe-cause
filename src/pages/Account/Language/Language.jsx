@@ -71,51 +71,13 @@ const Language = () => {
                     language.map((val, i)=>{
                         return(
                         <div className={styles.Label} key={i} >
-                            <label for="html">{val.langu}</label>
+                            <label htmlFor="html">{val.langu}</label>
                             <input onChange={handleChange} value={val.abb} type="radio" id="html" name="fav_language"/>
                         </div>
                         )
                     })
                 }
-               
-               {/* <div className={styles.Label} >
-                    <label for="css">English (UK)</label>
-                   <input type="radio" id="css" name="fav_language" />
-                </div>
-                <div className={styles.Label} >
-                    <label for="mandarin">Mandarin</label>
-                   <input type="radio" onChange={handleChange} value='mn' id="mandarin" name="fav_language" />
-                </div> */}
-                {/* <hr/>
-                <p style={{fontSize:'18px',fontWeight:'600'}} >Languages</p>
-                <div className={styles.Label} >
-                    <label for="html">Hindi</label>
-                    <input type="radio"onChange={handleChange} value='hindi' id="html" name="fav_language"/>
-                </div>
-                <div className={styles.Label} >
-                     <label for="css">Spanish</label>
-                   <input type="radio" id="css" name="fav_language" />
-                </div>
-                <div className={styles.Label} >
-                    <label for="javascript">Arabic</label>
-                   <input type="radio" id="javascript" name="fav_language" />
-                </div>
-                <div className={styles.Label} >
-                    < label for="html">Indonesia</label>
-                 <  input type="radio" id="html" name="fav_language"/>
-                </div>
-                 <div className={styles.Label} >
-                    <label for="css">Germany</label>
-                   <input type="radio" id="css" name="fav_language" />
-                </div>
-                <div className={styles.Label} >
-                    <label for="javascript">Portugese</label>
-                   <input type="radio" id="javascript" name="fav_language" />
-                </div>
-                 <div className={styles.Label} >
-                    <label for="css">Korean</label>
-                   <input type="radio" id="css" name="fav_language" />
-                </div> */}
+            
             </form>
         </div>
     </div>

@@ -43,7 +43,7 @@ const EditProfile = () => {
     }
   }, [user]);
 
-  const updateProfile = async ({ id }) => {
+  const updateProfile = async (id ) => {
     await setDoc(doc(db, "volunteers", id), {
       name: name,
       email: email,
@@ -62,7 +62,7 @@ const EditProfile = () => {
     try {
       updateEmailAddress(email, password);
       console.log(user.uid);
-      updateProfile({ id: user.UID });
+      updateProfile(user.uid);
       navigate("/account");
     } catch (err) {
       console.log(err.message);
