@@ -1,7 +1,7 @@
 .Box{
     display: flex;
     width: 50%;
-    max-height: 10vh;
+    max-height: 7vh;
     margin-top: 1rem;
     margin-left: 1rem;
     gap: 6;
@@ -14,8 +14,8 @@
     width: 30%;
 } */
 .Image{
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
 }
 .MessageContainer{

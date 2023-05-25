@@ -1,7 +1,9 @@
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import {  useMemo, useState } from "react";
+import {  useMemo, useState,useRef, useEffect } from "react";
 import styles from "./styles.module.css";
 
+import { db } from "../../../firebase";
+import {query, collection, orderBy, onSnapshot, limit} from 'firebase/firestore'
 import SecondaryTabNavigation from "../SecondaryTabNavigation/OrganizationSecondaryTabNavigation";
 import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
 import ChatContainer from "../ChatContainer/ChatContainer";
@@ -20,9 +22,9 @@ import InputContainer from "../InputContainer/InputContainer";
 const AboutOrganization = ({ image,name,country,description, email, facebook, web, twitter, phone, linkedin }) => {
   const [tab, setTab] = useState("About");
 
-  const [message, setMessage] = useState('');
-    const [chatList, setChatList] = useState(['Lorem Iposem Lorem IposemLorem IposemLorem IposemLorem IposemLorem IposemLorem Iposem',]);
-
+  // const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
+  const scroll = useRef();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
   });
@@ -32,6 +34,23 @@ const AboutOrganization = ({ image,name,country,description, email, facebook, we
   const handleTabChange = (tab) => {
     setTab(tab);
   };
+
+  useEffect(()=>{
+    const q = query(
+      collection(db, 'messages'),
+      orderBy('createdAt'),
+      limit(50)
+    );
+    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+      let messages = [];
+      QuerySnapshot.forEach((doc) => {
+        messages.push({...doc.data(), id: doc.id});
+      });
+      setMessages(messages);
+    });
+    return ()=> unsubscribe;
+  },[]);
+  
 
   const Content = ({email, facebook, web, twitter, phone, linkedin}) => {
     if (tab === "About") {
@@ -56,12 +75,12 @@ const AboutOrganization = ({ image,name,country,description, email, facebook, we
             <p style={{fontWeight:'700'}} >Short description</p>
             <p style={{fontWeight:'400',fontSize:'14px'}}>{description}</p>
               <div className={styles.Link} >
-                <a href={email} target='_blank' > <img src={msg} alt="" /> </a>
+                <a href={email} target='_blank' rel="noreferrer" > <img src={msg} alt="" /> </a>
                 {/* <a href={facebook} target='_blank' > <img src={fb} alt="" /> </a> */}
-                <a href={web} target='_blank'> <img src={wb} alt="" /> </a>
-                <a href={twitter} target='_blank'> <img src={twit} alt="" /> </a>
-                <a tel={phone} target='_blank'> <img src={ph} alt="" /> </a>
-                <a href={linkedin} target='_blank'> <img src={link} alt="" /> </a>
+                <a href={web} target='_blank' rel="noreferrer"> <img src={wb} alt="" /> </a>
+                <a href={twitter} target='_blank' rel="noreferrer"> <img src={twit} alt="" /> </a>
+                <a tel={phone} target='_blank' rel="noreferrer"> <img src={ph} alt="" /> </a>
+                <a href={linkedin} target='_blank' rel="noreferrer"> <img src={link} alt="" /> </a>
                 {/* <a> <img src={loc} alt="" /> </a> */}
 
               </div>
@@ -71,13 +90,15 @@ const AboutOrganization = ({ image,name,country,description, email, facebook, we
     } else if (tab === "Chat") {
       return (
          <div className={styles.Photos}>
+          <span ref={scroll}></span>
           {
-            chatList.map((message,i)=>(
-<ChatContainer image={img} key={i+1} username='Captain Michael' message={message}/>
-            ))
-          }
-          
-          <InputContainer setMessage={setMessage} setChatList={setChatList} chatList={chatList} message={message} />
+            messages?.map((message) => 
+            (<ChatContainer
+             key={message.id} 
+              message={message}/>)
+              )
+          }          
+          <InputContainer scroll={scroll} />
         </div>
 
       );

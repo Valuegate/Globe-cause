@@ -1,17 +1,20 @@
 import React from "react";
 import styles from "./styles.module.css";
+// import {auth} from '../../../firebase'
+// import {useAuthState} from 'react-firebase-hooks/auth'
 
-import InputContainer from "../InputContainer/InputContainer";
+// import InputContainer from "../InputContainer/InputContainer";
 
-const ChatContainer = ({ image, username, message }) => {
+const ChatContainer = ({ message }) => {
+  // const [user] = useAuthState(auth);
   return (
-    <div className={styles.Box}>
+    <div className={styles.Box }>
       <div className={styles.ImageContainer}>
-        <img src={image} alt="" className={styles.Image} />
+        <img src={message.avatar} alt="" className={styles.Image} />
       </div>
       <div className={styles.MessageContainer}>
-        <p className={styles.Username}>{username} </p>
-        <p className={styles.Message}>{message}</p>
+        <p className={styles.Username}>{message.name || 'No Name'} </p>
+        <p className={styles.Message}>{message.text}</p>
       </div>
     </div>
   );

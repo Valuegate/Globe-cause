@@ -1,6 +1,8 @@
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./styles.module.css";
+import { db } from "../../../firebase";
+import {query, collection, orderBy, onSnapshot, limit} from 'firebase/firestore'
 
 import SecondaryTabNavigation from "../SecondaryTabNavigation/SecondaryTabNavigation";
 import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
@@ -18,17 +20,29 @@ const AboutCity = ({ ratings, description, photos, conditions }) => {
 
   const [tab, setTab] = useState("About");
 
-  const [message, setMessage] = useState("");
-  const [chatList, setChatList] = useState([]);
+  const scroll = useRef();
+   const [messages, setMessages] = useState([]);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
   });
   const center = useMemo(() => ({ lat: 38.736946, lng: -9.142685 }), []);
 
-  useEffect(() => {
-   
-  }, []);
+ useEffect(()=>{
+    const q = query(
+      collection(db, 'messages'),
+      orderBy('createdAt'),
+      limit(50)
+    );
+    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+      let messages = [];
+      QuerySnapshot.forEach((doc) => {
+        messages.push({...doc.data(), id: doc.id});
+      });
+      setMessages(messages);
+    });
+    return ()=> unsubscribe;
+  },[]);
 
   const handleTabChange = (tab) => {
     setTab(tab);
@@ -118,21 +132,17 @@ const AboutCity = ({ ratings, description, photos, conditions }) => {
     } else if (tab === "Chat") {
       return (
         <div className={styles.Photos}>
-          {chatList.map((message, i) => (
-            <ChatContainer
-              image={img}
-              key={i + 1}
-              username="Captain Michael"
-              message={message}
-            />
-          ))}
+         <span ref={scroll}></span>
+          {
+            messages?.map((message) => 
+            (<ChatContainer
+             key={message.id} 
+              message={message}/>)
+              )
+          }          
+          
           <div style={{ width: "100%" }}>
-            <InputContainer
-              setMessage={setMessage}
-              setChatList={setChatList}
-              chatList={chatList}
-              message={message}
-            />
+            <InputContainer scroll={scroll} />
           </div>
         </div>
       );
