@@ -14,7 +14,11 @@ import InputLabel from "../../components/elements/InputLabel/InputLabel";
 import Label from "../../components/elements/Label/Label";
 import AuthenticationButton from "../../components/elements/AuthenticationButton/AuthenticationButton";
 
+
+import { flexbox } from "@mui/system";
+
 import ErrorPopup from "../../components/containers/ErrorPopup/ErrorPopup";
+
 
 const Login = () => {
   const [loading, setLoading] = useState(true);
@@ -22,6 +26,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [, setName] = useState("");
   const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
 
   const { user } = useUserAuth();
 
@@ -67,6 +72,7 @@ const Login = () => {
     } catch (err) {
       setError("Invalid email or password");
       console.log(err.message);
+      
     }
   };
 
@@ -78,6 +84,7 @@ const Login = () => {
 
   return (
     <div className={styles.Login}>
+
       {!loading ? <ErrorPopup message="success" color="green" /> : null}
 
       <HeaderText text="Login" />

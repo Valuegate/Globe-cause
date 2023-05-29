@@ -21,7 +21,7 @@ const OrganizationDetail = () => {
   //console.log(organizationId);
 
   const fetchPost = async () => {
-    await getDoc(doc(db, `organisations_${filter.toLowerCase()}`, organizationId)).then(
+    await getDoc(doc(db, `organisations_${filter?.toLowerCase()}`, organizationId)).then(
       (querySnapshot) => {
         const newData = querySnapshot.data();
         setOrganization(newData);
@@ -46,11 +46,13 @@ const OrganizationDetail = () => {
         country={organization?.name}
         name={organization?.city}
         ratings={organization?.id}
+        ids={organizationId}
         email={organization?.email}
         facebook={organization?.facebook}
         web={organization?.website}
         twitter={organization?.twitter}
         phone={organization?.phone}
+        filter={filter}
         linkedin={organization?.linkedIn}
       />
       <BackButton color="#ffffff" />

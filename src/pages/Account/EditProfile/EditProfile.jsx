@@ -52,6 +52,7 @@ const EditProfile = () => {
     }
   }, [user]);
 
+
   const updateProfile = async ({ id, database }) => {
     await setDoc(doc(db, database, id), {
       name: name,
@@ -70,6 +71,7 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       updateEmailAddress(email, password);
+
       console.log(user.UID);
       if (role === "volunteer") {
         updateProfile({ id: user.uid, database: "volunteers" });

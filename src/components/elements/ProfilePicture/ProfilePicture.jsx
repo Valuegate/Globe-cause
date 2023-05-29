@@ -1,8 +1,10 @@
 import styles from "./styles.module.css";
+
 import { useState, useContext } from "react";
 import imge from "../../../assets/Group 11966.png";
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 import { UserAthorizationContext } from "../../../hooks/authorization/UserAuthorizationContext";
+
 
 import { db, storage } from "../../../firebase";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
@@ -16,6 +18,7 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
   const [imageAsUrl, setImageAsUrl] = useState(allInputs);
 
   const { role } = useContext(UserAthorizationContext);
+
 
   const { user } = useUserAuth();
 
@@ -72,6 +75,7 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
   };
 
   return (
+
     <form runat="server">
       <label for="inputTag" style={{ cursor: "pointer" }}>
         <div className={styles.ProfilePicture}>

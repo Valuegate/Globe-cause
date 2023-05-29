@@ -46,6 +46,7 @@ const Account = () => {
     setNavigationState(!navigationState);
   };
 
+
   const fetchPost = async (id, database) => {
     await getDoc(doc(db, database, id)).then((querySnapshot) => {
       const newData = querySnapshot.data();

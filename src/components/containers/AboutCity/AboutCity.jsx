@@ -1,6 +1,8 @@
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./styles.module.css";
+import { db } from "../../../firebase";
+import {query, collection, orderBy, onSnapshot, limit} from 'firebase/firestore'
 
 import SecondaryTabNavigation from "../SecondaryTabNavigation/SecondaryTabNavigation";
 import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
@@ -9,26 +11,39 @@ import RatingContainer from "../RatingContainer/RatingContainer";
 import OrganizationContainer from "../OrganizationContainer/OrganizationContainer";
 import ChatContainer from "../ChatContainer/ChatContainer";
 import img from "../../../assets/myPhoto.JPG";
-import InputContainer from "../InputContainer/InputContainer";
+import InputContainer from "../InputContainer/CityInputContainer";
 // import photos from "../../../Demo/Api/Photos";
 
-const AboutCity = ({ ratings, description, photos, conditions }) => {
-  ratings.conditions && console.log(Object.keys(ratings.conditions));
+const AboutCity = ({ ratings, description, photos,filter,ids, conditions }) => {
+  ratings?.conditions && console.log(Object.keys(ratings?.conditions));
  
 
   const [tab, setTab] = useState("About");
 
-  const [message, setMessage] = useState("");
-  const [chatList, setChatList] = useState([]);
+  const scroll = useRef();
+   const [messages, setMessages] = useState([]);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
   });
   const center = useMemo(() => ({ lat: 38.736946, lng: -9.142685 }), []);
 
-  useEffect(() => {
-   
-  }, []);
+ useEffect(()=>{
+    const q = query(
+      collection(db, `locations_${filter?.toLowerCase()}`,ids,'comments'),
+      orderBy('createdAt'),
+      limit(50)
+    );
+    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+      let message = [];
+      QuerySnapshot.forEach((doc) => {
+        message.push({...doc.data(), id: doc.id});
+      });
+      setMessages(message);
+      console.log(message)
+    });
+    return ()=> unsubscribe;
+  },[]);
 
   const handleTabChange = (tab) => {
     setTab(tab);
@@ -55,7 +70,7 @@ const AboutCity = ({ ratings, description, photos, conditions }) => {
             <Label text="Rating" />
           </div>
 
-          {ratings.conditions &&
+          {ratings?.conditions &&
             Object.keys(ratings?.conditions)?.map((rating, index) => {
               return (
                 <RatingContainer
@@ -75,7 +90,7 @@ const AboutCity = ({ ratings, description, photos, conditions }) => {
                 />
               );
             })} */}
-          {ratings.living_cost &&
+          {ratings?.living_cost &&
             Object.keys(ratings?.living_cost)?.map((rating, index) => {
               return (
                 <RatingContainer
@@ -85,7 +100,7 @@ const AboutCity = ({ ratings, description, photos, conditions }) => {
                 />
               );
             })}
-          {ratings.social_life &&
+          {ratings?.social_life &&
             Object.keys(ratings?.social_life)?.map((rating, index) => {
               return (
                 <RatingContainer
@@ -118,21 +133,17 @@ const AboutCity = ({ ratings, description, photos, conditions }) => {
     } else if (tab === "Chat") {
       return (
         <div className={styles.Photos}>
-          {chatList.map((message, i) => (
-            <ChatContainer
-              image={img}
-              key={i + 1}
-              username="Captain Michael"
-              message={message}
-            />
-          ))}
+         <span ref={scroll}></span>
+          {
+            messages?.map((message) => 
+            (<ChatContainer
+             key={message.id} 
+              message={message}/>)
+              )
+          }          
+          
           <div style={{ width: "100%" }}>
-            <InputContainer
-              setMessage={setMessage}
-              setChatList={setChatList}
-              chatList={chatList}
-              message={message}
-            />
+            <InputContainer filter={filter} ids={ids} scroll={scroll} />
           </div>
         </div>
       );
