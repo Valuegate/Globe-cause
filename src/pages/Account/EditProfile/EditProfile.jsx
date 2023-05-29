@@ -7,6 +7,9 @@ import Label from "../../../components/elements/Label/Label";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useContext } from "react";
+import { UserAthorizationContext } from "../../../hooks/authorization/UserAuthorizationContext";
+
 import { db } from "../../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
@@ -18,18 +21,20 @@ const EditProfile = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
+  const { role } = useContext(UserAthorizationContext);
+
   const navigate = useNavigate();
 
   const { user, updateEmailAddress } = useUserAuth();
 
-  const getProfile = async (id) => {
-    const docRef = doc(db, "volunteers", id);
+  const getProfile = async (id, database) => {
+    const docRef = doc(db, database, id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
       setName(docSnap.data().name);
-      setEmail(docSnap.data().email_address);
+      setEmail(docSnap.data().email_address || docSnap.data().email);
       setPhone(docSnap.data().phone_number);
     } else {
       // doc.data() will be undefined in this case
@@ -39,12 +44,16 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (user) {
-      getProfile(user.uid);
+      if (role === "volunteer") {
+        getProfile(user.uid, "volunteers");
+      } else {
+        getProfile(user.uid, `organisations_${role}`);
+      }
     }
   }, [user]);
 
-  const updateProfile = async ({ id }) => {
-    await setDoc(doc(db, "volunteers", id), {
+  const updateProfile = async ({ id, database }) => {
+    await setDoc(doc(db, database, id), {
       name: name,
       email: email,
       phone_number: phone,
@@ -61,8 +70,15 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       updateEmailAddress(email, password);
-      console.log(user.uid);
-      updateProfile({ id: user.UID });
+      console.log(user.UID);
+      if (role === "volunteer") {
+        updateProfile({ id: user.uid, database: "volunteers" });
+      } else {
+        updateProfile({
+          id: user.UID,
+          database: `organisations_${role}`,
+        });
+      }
       navigate("/account");
     } catch (err) {
       console.log(err.message);

@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext";
 import { useNavigate } from "react-router-dom";
 
+//authorization context
+import { useContext } from "react";
+import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
+
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -21,6 +25,9 @@ const Account = () => {
   const [navigationState, setNavigationState] = useState(0);
   const [userDetails, setUserDetails] = useState([]);
 
+  //authorization context
+  const { role, setRole } = useContext(UserAthorizationContext);
+
   const { logOut, user } = useUserAuth();
 
   console.log(user?.uid);
@@ -39,27 +46,36 @@ const Account = () => {
     setNavigationState(!navigationState);
   };
 
-  const fetchPost = async (id) => {
-    await getDoc(doc(db, "volunteers", id)).then((querySnapshot) => {
+  const fetchPost = async (id, database) => {
+    await getDoc(doc(db, database, id)).then((querySnapshot) => {
       const newData = querySnapshot.data();
       setUserDetails(newData);
-      // console.log(newData);
-      console.log(userDetails);
+      console.log("this is the user details", userDetails);
     });
   };
 
   useEffect(() => {
-    fetchPost( user?.uid);
-  }, []);
+    if (role === "volunteer") {
+      fetchPost(user?.uid, "volunteers");
+    } else {
+      fetchPost(user?.uid, `organisations_${role}`);
+    }
+    console.log(role);
+  }, [role]);
 
   return (
     <div className={styles.Account}>
-      <ProfilePicture  />
-      <Label text={userDetails?.name || 'Your Name'} />
-      <p style={{ marginTop: "-15px" }}>{userDetails?.email_address || 'Your Email'}</p>
+      <ProfilePicture profile_image={userDetails?.profile_image_url} />
+      <Label text={userDetails?.name || "Your Name"} />
+      <p style={{ marginTop: "-15px" }}>
+        {userDetails?.email_address || userDetails?.email || "Your Email"}
+      </p>
       <HorizontalLine width="80%" />
       <BottomNavigation navigationState={navigationState} />
-      <NavigationButton onClick={bottomNavigation} navigationState={navigationState} />
+      <NavigationButton
+        onClick={bottomNavigation}
+        navigationState={navigationState}
+      />
 
       {accountSettings.map((item, key) => {
         if (item.title === "Logout") {

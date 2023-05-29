@@ -1,8 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext";
-import { db } from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
 
 import styles from "./styles.module.css";
 
@@ -17,32 +15,17 @@ import Label from "../../components/elements/Label/Label";
 import AuthenticationButton from "../../components/elements/AuthenticationButton/AuthenticationButton";
 
 import ErrorPopup from "../../components/containers/ErrorPopup/ErrorPopup";
-import { flexbox } from "@mui/system";
 
 const Login = () => {
+  const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [country, setCountry] = useState("");
+  const [, setName] = useState("");
   const [error, setError] = useState("");
-
-  const [accountType, setAccountType] = useState("volunteer");
 
   const { user } = useUserAuth();
 
   const [passwordType, setPasswordType] = useState("password");
-
-  const fetchAccountType = async (uid) => {
-    const docRef = doc(db, "volunteers", uid);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      return;
-    }
-  };
 
   const handlePasswordChange = (evnt) => {
     setPassword(evnt.target.value);
@@ -61,7 +44,6 @@ const Login = () => {
 
   const handleGoogleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
     try {
       await signInWithGoogle();
       setLoading(false);
@@ -76,22 +58,27 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     setError("");
     try {
       await logIn(email, password);
-      await fetchAccountType(user.uid);
       setLoading(false);
       navigate("/home");
     } catch (err) {
-      setError(err.message);
+      setError("Invalid email or password");
       console.log(err.message);
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [user]);
+
   return (
     <div className={styles.Login}>
-      {loading ? <ErrorPopup message="success" color="green" /> : null}
+      {!loading ? <ErrorPopup message="success" color="green" /> : null}
 
       <HeaderText text="Login" />
       <SocialAuthButton
@@ -106,7 +93,7 @@ const Login = () => {
         bg="#FFFFFF"
         color="#0E0E0F"
       />
-      <form className={styles.Login} onSubmit={handleSubmit}>
+      <form className={styles.Login}>
         <div className={styles.Inputs}>
           <InputLabel
             label="Email"
@@ -137,40 +124,14 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-            alignItems: "center",
-            width: "100%",
-            maxWidth: "400px",
-            height: "120px",
-          }}
-        >
-          <input
-            type="radio"
-            id="volunteer"
-            name="account_type"
-            value="volunteer"
-            defaultChecked
-            onClick={() => setAccountType("volunteer")}
-          />
-          <label htmlFor="volunteer">Volunteer</label>
-          <br />
-          <input
-            type="radio"
-            id="oranization"
-            name="account_type"
-            value="organization"
-            onClick={() => setAccountType("organization")}
-          />
-          <label htmlFor="organization">Organization</label>
-          <br />
-        </div>
         <Label text="Forgot password?" />
-        <AuthenticationButton text="Login" submit={"submit"} />
+        <AuthenticationButton
+          text="Login"
+          submit={"submit"}
+          onclick={handleSubmit}
+        />
       </form>
+      <p style={{color: "red"}}> {error}</p>
       <div className={styles.SignupLabel}>
         <Label text="Don't have an account?" />
         <Link to="/signup" style={{ textDecoration: "none" }}>
