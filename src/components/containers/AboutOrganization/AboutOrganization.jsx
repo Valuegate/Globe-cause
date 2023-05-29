@@ -3,7 +3,7 @@ import {  useMemo, useState,useRef, useEffect } from "react";
 import styles from "./styles.module.css";
 
 import { db } from "../../../firebase";
-import {query, collection, orderBy, onSnapshot, limit} from 'firebase/firestore'
+import {query, collection, doc,orderBy, onSnapshot, limit} from 'firebase/firestore'
 import SecondaryTabNavigation from "../SecondaryTabNavigation/OrganizationSecondaryTabNavigation";
 import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
 import ChatContainer from "../ChatContainer/ChatContainer";
@@ -19,7 +19,7 @@ import loc from '../../../assets/loc.png'
 import photos from "../../../Demo/Api/Photos";
 import InputContainer from "../InputContainer/InputContainer";
 
-const AboutOrganization = ({ image,name,country,description, email, facebook, web, twitter, phone, linkedin }) => {
+const AboutOrganization = ({ image,name,country,description, email, filter,facebook,ids, web, twitter, phone, linkedin }) => {
   const [tab, setTab] = useState("About");
 
   // const [message, setMessage] = useState('');
@@ -35,21 +35,24 @@ const AboutOrganization = ({ image,name,country,description, email, facebook, we
     setTab(tab);
   };
 
+  // db.collection("First collection Name").doc("Id of the document").collection("Nested collection Name")
+
   useEffect(()=>{
     const q = query(
-      collection(db, 'messages'),
-      orderBy('createdAt'),
+      collection(db, `organisations_${filter?.toLowerCase()}`,ids,'comments'),
+       orderBy('createdAt'),
       limit(50)
     );
     const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
-      let messages = [];
+      let message = [];
       QuerySnapshot.forEach((doc) => {
-        messages.push({...doc.data(), id: doc.id});
+        message.push({...doc.data(), id: doc.id});
       });
-      setMessages(messages);
+      setMessages(message);
+      
     });
     return ()=> unsubscribe;
-  },[]);
+  },[ids]);
   
 
   const Content = ({email, facebook, web, twitter, phone, linkedin}) => {
@@ -94,11 +97,11 @@ const AboutOrganization = ({ image,name,country,description, email, facebook, we
           {
             messages?.map((message) => 
             (<ChatContainer
-             key={message.id} 
+             key={message?.id} 
               message={message}/>)
               )
           }          
-          <InputContainer scroll={scroll} />
+          <InputContainer filter={filter} ids={ids} scroll={scroll} />
         </div>
 
       );
@@ -122,7 +125,7 @@ const AboutOrganization = ({ image,name,country,description, email, facebook, we
             <img src={image} alt=''/>
             <div className={styles.Stack} >
                 <p>{name}</p>
-                <p>{country} &nbsp; {country}</p>
+                <p>{country} </p>
             </div>
             
         </div>

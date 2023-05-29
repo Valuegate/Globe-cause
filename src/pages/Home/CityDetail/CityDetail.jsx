@@ -19,7 +19,7 @@ const CityDetail = () => {
   const filter = location.state?.filter;
 
   const fetchPost = async () => {
-    await getDoc(doc(db, `locations_${filter.toLowerCase()}`, cityId)).then(
+    await getDoc(doc(db, `locations_${filter?.toLowerCase()}`, cityId)).then(
       (querySnapshot) => {
         const newData = querySnapshot.data();
         setCity(newData);
@@ -29,12 +29,12 @@ const CityDetail = () => {
 
   useEffect(() => {
     fetchPost();
-  }, []);
-
-  useEffect(() => {
-    // const city = cities.find((city) => city.id === cityId);
-    // setCity(city);
   }, [cityId]);
+
+  // useEffect(() => {
+  //   // const city = cities.find((city) => city.id === cityId);
+  //   // setCity(city);
+  // }, [cityId]);
 
   return (
     <div
@@ -46,7 +46,9 @@ const CityDetail = () => {
       <AboutCity
         description={city.short_description}
         photos={city.photos_links}
-        ratings={city}
+        ratings={city?.rating}
+        filter={filter}
+        ids={cityId}
       />
       <BackButton color="#ffffff"  />
     </div>

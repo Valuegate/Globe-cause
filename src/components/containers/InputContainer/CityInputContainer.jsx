@@ -18,7 +18,7 @@ const InputContainer = ({scroll,filter,ids}) => {
     return;
   }
   const {uid, displayName, photoURL} = auth.currentUser;
-  await addDoc(collection(db, `organisations_${filter.toLowerCase()}`,ids,'comments'), {
+  await addDoc(collection(db, `locations_${filter.toLowerCase()}`,ids,'comments'), {
     text: chat,
     createdAt: serverTimestamp(),
     uid,

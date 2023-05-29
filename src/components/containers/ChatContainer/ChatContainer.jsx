@@ -10,11 +10,11 @@ const ChatContainer = ({ message }) => {
   return (
     <div className={styles.Box }>
       <div className={styles.ImageContainer}>
-        <img src={message.avatar} alt="" className={styles.Image} />
+        <img src={message.profile_image||message.avatar} alt="" className={styles.Image} />
       </div>
       <div className={styles.MessageContainer}>
         <p className={styles.Username}>{message.name || 'No Name'} </p>
-        <p className={styles.Message}>{message.text}</p>
+        <p className={styles.Message}>{message.text||message.comment}</p>
       </div>
     </div>
   );
