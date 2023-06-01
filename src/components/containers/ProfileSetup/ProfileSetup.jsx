@@ -19,8 +19,6 @@ const ProfileSetup = () => {
       case 1:
         return <ProfileSetup2 />;
        case 2:
-         return <ProfileSetup3/>;
-       case 3:
          return <ProfileSetup4/>;
        default:
          return <ProfileSetup1/>;
@@ -41,11 +39,11 @@ const ProfileSetup = () => {
             <div className={styles.Timeline} >
                 <p className={styles.Phase}  style={{background:page===1||page===2||page===3 ?'#1F4490':'#fff',color:page===1||page===2||page===3 ?'#fff':'rgba(14, 14, 15, 0.5)'}} >{page===1||page===2||page===3 ? <>&#x2713;</> :'1'}</p>
                 <p className={styles.Phase} style={{background:page===2||page===3 ?'#1F4490':'#fff',color:page===2||page===3 ?'#fff':'rgba(14, 14, 15, 0.5)'}} >{page===2||page===3 ? <>&#x2713;</>:'2'}</p>
-                <p className={styles.Phase}  style={{background:page===3 ?'#1F4490':'#fff',color:page===3 ?'#fff':'rgba(14, 14, 15, 0.5)'}} >{page===3 ? <>&#x2713;</>:'3'}</p>
+                {/* <p className={styles.Phase}  style={{background:page===3 ?'#1F4490':'#fff',color:page===3 ?'#fff':'rgba(14, 14, 15, 0.5)'}} >{page===3 ? <>&#x2713;</>:'3'}</p> */}
             </div>
          </div>
          {conditionalComponent()}
-         <AuthenticationButton onclick={(e)=>handleSubmit(e)} text={ page === 0 || page === 1 ||page === 2  ? "Next" : "Finish" } />
+         <AuthenticationButton onclick={(e)=>handleSubmit(e)} text={ page === 0 || page === 1  ? "Next" : "Finish" } />
 
          
 
