@@ -154,6 +154,7 @@ const AboutOrganization = ({ image,name,country,description, email, filter,faceb
             ids={ids}
           />
         </div>
+
       );
     } else if (tab === "Photos") {
       return (

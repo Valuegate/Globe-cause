@@ -1,7 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  FacebookAuthProvider,
+  OAuthProvider,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -40,26 +46,15 @@ export const storage = getStorage(app);
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
-export const signInWithGoogle = () =>
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      // const credential = GoogleAuthProvider.credentialFromResult(result);
-      // const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log(errorCode, errorMessage, credential);
-      // ...
-    });
+export const signInWithGoogle = () => signInWithPopup(auth, provider);
+
+const facebookProvider = new FacebookAuthProvider();
+facebookProvider.setCustomParameters({ prompt: "select_account" });
+
+export const signInWithFacebook = () => signInWithPopup(auth, facebookProvider);
+const appleProvider = new OAuthProvider("apple.com");
+appleProvider.setCustomParameters({ prompt: "select_account" });
+
+export const signInWithApple = () => signInWithPopup(auth, appleProvider);
+
 export default app;

@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 import CityHeader from "../../../components/elements/CityHeader/CityHeader";
 import AboutOrganization from "../../../components/containers/AboutOrganization/AboutOrganization";
 import BackButton from "../../../components/elements/BackButton/BackButton";
 import Nav from "../Nav";
+
 
 const OrganizationDetail = () => {
   const location = useLocation();
@@ -22,13 +24,13 @@ const OrganizationDetail = () => {
   //console.log(organizationId);
 
   const fetchPost = async () => {
-    await getDoc(doc(db, `organisations_${filter?.toLowerCase()}`, organizationId)).then(
-      (querySnapshot) => {
-        const newData = querySnapshot.data();
-        setOrganization(newData);
-        console.log(newData)
-      }
-    );
+    await getDoc(
+      doc(db, `organisations_${filter?.toLowerCase()}`, organizationId)
+    ).then((querySnapshot) => {
+      const newData = querySnapshot.data();
+      setOrganization(newData);
+      console.log(newData);
+    });
   };
 
   useEffect(() => {
@@ -57,7 +59,12 @@ const OrganizationDetail = () => {
         filter={filter}
         linkedin={organization?.linkedIn}
       />
-      <BackButton color="#ffffff" />
+      <button
+        className={styles.BackButton}
+        onClick={() => window.history.back()}
+      >
+        <ArrowBackIosIcon />
+      </button>
     </div>
   );
 };

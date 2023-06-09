@@ -6,7 +6,7 @@ const EmailProtectedRoute = ({ children }) => {
   const { user } = useUserAuth();
 
   if (user && user.emailVerified) {
-    navigate("/account");
+    navigate("/home");
   }
 
   return children;

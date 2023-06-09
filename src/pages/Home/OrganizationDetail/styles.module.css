@@ -23,3 +23,30 @@ background-color: #1F4490;
     align-items: center;
     background-color: #fff;
 }
+
+.BackButton{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(0,0,0,0.7);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    color: #fff;
+}
+@media screen and (min-width: 768px) {
+    .BackButton{
+        top: 40px;
+        left: 40px;
+        position: fixed;
+    }
+}
+    

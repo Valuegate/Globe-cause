@@ -1,14 +1,24 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase";
 
 import { useContext } from "react";
 import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
+import { use } from "i18next";
+
+import Splash from "../Home/Splash";
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useUserAuth();
+  // const { user } = useUserAuth();
+  const [user, loading, error] = useAuthState(auth);
+
+  const history = useNavigate();
+
+  const { logOut } = useUserAuth();
 
   const lists = ["portugal", "spain", "romania"];
 
@@ -44,6 +54,8 @@ const ProtectedRoute = ({ children }) => {
     }
   };
 
+  
+
   useEffect(() => {
     if (user) {
       fetchIndividualAccountType(user.uid);
@@ -56,18 +68,27 @@ const ProtectedRoute = ({ children }) => {
     
   }, [user]);
 
+
   console.log("Check user in Private: ", user);
   console.log("Check role in Private: ", role);
 
-  if (!user) {
-    console.log("No user");
-    return <Navigate to="/login" />;
+  if (user && user.emailVerified && role !== "") {
+    return children;
   } else if (user && !user.emailVerified) {
-    console.log("Email not verified");
-    return <Navigate to="/verify-email" />;
+    history("/verify-email");
+  } else {
+    history("/login");
   }
 
-  return children;
+  if (loading) {
+    return <Splash />;
+  }
+
+  if (error) {
+    return <h1>Error: {error}</h1>;
+  }
+
+  // return children;
 };
 
 export default ProtectedRoute;

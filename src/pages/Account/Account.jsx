@@ -36,7 +36,7 @@ const Account = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.log(error.message);
     }
@@ -45,7 +45,6 @@ const Account = () => {
   const bottomNavigation = () => {
     setNavigationState(!navigationState);
   };
-
 
   const fetchPost = async (id, database) => {
     await getDoc(doc(db, database, id)).then((querySnapshot) => {

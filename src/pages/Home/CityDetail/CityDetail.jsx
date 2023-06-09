@@ -52,6 +52,8 @@ const CityDetail = () => {
         ratings={city?.rating}
         filter={filter}
         ids={cityId}
+        lat = {city?.coordinates?.lat }
+        lng = {city?.coordinates?.long }
       />
       <BackButton color="#ffffff"  />
     </div>
