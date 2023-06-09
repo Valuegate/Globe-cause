@@ -95,7 +95,7 @@ const Login = () => {
       navigate("/home");
     } catch (err) {
       setError("Invalid email or password");
-      setLoading(false);
+      // setLoading(false);
       console.log(err.message);
     }
   };

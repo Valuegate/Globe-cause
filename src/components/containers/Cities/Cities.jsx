@@ -16,17 +16,23 @@ const Cities = ({ filter }) => {
 
   
 
+  
+
 
 
   const searchCities = (city) => {
     if (city === "") {
-      return cities;
+      return cities.sort((a, b) => a - b);
     }
     return cities.filter((cityItem) => {
       const cityName = cityItem.city?.toLowerCase();
-      return cityName.includes(city.toLowerCase()) ? cityItem : null;
+      
+      return cityName.includes(city.toLowerCase()).sort() ? cityItem.sort() : null;
     });
   };
+
+  // const simpleSort = Array.from(cities)?.sort((a, b) => a - b);
+  //     console.log('hello:',simpleSort?.city);
 
   const fetchPost = async (country) => {
     await getDocs(collection(db, `locations_${country.toLowerCase()}`)).then(
@@ -35,7 +41,8 @@ const Cities = ({ filter }) => {
           ...doc.data(),
           id: doc.id,
         }));
-        setCities(newData);
+        setCities(Array.from(newData)?.sort());
+        console.log(cities?.city?.sort())
         // console.log(countries[0]?.countriesList[0]);
       }
     );
@@ -43,6 +50,7 @@ const Cities = ({ filter }) => {
 
   useEffect(() => {
     fetchPost(cityFilter);
+    // const simpleSort = Array.from(cityFilter).sort((a, b) => a - b);
   }, []);
 
   // const filterCities = (city) => {
@@ -58,7 +66,7 @@ const Cities = ({ filter }) => {
     <div className={styles.Cities}>
       <TabNavigation click={NavigationActive} cityFilter={cityFilter} />
       <div className={styles.CitiesContainer}>
-        {searchCities(filter).map((city, key) => (
+        {searchCities(filter).sort().map((city, key) => (
           <Link
             to={`/city/${city.id}`}
             style={{ textDecoration: "none" }}
