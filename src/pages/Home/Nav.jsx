@@ -30,7 +30,7 @@ const Nav = () => {
                 
                 
                 <Link  to='/account' style={{display:'flex',textDecoration:'none',alignItems:'center',justifyContent:'center'}} >
-                <IoIosPerson className={style.Notification}/>&nbsp;<p className={style.Ptag}>Hello, {user?.email||'John'}</p>
+                <IoIosPerson className={style.Notification}/>&nbsp;<p className={style.Ptag}>Hello, {user?.email||'there'}</p>
                 </Link>
             </div>
         </div>

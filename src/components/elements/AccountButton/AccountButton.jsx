@@ -6,7 +6,7 @@ const AccountButton = ({ text, to, children }) => {
   return (
     <Link
       className={styles.AccountButton}
-      style={{ textDecoration: "none", color: "#0E0E0F" }}
+      style={{ textDecoration: "none", color: "#fff" }}
       to={to}
     >
       <div className={styles.NameContainer}>

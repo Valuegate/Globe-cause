@@ -54,7 +54,6 @@ const Login = () => {
   const { logIn } = useUserAuth();
   const navigate = useNavigate();
 
-
   const createProfile = async (id) => {
     await setDoc(doc(db, "volunteers", id), {
       country: "",
@@ -71,7 +70,6 @@ const Login = () => {
         console.error("Error writing document: ", error);
       });
   };
-
 
   const handleGoogleLogin = async (e) => {
     e.preventDefault();
@@ -93,14 +91,13 @@ const Login = () => {
     try {
       await logIn(email, password);
       setLoading(false);
-      localStorage.setItem('user', JSON.stringify(user.displayName));
+      localStorage.setItem("user", JSON.stringify(user.displayName));
       navigate("/home");
     } catch (err) {
       setError("Invalid email or password");
       setLoading(false);
       console.log(err.message);
     }
-
   };
 
   useEffect(() => {
@@ -110,13 +107,11 @@ const Login = () => {
       }
       navigate("/home");
     }
-  }, [user]);
+  }, [role]);
 
   return (
     <div className={styles.Login}>
-
       {/* {!loading ? <ErrorPopup message="success" color="green" /> : null} */}
-
 
       <HeaderText text="Login" />
       <SocialAuthButton
@@ -171,7 +166,7 @@ const Login = () => {
         </div>
         <Label text="Forgot password?" />
         <AuthenticationButton
-          text={loading ? 'loading...':"Login"}
+          text={loading ? "loading..." : "Login"}
           submit={"submit"}
           onclick={handleSubmit}
         />

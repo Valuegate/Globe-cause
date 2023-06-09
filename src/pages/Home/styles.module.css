@@ -12,8 +12,7 @@
 /*Home screen styles*/
 .Home {
     width: 100%;
-    background-color: #1F4490;
-    background-image: url("../../assets/banner.png");
+    
 }
 .NavigationButton {
     width: 50px;

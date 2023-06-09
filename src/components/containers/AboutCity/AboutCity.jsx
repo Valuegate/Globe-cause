@@ -63,6 +63,25 @@ const AboutCity = ({
     setTab(tab);
   };
 
+  const pictureEnlarger = (e) => {
+    console.log(e.target.src);
+    const img = document.createElement("img");
+    img.src = e.target.src;
+    img.style.width = "90%";
+    img.style.height = "90%";
+    img.style.objectFit = "contain";
+    img.style.position = "fixed";
+    img.style.top = "5%";
+    img.style.left = "5%";
+    img.style.zIndex = "1000";
+    // img.style.backgroundColor = "rgba(0,0,0,0.5)";
+    img.style.cursor = "pointer";
+    img.onclick = () => {
+      img.remove();
+    };
+    document.body.appendChild(img);
+  };
+
   const Content = () => {
     if (tab === "About") {
       return (
@@ -133,7 +152,13 @@ const AboutCity = ({
           </div>
           <div className={styles.ImageContainer}>
             {photos?.map((photo, i) => (
-              <img src={photo} className={styles.Image} key={i} alt="" />
+              <img
+                src={photo}
+                className={styles.Image}
+                key={i}
+                alt=""
+                onClick={pictureEnlarger}
+              />
             ))}
           </div>
         </>
@@ -144,7 +169,6 @@ const AboutCity = ({
           <OrganizationContainer />
         </div>
       );
-
     } else if (tab === "Chat") {
       return (
         <div className={styles.Photos}>
