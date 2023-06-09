@@ -72,7 +72,7 @@ const ProtectedRoute = ({ children }) => {
   console.log("Check user in Private: ", user);
   console.log("Check role in Private: ", role);
 
-  if (user && user.emailVerified && role !== "") {
+  if (user && user.emailVerified) {
     return children;
   } else if (user && !user.emailVerified) {
     history("/verify-email");

@@ -67,7 +67,7 @@ const Account = () => {
     <div className={styles.Account}>
       <ProfilePicture profile_image={userDetails?.profile_image_url} />
       <Label text={userDetails?.name || "Your Name"} />
-      <p style={{ marginTop: "-15px" }}>
+      <p style={{ marginTop: "-15px", color: "#fff" }}>
         {userDetails?.email_address || userDetails?.email || "Your Email"}
       </p>
       <HorizontalLine width="80%" />

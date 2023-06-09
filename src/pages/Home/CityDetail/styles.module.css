@@ -6,14 +6,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-            background-color: #1F4490;
-            background-image: url("../../../assets/banner.png");
         
 }
 @media screen and (min-width: 768px) {
-    .CityDetail {
-        background-color: #1F4490;
-    }
+
 }
     
 .Map {

@@ -31,7 +31,9 @@ const Nav = () => {
                 
                 
                 <Link  to='/account' style={{display:'flex',textDecoration:'none',alignItems:'center',justifyContent:'center'}} >
+
                 <p className={style.Ptag}>Hello,&nbsp;<IoIosPerson className={style.Notification}/>&nbsp; {user?.email||'John'}</p>
+
                 </Link>
             </div>
         </div>
