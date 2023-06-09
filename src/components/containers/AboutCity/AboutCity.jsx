@@ -130,24 +130,25 @@ const AboutCity = ({ ratings, description, photos,filter,ids, conditions }) => {
           <OrganizationContainer />
         </div>
       );
-    } else if (tab === "Chat") {
-      return (
-        <div className={styles.Photos}>
-         <span ref={scroll}></span>
-          {
-            messages?.map((message) => 
-            (<ChatContainer
-             key={message.id} 
-              message={message}/>)
-              )
-          }          
+    } 
+    // else if (tab === "Chat") {
+    //   return (
+    //     <div className={styles.Photos}>
+    //      <span ref={scroll}></span>
+    //       {
+    //         messages?.map((message) => 
+    //         (<ChatContainer
+    //          key={message.id} 
+    //           message={message}/>)
+    //           )
+    //       }          
           
-          <div style={{ width: "100%" }}>
-            <InputContainer filter={filter} ids={ids} scroll={scroll} />
-          </div>
-        </div>
-      );
-    }
+    //       <div style={{ width: "100%" }}>
+    //         <InputContainer filter={filter} ids={ids} scroll={scroll} />
+    //       </div>
+    //     </div>
+    //   );
+    // }
   };
 
   return (

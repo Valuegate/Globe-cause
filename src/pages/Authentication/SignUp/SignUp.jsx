@@ -12,6 +12,8 @@ import InputLabel from "../../../components/elements/InputLabel/InputLabel";
 import Label from "../../../components/elements/Label/Label";
 import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
 
+import ProfileSetup from "../../../components/containers/ProfileSetup/ProfileSetup";
+
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -19,6 +21,25 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
+
+  //organization state
+  const [orgName, setOrgName] = useState("");
+  const [orgEmail, setOrgEmail] = useState("");
+  const [orgPhone, setOrgPhone] = useState("");
+  const [orgPassword, setOrgPassword] = useState("");
+  const [orgCountry, setOrgCountry] = useState("");
+  const [orgCity, setOrgCity] = useState("");
+  const [village, setVillage] = useState("");
+  const [tagline, setTagline] = useState("");
+  const [oid, setOid] = useState("");
+  const [members, setMembers] = useState("");
+  const [website, setWebsite] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [short_description, setShortDescription] = useState("");
+
+  const [accountType, setAccountType] = useState("volunteer");
 
   const { signUp, user, googleSignIn } = useUserAuth();
 
@@ -39,13 +60,42 @@ const SignUp = () => {
       });
   };
 
+  //create organization profile
+  const createOrgProfile = async (id) => {
+    await setDoc(doc(db, `organisations_${orgCountry}`, id), {
+      city: orgCity,
+      country: orgCountry,
+      date_created: new Date(),
+      email: orgEmail,
+      facebook: facebook,
+      linkedin: linkedin,
+      approximate_local_members: members,
+      name: orgName,
+      oid: oid,
+      phone_number: orgPhone,
+      profile_image_url: "",
+      // tagline: tagline,
+      twitter: twitter,
+      // village: village,
+      website: website,
+      isVerified: false,
+      short_description: short_description,
+    })
+      .then(() => {
+        console.log("Document successfully written!");
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+  };
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
+      await signUp(email || orgEmail, password || orgPassword);
     } catch (err) {
       setError(err.message);
       console.log(email);
@@ -54,8 +104,11 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && accountType === "volunteer") {
       createProfile(user.uid);
+      navigate("/account");
+    } else if (user && accountType === "organization") {
+      createOrgProfile(user.uid);
       navigate("/account");
     }
   }, [user]);
@@ -75,46 +128,111 @@ const SignUp = () => {
         color="#0E0E0F"
         onclick={googleSignIn}
       />
-      <form className={styles.SignUp} onSubmit={handleSubmit}>
-        <div className={styles.Inputs}>
-          <InputLabel
-            label="Name"
-            type="text"
-            placeholder="Enter your fullname"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-          <InputLabel
-            label="Email"
-            type="email"
-            placeholder="Enter your email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <InputLabel
-            label="Password"
-            type="password"
-            placeholder="Enter your password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <InputLabel
-            label="Phone Number"
-            type="number"
-            placeholder="Enter your phone number"
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <InputLabel
-            label="Country"
-            type="text"
-            placeholder="Enter your country"
-            onChange={(e) => setCountry(e.target.value)}
-          />
-        </div>
-        <Label text="Forgot password?" />
-        <AuthenticationButton text="Sign up" />
-      </form>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          alignItems: "center",
+          width: "100%",
+          maxWidth: "400px",
+          height: "120px",
+        }}
+      >
+        <input
+          type="radio"
+          id="volunteer"
+          name="account_type"
+          value="volunteer"
+          defaultChecked
+          onClick={() => setAccountType("volunteer")}
+        />
+        <label htmlFor="volunteer">Volunteer</label>
+        <br />
+        <input
+          type="radio"
+          id="oranization"
+          name="account_type"
+          value="organization"
+          onClick={() => setAccountType("organization")}
+        />
+        <label htmlFor="organization">Organization</label>
+        <br />
+      </div>
+      {accountType === "volunteer" ? (
+        <form className={styles.SignUp} onSubmit={handleSubmit}>
+          <div className={styles.Inputs}>
+            <InputLabel
+              label="Name"
+              type="text"
+              placeholder="Enter your fullname"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <InputLabel
+              label="Email"
+              type="email"
+              placeholder="Enter your email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <InputLabel
+              label="Password"
+              type="password"
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <InputLabel
+              label="Phone Number"
+              type="number"
+              placeholder="Enter your phone number"
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <InputLabel
+              label="Country"
+              type="text"
+              placeholder="Enter your country"
+              onChange={(e) => setCountry(e.target.value)}
+            />
+          </div>
+          <Label text="Forgot password?" />
+          <AuthenticationButton text="Sign up" />
+        </form>
+      ) : (
+        <ProfileSetup
+          orgName={orgName}
+          setOrgName={setOrgName}
+          orgEmail={orgEmail}
+          setOrgEmail={setOrgEmail}
+          orgPhone={orgPhone}
+          setOrgPhone={setOrgPhone}
+          orgPassword={orgPassword}
+          setOrgPassword={setOrgPassword}
+          orgCountry={orgCountry}
+          setOrgCountry={setOrgCountry}
+          orgCity={orgCity}
+          setOrgCity={setOrgCity}
+          village={village}
+          setVillage={setVillage}
+          tagline={tagline}
+          setTagline={setTagline}
+          oid={oid}
+          setOid={setOid}
+          members={members}
+          setMembers={setMembers}
+          website={website}
+          setWebsite={setWebsite}
+          facebook={facebook}
+          setFacebook={setFacebook}
+          twitter={twitter}
+          setTwitter={setTwitter}
+          linkedin={linkedin}
+          setLinkedin={setLinkedin}
+          submit={handleSubmit}
+        />
+      )}
       <div className={styles.SignupLabel}>
         <Label text="Already have an account?" />
         <Link to="/login" style={{ textDecoration: "none" }}>

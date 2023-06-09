@@ -1,0 +1,50 @@
+.EmailVerified {
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.VerifiedButton{
+    width: 60%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 20px 0px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.VerifiedButton:hover{
+    cursor: pointer;
+    background-image: linear-gradient(to right, #1F4490, #00A9E1);
+    color: #fff;
+
+}
+
+
+
+
+
+@media screen and (min-width: 768px) {
+    .EmailVerified{
+        margin-bottom: 0;
+        height: 100vh;
+    }
+   .VerifiedButton{
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 20px 0px;
+}
+}

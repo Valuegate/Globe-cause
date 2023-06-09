@@ -15,9 +15,10 @@ const InputSelect = ({ label, type, placeholder,value, onChange }) => {
     //   data: input,
     })
       .then(response => {
+        Object.keys(response.data["items"]).forEach(function(key) {       console.log(response.data["items"][key].country);     })
        
-    console.log(response.data?.data?.country)
-    setCountries(response.data.data)
+    console.log(response.data.data[0].country)
+    setCountries(response.data.country)
     // navigate('/dashboard');
       })
       .catch(err => {
@@ -35,7 +36,7 @@ const InputSelect = ({ label, type, placeholder,value, onChange }) => {
       <Label text={label}/>
       <div className={styles.Input}>
         {/* <input type={type} value={value} placeholder={placeholder} onChange={onChange} /> */}
-        <select name="" id="">
+        <select name="" id="" onChange={onChange}>
             <option placeholder={placeholder} value={countries?.country}>{countries?.country}</option>
         </select>
       </div>

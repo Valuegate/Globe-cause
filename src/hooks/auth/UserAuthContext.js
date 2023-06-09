@@ -10,6 +10,7 @@ import {
   updatePassword,
   GoogleAuthProvider,
   signInWithPopup,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../../firebase";
 
@@ -25,11 +26,14 @@ export function UserAuthContextProvider({ children }) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
 
+  function verificationEmail() {
+    return sendEmailVerification(auth.currentUser);
+  }
+
   function googleSignIn() {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider);
   }
-
 
   function logOut() {
     return signOut(auth);
@@ -58,7 +62,7 @@ export function UserAuthContextProvider({ children }) {
       });
   };
 
-  const updatePassword = ( currentPassword, newPassword) => {
+  const updatePassword = (currentPassword, newPassword) => {
     reauthenticate(currentPassword)
       .then(() => {
         const user = auth.currentUser;
@@ -92,6 +96,7 @@ export function UserAuthContextProvider({ children }) {
         updateEmailAddress,
         updatePassword,
         googleSignIn,
+        verificationEmail,
       }}
     >
       {children}

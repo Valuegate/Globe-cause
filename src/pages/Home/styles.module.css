@@ -1,3 +1,4 @@
+
 /*splash screen styles*/
 .Splash {
     width: 100%;
@@ -28,4 +29,76 @@
     align-items: center;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
     cursor: pointer;
+}
+
+/* Nav styles */
+
+.NavContainer {
+    width: 100%;
+    padding: 2rem;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.NavItems {
+    display: flex;
+    flex-direction: row;
+justify-content: center;
+    align-items: center;
+}
+
+.NavItems>img {
+    width: 10rem;
+    height: 2rem;
+}
+
+.NavItem, .Ptag {
+    margin-right: 2rem;
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.NavItemf {
+    margin-right: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: '#fff !important';
+
+}
+.Notification{
+    display: block;
+    /* position: absolute;
+    top: 10%;
+    left:90%; */
+    width: 2rem;
+    min-width: 1rem;
+    height: 2rem;
+    min-height: 1rem;
+    color:white;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 468px) {
+    .NavContainer {
+        padding: 1rem;
+        margin: auto;
+    }
+
+    .NavItem,
+    .NavItemf {
+        margin-right: .5rem;
+        font-size: .75rem;
+        font-weight: 700;
+    }
+
+    .NavItems>img {
+        width: 5rem;
+        height: 2rem;
+    }
 }
