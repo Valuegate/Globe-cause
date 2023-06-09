@@ -116,7 +116,7 @@ const SignUp = () => {
   return (
     <div className={styles.SignUp}>
       <HeaderText text="Sign Up" />
-      <SocialAuthButton
+      {/* <SocialAuthButton
         text="CONTINUE WITH FACEBOOK"
         bg="#1F4490"
         color="#ffffff"
@@ -127,7 +127,7 @@ const SignUp = () => {
         bg="#FFFFFF"
         color="#0E0E0F"
         onclick={googleSignIn}
-      />
+      /> */}
       <div
         style={{
           display: "flex",

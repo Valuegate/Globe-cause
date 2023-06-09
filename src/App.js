@@ -33,9 +33,11 @@ import Language from "./pages/Account/Language/Language";
 import Community from "./pages/MyCommunity/Community";
 import EmailVerification from "./pages/Authentication/EmailVerification/EmailVerification";
 import EmailVerified from "./pages/Authentication/EmailVerified/EmailVerified";
+import DarkMode from "./pages/Account/DarkMode/DarkMode";
 
 function App() {
   const [role, setRole] = useState("");
+  console.log("role", role);
 
   return (
     <div className="App">
@@ -46,7 +48,14 @@ function App() {
               <Routes>
                 <Route path="/" element={<Splash />} />
                 <Route path="/signup" element={<SignUp />} />
-                <Route path="/home" element={<Home />} />
+                <Route
+                  path="/home"
+                  element={
+                    <ProtectedRoute>
+                      <Home />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/organizations"
                   element={
@@ -82,7 +91,7 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-                {role !== "volunteer" ? (
+                {role !== "volunteer" || role !== "" ? (
                   <Route
                     path="/community"
                     element={
@@ -133,6 +142,14 @@ function App() {
                   }
                 />
                 <Route
+                  path="/account/dark-mode"
+                  element={
+                    <ProtectedRoute>
+                      <DarkMode />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
                   path="/account/language"
                   element={
                     <ProtectedRoute>
@@ -145,6 +162,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <OrganizationDetail />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/account/help-center"
+                  element={
+                    <ProtectedRoute>
+                      <Help />
                     </ProtectedRoute>
                   }
                 />

@@ -2,7 +2,13 @@ import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./styles.module.css";
 import { db } from "../../../firebase";
-import {query, collection, orderBy, onSnapshot, limit} from 'firebase/firestore'
+import {
+  query,
+  collection,
+  orderBy,
+  onSnapshot,
+  limit,
+} from "firebase/firestore";
 
 import SecondaryTabNavigation from "../SecondaryTabNavigation/SecondaryTabNavigation";
 import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
@@ -14,36 +20,44 @@ import img from "../../../assets/myPhoto.JPG";
 import InputContainer from "../InputContainer/CityInputContainer";
 // import photos from "../../../Demo/Api/Photos";
 
-const AboutCity = ({ ratings, description, photos,filter,ids, conditions }) => {
+const AboutCity = ({
+  ratings,
+  description,
+  photos,
+  filter,
+  ids,
+  conditions,
+  lat,
+  lng,
+}) => {
   ratings?.conditions && console.log(Object.keys(ratings?.conditions));
- 
 
   const [tab, setTab] = useState("About");
 
   const scroll = useRef();
-   const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
   });
-  const center = useMemo(() => ({ lat: 38.736946, lng: -9.142685 }), []);
+  const center = useMemo(() => ({ lat: 10 || lat, lng: 135 || lng }), []);
 
- useEffect(()=>{
+  useEffect(() => {
     const q = query(
-      collection(db, `locations_${filter?.toLowerCase()}`,ids,'comments'),
-      orderBy('createdAt'),
+      collection(db, `locations_${filter?.toLowerCase()}`, ids, "comments"),
+      orderBy("createdAt"),
       limit(50)
     );
     const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
       let message = [];
       QuerySnapshot.forEach((doc) => {
-        message.push({...doc.data(), id: doc.id});
+        message.push({ ...doc.data(), id: doc.id });
       });
       setMessages(message);
-      console.log(message)
+      console.log(message);
     });
-    return ()=> unsubscribe;
-  },[]);
+    return () => unsubscribe;
+  }, []);
 
   const handleTabChange = (tab) => {
     setTab(tab);
@@ -56,7 +70,7 @@ const AboutCity = ({ ratings, description, photos,filter,ids, conditions }) => {
           <div className={styles.Map}>
             {isLoaded ? (
               <GoogleMap
-                mapContainerStyle={{ width: "100%", height: "100%" }}
+                mapContainerStyle={{ width: "100%", height: "400px" }}
                 zoom={10}
                 center={center}
               >
@@ -133,15 +147,11 @@ const AboutCity = ({ ratings, description, photos,filter,ids, conditions }) => {
     } else if (tab === "Chat") {
       return (
         <div className={styles.Photos}>
-         <span ref={scroll}></span>
-          {
-            messages?.map((message) => 
-            (<ChatContainer
-             key={message.id} 
-              message={message}/>)
-              )
-          }          
-          
+          <span ref={scroll}></span>
+          {messages?.map((message) => (
+            <ChatContainer key={message.id} message={message} />
+          ))}
+
           <div style={{ width: "100%" }}>
             <InputContainer filter={filter} ids={ids} scroll={scroll} />
           </div>

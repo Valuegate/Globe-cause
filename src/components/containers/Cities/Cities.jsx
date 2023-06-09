@@ -14,6 +14,10 @@ const Cities = ({ filter }) => {
   const [cityFilter, setCityFilter] = useState("Portugal");
   const [cities, setCities] = useState([]);
 
+  
+
+
+
   const searchCities = (city) => {
     if (city === "") {
       return cities;

@@ -148,13 +148,9 @@ const AboutOrganization = ({ image,name,country,description, email, filter,faceb
         </div>
 
 
-          <InputContainer
-            setMessage={setMessage}
-            setChatList={setChatList}
-            chatList={chatList}
-            message={message}
-          />
-        </div>
+      
+
+
       );
     } else if (tab === "Photos") {
       return (

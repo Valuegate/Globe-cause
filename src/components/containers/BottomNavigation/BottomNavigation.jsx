@@ -36,14 +36,14 @@ const BottomNavigation = ({ navigationState }) => {
           </div>
           <BottomNavigationText text="Organizations" />
         </Link>
-        {role !== "volunteer" && (
+        {role !== "" && role !== "volunteer" ? (
           <Link to="/community" style={{ textDecoration: "none" }}>
             <div className={styles.Icon}>
               <VscOrganization size={28} color={"#0E0E0F"} />
             </div>
             <BottomNavigationText text="Community" />
           </Link>
-        )}
+        ) : null}
         <Link to="/account" style={{ textDecoration: "none" }}>
           <div className={styles.Icon}>
             <MdOutlineAccountCircle size={28} color={"#0E0E0F"} />

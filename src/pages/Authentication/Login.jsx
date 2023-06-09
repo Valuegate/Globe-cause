@@ -1,12 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext";
-
+import { setDoc, doc } from "firebase/firestore";
 import styles from "./styles.module.css";
+
+import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-import { signInWithGoogle } from "../../firebase";
+import {
+  signInWithGoogle,
+  signInWithFacebook,
+  signInWithApple,
+  db,
+} from "../../firebase";
 
 import HeaderText from "../../components/elements/HeaderText/HeaderText";
 import SocialAuthButton from "../../components/elements/SocialAuthButton/SocialAuthButton";
@@ -14,11 +21,9 @@ import InputLabel from "../../components/elements/InputLabel/InputLabel";
 import Label from "../../components/elements/Label/Label";
 import AuthenticationButton from "../../components/elements/AuthenticationButton/AuthenticationButton";
 
-
 import { flexbox } from "@mui/system";
 
 import ErrorPopup from "../../components/containers/ErrorPopup/ErrorPopup";
-
 
 const Login = () => {
   const [loading, setLoading] = useState(true);
@@ -29,6 +34,8 @@ const Login = () => {
   const [msg, setMsg] = useState("");
 
   const { user } = useUserAuth();
+
+  const { role } = useContext(UserAthorizationContext);
 
   const [passwordType, setPasswordType] = useState("password");
 
@@ -47,6 +54,23 @@ const Login = () => {
   const { logIn } = useUserAuth();
   const navigate = useNavigate();
 
+  const createProfile = async (id) => {
+    await setDoc(doc(db, "volunteers", id), {
+      country: "",
+      date_created: new Date(),
+      email_address: user.email,
+      name: user.displayName,
+      phone_number: user.phoneNumber,
+      profile_image_url: "",
+    })
+      .then(() => {
+        console.log("Document successfully written!");
+      })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
+  };
+
   const handleGoogleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -55,7 +79,6 @@ const Login = () => {
       await console.log("user", user);
       setName(user.displayName);
       setEmail(user.email);
-      navigate("/home");
     } catch (err) {
       setError(err.message);
     }
@@ -72,19 +95,20 @@ const Login = () => {
     } catch (err) {
       setError("Invalid email or password");
       console.log(err.message);
-      
     }
   };
 
   useEffect(() => {
     if (user) {
+      if (role === "") {
+        createProfile(user.uid);
+      }
       navigate("/home");
     }
   }, [user]);
 
   return (
     <div className={styles.Login}>
-
       {!loading ? <ErrorPopup message="success" color="green" /> : null}
 
       <HeaderText text="Login" />
@@ -92,13 +116,20 @@ const Login = () => {
         text="CONTINUE WITH FACEBOOK"
         bg="#1F4490"
         color="#ffffff"
+        onclick={signInWithFacebook}
       />
-      <SocialAuthButton text="CONTINUE WITH APPLE" bg="#0E0E0F" color="#ffff" />
       <SocialAuthButton
-        onclick={handleGoogleLogin}
+        text="CONTINUE WITH APPLE"
+        bg="#0E0E0F"
+        color="#ffff"
+        onclick={signInWithApple}
+      />
+      <SocialAuthButton
+        onclick={signInWithGoogle}
         text="CONTINUE WITH GOOGLE"
         bg="#FFFFFF"
         color="#0E0E0F"
+        onClick={handleGoogleLogin}
       />
       <form className={styles.Login}>
         <div className={styles.Inputs}>
@@ -138,7 +169,7 @@ const Login = () => {
           onclick={handleSubmit}
         />
       </form>
-      <p style={{color: "red"}}> {error}</p>
+      <p style={{ color: "red" }}> {error}</p>
       <div className={styles.SignupLabel}>
         <Label text="Don't have an account?" />
         <Link to="/signup" style={{ textDecoration: "none" }}>
