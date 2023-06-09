@@ -15,14 +15,15 @@ const Nav = () => {
         <div className={style.NavItems}>
           <div className={style.NavItem}>
             <Link  style={{textDecoration:'none',color:'#fff'}} targer='_blank'  to='https://sivolunteering.com/'>
-                Home
+                Project Website
             </Link>
-            </div>
+            
+            </div><img src={logo} alt='' />
         {/* <div className={style.NavItem}>About</div> */}
         </div>
         
         <div className={style.NavItems}>
-          <img src={logo} alt='' />
+          {/* <img src={logo} alt='' /> */}
         </div>
         <div className={style.NavItems} >
           {/* <div className={style.NavItem}>Services</div> */}
@@ -30,7 +31,7 @@ const Nav = () => {
                 
                 
                 <Link  to='/account' style={{display:'flex',textDecoration:'none',alignItems:'center',justifyContent:'center'}} >
-                <IoIosPerson className={style.Notification}/>&nbsp;<p className={style.Ptag}>Hello, {user?.email||'John'}</p>
+                <p className={style.Ptag}>Hello,&nbsp;<IoIosPerson className={style.Notification}/>&nbsp; {user?.email||'John'}</p>
                 </Link>
             </div>
         </div>
