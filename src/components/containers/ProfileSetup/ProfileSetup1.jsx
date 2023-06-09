@@ -1,5 +1,6 @@
-import React from "react";
-import InputLabel from "../../elements/InputLabel/InputLabel";
+import React from 'react'
+import InputLabel from '../../elements/InputLabel/InputLabel'
+import InputSelect from '../../elements/InputLabel/InputSelect';
 import styles from "./styles.module.css";
 
 const ProfileSetup1 = ({
@@ -9,7 +10,6 @@ const ProfileSetup1 = ({
   setOid,
   setMembers,
   setCountry,
-  setVillage,
   setCity,
   setPassword,
   password,
@@ -34,7 +34,7 @@ const ProfileSetup1 = ({
       <InputLabel
         label="Organisation Email address"
         type="text"
-        placeholder=""
+        placeholder="Organisation Email address"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -48,44 +48,35 @@ const ProfileSetup1 = ({
       <InputLabel
         label="Tagline"
         type="text"
-        placeholder=""
+        placeholder="Tagline"
         value={tagline}
         onChange={(e) => setTagline(e.target.value)}
       />
       <InputLabel
         label="OID Number"
         type="text"
-        placeholder=""
+        placeholder="OID Number"
         value={oid}
         onChange={(e) => setOid(e.target.value)}
       />
       <InputLabel
         label="Approx. local no. of active members"
         type="text"
-        placeholder=""
+        placeholder="Approx. local no. of active members"
         value={members}
         onChange={(e) => setMembers(e.target.value)}
       />
-      <InputLabel
+      <InputSelect
         label="Country"
-        type="text"
-        placeholder=""
-        value={country}
+        placeholder="Country"
         onChange={(e) => setCountry(e.target.value)}
       />
       <InputLabel
         label="City"
         type="text"
-        placeholder=""
+        placeholder="City"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-      />
-      <InputLabel
-        label="Village"
-        type="text"
-        placeholder=""
-        value={village}
-        onChange={(e) => setVillage(e.target.value)}
       />
     </div>
   );

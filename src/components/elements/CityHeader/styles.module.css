@@ -11,7 +11,10 @@
 .CityHeader h1{
     font-size: 2.0rem;
     font-weight: 600;
-    color: white;
+    background: #fff;
+        padding: 1rem;
+        border-radius: 16px;
+        color: #333;
     margin-bottom: 10px;
     text-shadow:  0 0 3px rgba(0,0,0,0.5);
 }
@@ -19,7 +22,7 @@
 .CityHeader h2{
     font-size: 1.2rem;
     font-weight: 400;
-    color: white;
+    
     margin-bottom: 10px;
     text-shadow:  0 0 3px rgba(0,0,0,0.5);
 }

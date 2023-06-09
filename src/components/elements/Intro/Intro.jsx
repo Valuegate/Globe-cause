@@ -3,28 +3,36 @@ import staff from "../../../assets/staff.png";
 import notification from '../../../assets/notification.png'
 import styles from "./styles.module.css";
 import {Link} from 'react-router-dom'
+import {IoIosPerson} from 'react-icons/io'
+import logo from '../../../assets/logo-siv.svg'
 
 const Intro = () => {
+  // const items = JSON.parse(localStorage.getItem('user'));
   return (
     <div className={styles.Intro}>
       <div className={styles.IntroText}>
-        <h3>
-          Safe & informed
-          <br />
-          volunteering
-        </h3>
+        <div className={styles.div} >
+          <img src={logo} alt='' />
+          <h3>          
+            Safe & informed
+            <br />
+            volunteering
+          </h3>
+        </div>
+        
         <p>
           Join a global community of volunteers living and traveling around the
           world
         </p>
       </div>
-      <div className={styles.IntroImage}>
+      {/* <div className={styles.IntroImage}>
         <img src={staff} alt="IntroImage" />
-      </div>
+      </div> */}
       <div  >
-        <Link to='/notifications'>
-        <img className={styles.Notification} src={notification} alt=''/>
-        </Link>
+        {/* <Link to='/account'>
+        {items?.name}&nbsp;<IoIosPerson className={styles.Notification}/>
+        </Link> */}
+        
       </div>
       {/* <div className={styles.Notification}>
         <NotificationsIcon fontSize="large" />

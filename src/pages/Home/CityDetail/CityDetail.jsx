@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
-
+import img from '../../../assets/banner.png'
 import CityHeader from "../../../components/elements/CityHeader/CityHeader";
 import AboutCity from "../../../components/containers/AboutCity/AboutCity";
 import BackButton from "../../../components/elements/BackButton/BackButton";
+import Nav from "../Nav";
 
 const CityDetail = () => {
   
@@ -39,8 +40,10 @@ const CityDetail = () => {
   return (
     <div
       className={styles.CityDetail}
-      style={{ backgroundImage: `url(${city.main_image_link})` }}
+      // style={{ backgroundImage: img }}
+      // style={{ backgroundImage: `url(${city.main_image_link})` }}
     >
+      <Nav/>
       {console.log(city)}
       <CityHeader city={city.city} country={city.country} />
       <AboutCity

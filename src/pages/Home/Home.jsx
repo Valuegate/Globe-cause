@@ -10,11 +10,15 @@ import BottomNavigation from "../../components/containers/BottomNavigation/Botto
 
 import NavigationButton from "../../components/elements/NavigationButton/NavigationButton";
 import Patners from "../../components/containers/Patners/Patners";
+import Nav from "./Nav";
+
 // import SignInButton from "../../components/elements/SignInButton";
 
 const Home = () => {
   const [navigationState, setNavigationState] = useState(0);
   const [filter, setFilter] = useState("");
+
+  
 
 
   const bottomNavigation = () => {
@@ -23,6 +27,7 @@ const Home = () => {
 
   return (
     <div className={styles.Home}>
+      <Nav/>
       <Intro />
       <Search setFilter={setFilter} />
       <Patners />

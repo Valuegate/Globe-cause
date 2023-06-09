@@ -32,6 +32,7 @@ const ProtectedRoute = ({ children }) => {
     if (docSnap.exists()) {
       console.log("Document data exist:", docSnap.data());
       setRole("volunteer");
+          
       return true;
     } else {
       console.log("No such document!");
@@ -64,6 +65,7 @@ const ProtectedRoute = ({ children }) => {
         fetchOrganizationAccountType(user.uid);
       }
     }
+    
   }, [user]);
 
 

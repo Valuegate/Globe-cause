@@ -9,6 +9,9 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 import CityHeader from "../../../components/elements/CityHeader/CityHeader";
 import AboutOrganization from "../../../components/containers/AboutOrganization/AboutOrganization";
+import BackButton from "../../../components/elements/BackButton/BackButton";
+import Nav from "../Nav";
+
 
 const OrganizationDetail = () => {
   const location = useLocation();
@@ -37,8 +40,9 @@ const OrganizationDetail = () => {
   return (
     <div
       className={[styles.CityDetail]}
-      style={{ backgroundImage: `url(${organization?.cover_image})` }}
+      // style={{ backgroundImage: `url(${organization?.cover_image})` }}
     >
+      <Nav/>
       <CityHeader city="" country="" />
       <AboutOrganization
         image={organization?.cover_image}

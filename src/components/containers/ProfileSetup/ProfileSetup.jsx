@@ -82,8 +82,6 @@ const ProfileSetup = ({
           />
         );
       case 2:
-        return <ProfileSetup3 />;
-      case 3:
         return <ProfileSetup4 />;
       default:
         return <ProfileSetup1 />;
@@ -137,7 +135,7 @@ const ProfileSetup = ({
           >
             {page === 2 || page === 3 ? <>&#x2713;</> : "2"}
           </p>
-          <p
+          {/* <p
             className={styles.Phase}
             style={{
               background: page === 3 ? "#1F4490" : "#fff",
@@ -145,11 +143,11 @@ const ProfileSetup = ({
             }}
           >
             {page === 3 ? <>&#x2713;</> : "3"}
-          </p>
+          </p> */}
         </div>
       </div>
       {conditionalComponent()}
-      {page === 0 || page === 1 || page === 2 ? (
+      {page === 0 || page === 1  ? (
         <AuthenticationButton onclick={(e) => handleSubmit(e)} text={"Next"} />
       ) : (
         <AuthenticationButton onclick={submit} text={"Finish"} />

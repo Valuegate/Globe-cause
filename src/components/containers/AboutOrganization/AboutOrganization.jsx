@@ -134,7 +134,7 @@ const AboutOrganization = ({ image,name,country,description, email, filter,faceb
       );
     } else if (tab === "Chat") {
       return (
-
+      <div>
          <div className={styles.Photos}>
           <span ref={scroll}></span>
           {
@@ -148,8 +148,12 @@ const AboutOrganization = ({ image,name,country,description, email, filter,faceb
         </div>
 
 
-      
-
+          <InputContainer
+            scroll={scroll}
+            filter={filter}
+            ids={ids}
+          />
+        </div>
 
       );
     } else if (tab === "Photos") {

@@ -144,6 +144,7 @@ const AboutCity = ({
           <OrganizationContainer />
         </div>
       );
+
     } else if (tab === "Chat") {
       return (
         <div className={styles.Photos}>
