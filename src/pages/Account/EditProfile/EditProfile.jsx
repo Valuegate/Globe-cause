@@ -32,7 +32,6 @@ const EditProfile = () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
       setName(docSnap.data().name);
       setEmail(docSnap.data().email_address || docSnap.data().email);
       setPhone(docSnap.data().phone_number);
@@ -52,7 +51,6 @@ const EditProfile = () => {
     }
   }, [user]);
 
-
   const updateProfile = async ({ id, database }) => {
     await setDoc(doc(db, database, id), {
       name: name,
@@ -60,7 +58,7 @@ const EditProfile = () => {
       phone_number: phone,
     })
       .then(() => {
-        console.log("Document successfully written!");
+        alert("Profile updated successfully");
       })
       .catch((error) => {
         console.error("Error writing document: ", error);

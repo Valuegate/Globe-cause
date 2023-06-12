@@ -9,9 +9,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 import CityHeader from "../../../components/elements/CityHeader/CityHeader";
 import AboutOrganization from "../../../components/containers/AboutOrganization/AboutOrganization";
-import BackButton from "../../../components/elements/BackButton/BackButton";
 import Nav from "../Nav";
-
 
 const OrganizationDetail = () => {
   const location = useLocation();
@@ -21,15 +19,12 @@ const OrganizationDetail = () => {
 
   const organizationId = location.state?.id;
 
-  //console.log(organizationId);
-
   const fetchPost = async () => {
     await getDoc(
-      doc(db, `organisations_${filter?.toLowerCase()}`, organizationId)
+      doc(db, `organizations_${filter?.toLowerCase()}`, organizationId)
     ).then((querySnapshot) => {
       const newData = querySnapshot.data();
       setOrganization(newData);
-      console.log(newData);
     });
   };
 
@@ -38,11 +33,8 @@ const OrganizationDetail = () => {
   }, [organizationId]);
 
   return (
-    <div
-      className={[styles.CityDetail]}
-      // style={{ backgroundImage: `url(${organization?.cover_image})` }}
-    >
-      <Nav/>
+    <div className={[styles.CityDetail]}>
+      <Nav />
       <CityHeader city="" country="" />
       <AboutOrganization
         image={organization?.cover_image}
@@ -58,6 +50,7 @@ const OrganizationDetail = () => {
         phone={organization?.phone}
         filter={filter}
         linkedin={organization?.linkedIn}
+        logo={organization?.logo_link}
       />
       <button
         className={styles.BackButton}

@@ -1,38 +1,39 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 
 import { useContext } from "react";
 import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
-import { use } from "i18next";
+import { NameContext } from "../../hooks/name/NameContext";
 
 import Splash from "../Home/Splash";
 
 const ProtectedRoute = ({ children }) => {
-  // const { user } = useUserAuth();
   const [user, loading, error] = useAuthState(auth);
 
   const history = useNavigate();
 
-  const { logOut } = useUserAuth();
 
   const lists = ["portugal", "spain", "romania"];
 
   //authorization context
   const { role, setRole } = useContext(UserAthorizationContext);
 
+  //name context
+  const { setName } = useContext(NameContext);
+
   const fetchIndividualAccountType = async (uid) => {
     const docRef = doc(db, "volunteers", uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data exist:", docSnap.data());
+      setName(docSnap.data().name);
       setRole("volunteer");
-          
+
       return true;
     } else {
       console.log("No such document!");
@@ -45,16 +46,14 @@ const ProtectedRoute = ({ children }) => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document data exist:", docSnap.data());
+        setName(docSnap.data().name);
         setRole(lists[i]);
         return;
       } else {
-        console.log("No such document! in ", lists[i]);
+        console.log("User not found");
       }
     }
   };
-
-  
 
   useEffect(() => {
     if (user) {
@@ -65,12 +64,9 @@ const ProtectedRoute = ({ children }) => {
         fetchOrganizationAccountType(user.uid);
       }
     }
-    
   }, [user]);
 
 
-  console.log("Check user in Private: ", user);
-  console.log("Check role in Private: ", role);
 
   if (user && user.emailVerified) {
     return children;
@@ -88,7 +84,6 @@ const ProtectedRoute = ({ children }) => {
     return <h1>Error: {error}</h1>;
   }
 
-  // return children;
 };
 
 export default ProtectedRoute;

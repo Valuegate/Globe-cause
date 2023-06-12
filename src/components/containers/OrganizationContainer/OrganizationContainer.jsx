@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-// import organizations from "../../../Demo/Api/Organizations";
 
 import { useEffect, useState } from "react";
 
@@ -21,23 +20,26 @@ const OrganizationContainer = ({ filter }) => {
 
   const searchOrganizations = (organization) => {
     if (organization === "") {
-      return organizations;
+      return organizations.sort((a, b) => a - b);
     }
     return organizations.filter((organizationItem) => {
       const cityName = organizationItem.name?.toLowerCase();
-      return cityName?.includes("a".toLowerCase()) ? organizationItem : null;
+      return cityName?.includes(organization.toLowerCase())
+        ? organizationItem
+        : null;
     });
   };
 
   const fetchPost = async (country) => {
     await getDocs(
-      collection(db, `organisations_${country.toLowerCase()}`)
+      collection(db, `organizations_${country.toLowerCase()}`)
     ).then((querySnapshot) => {
       const newData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
       setOrganizations(newData);
+      console.log(organizations);
     });
   };
 
@@ -54,21 +56,23 @@ const OrganizationContainer = ({ filter }) => {
     <div className={styles.Organizations}>
       <TabNavigation click={NavigationActive} cityFilter={organizationFilter} />
       <div className={styles.OrganizationsContainer}>
-        {searchOrganizations(filter).map((organization, key) => (
-          <Link
-            to={`/organization/${organization.id}`}
-            style={{ textDecoration: "none", display: "block" }}
-            key={key}
-            state={{ id: organization.id, filter: organizationFilter }}
-          >
-            <OrganizationCard
-              name={truncate(organization.name, 20)}
-              image={organization.logo_link}
-              key={organization.id}
-              country={organization.city}
-            />
-          </Link>
-        ))}
+        {searchOrganizations(filter)
+          .sort()
+          .map((organization, key) => (
+            <Link
+              to={`/organization/${organization.id}`}
+              style={{ textDecoration: "none", display: "block" }}
+              key={key}
+              state={{ id: organization.id, filter: organizationFilter }}
+            >
+              <OrganizationCard
+                name={truncate(organization.name, 20)}
+                image={organization.logo_link}
+                key={organization.id}
+                country={organization.city}
+              />
+            </Link>
+          ))}
       </div>
     </div>
   );

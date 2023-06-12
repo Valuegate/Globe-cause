@@ -30,7 +30,6 @@ const Account = () => {
 
   const { logOut, user } = useUserAuth();
 
-  console.log(user?.uid);
 
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -50,7 +49,6 @@ const Account = () => {
     await getDoc(doc(db, database, id)).then((querySnapshot) => {
       const newData = querySnapshot.data();
       setUserDetails(newData);
-      console.log("this is the user details", userDetails);
     });
   };
 
@@ -60,13 +58,12 @@ const Account = () => {
     } else {
       fetchPost(user?.uid, `organisations_${role}`);
     }
-    console.log(role);
   }, [role]);
 
   return (
     <div className={styles.Account}>
       <ProfilePicture profile_image={userDetails?.profile_image_url} />
-      <Label text={userDetails?.name || "Your Name"} />
+      <Label color="#fff" text={userDetails?.name || "Your Name"} />
       <p style={{ marginTop: "-15px", color: "#fff" }}>
         {userDetails?.email_address || userDetails?.email || "Your Email"}
       </p>

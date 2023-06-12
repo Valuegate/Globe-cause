@@ -5,9 +5,6 @@ const navigation = [
   {
     name: "Chat",
   },
-  {
-    name: "Photos",
-  },
 ];
 
 export default navigation;

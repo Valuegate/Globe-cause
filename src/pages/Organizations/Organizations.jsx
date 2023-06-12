@@ -22,7 +22,7 @@ const Organizations = () => {
       <HeaderText text={t("Example.2")} />
       <Search setFilter={setFilter} />
       {/* <TabNavigation /> */}
-      <OrganizationContainer />
+      <OrganizationContainer filter={filter} />
       <BottomNavigation navigationState={navigationState} />
       <NavigationButton onClick={bottomNavigation} />
     </div>

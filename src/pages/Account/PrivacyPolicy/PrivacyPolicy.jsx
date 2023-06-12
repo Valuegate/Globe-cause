@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './styles.module.css'
 import {Link} from 'react-router-dom'
 import arrow from '../../../assets/Vectuor.png'
+import BackButton from '../../../components/elements/BackButton/BackButton'
 
 const Policy =({title, content})=>{
     return(
@@ -17,9 +18,7 @@ const PrivacyPolicy = () => {
   return (
     <div className={styles.Container}>
          <div className={styles.HeaderContainer} >
-            <Link to='/account'>
-            <img src={arrow} alt="" />
-            </Link>
+            <BackButton/>
             <p style={{fontWeight:'700',textAlign:'center',fontSize:'20px'}} >Privacy 
             policy</p>
         </div>

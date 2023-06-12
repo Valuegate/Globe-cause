@@ -2,14 +2,13 @@ import React from "react";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import arrow from "../../../assets/Vectuor.png";
+import BackButton from "../../../components/elements/BackButton/BackButton";
 
 const About = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.HeaderContainer}>
-        <Link to="/account">
-          <img src={arrow} alt="" />
-        </Link>
+        <BackButton color="#fff" to="/account" />
         <p style={{ fontWeight: "700", textAlign: "center", fontSize: "20px" }}>
           About
         </p>

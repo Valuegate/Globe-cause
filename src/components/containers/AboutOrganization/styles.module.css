@@ -65,8 +65,9 @@
  width: 80%;
 }
 .Container>img{
-    width: 45px;
-    height: 45px;
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
 }
 .Stack{
     display: flex;
@@ -98,7 +99,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 2rem;
     margin-top: 1rem;
  }

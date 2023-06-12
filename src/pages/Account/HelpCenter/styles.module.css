@@ -1,7 +1,12 @@
 .Container {
     padding: .75rem;
-    width: 85%;
+    width: 95%;
     margin: auto;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .HeaderContainer {

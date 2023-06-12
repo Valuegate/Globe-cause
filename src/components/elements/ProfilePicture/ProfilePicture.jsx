@@ -5,9 +5,8 @@ import imge from "../../../assets/Group 11966.png";
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 import { UserAthorizationContext } from "../../../hooks/authorization/UserAuthorizationContext";
 
-
 import { db, storage } from "../../../firebase";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -19,10 +18,8 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
 
   const { role } = useContext(UserAthorizationContext);
 
-
   const { user } = useUserAuth();
 
-  console.log("image as file", imageAsFile);
   const handleImageAsFile = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
@@ -33,10 +30,9 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
 
   const handleFireBaseUpload = (e) => {
     e.preventDefault();
-    console.log("start of upload");
     // async magic goes here...
     if (imageAsFile === "") {
-      console.error(`not an image, the image file is a ${typeof imageAsFile}`);
+      alert(`not an image, the image file is a ${typeof imageAsFile}`);
     }
     const uploadTask = uploadBytes(
       ref(storage, `images/${imageAsFile.name}`),
@@ -45,7 +41,7 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
     //initiates the firebase side uploading
     uploadTask.then((snapshot) => {
       console.log(snapshot);
-      console.log("image uploaded");
+      alert("Image uploaded successfully");
       // gets the functions from storage refences the image storage in firebase by the children
       // gets the download url then sets the image from firebase as the value for the imgUrl key:
       Promise.resolve(getDownloadURL(snapshot.ref)).then((url) => {
@@ -67,7 +63,7 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
       profile_image_url: image,
     })
       .then(() => {
-        console.log("Document successfully written!");
+        console.log("Suuccessfully updated profile image");
       })
       .catch((error) => {
         console.error("Error writing document: ", error);
@@ -75,7 +71,6 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
   };
 
   return (
-
     <form runat="server">
       <label for="inputTag" style={{ cursor: "pointer" }}>
         <div className={styles.ProfilePicture}>

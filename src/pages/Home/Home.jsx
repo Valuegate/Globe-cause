@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { Link } from "react-router-dom";
+
 
 import styles from "./styles.module.css";
 
@@ -12,34 +12,31 @@ import NavigationButton from "../../components/elements/NavigationButton/Navigat
 import Patners from "../../components/containers/Patners/Patners";
 import Nav from "./Nav";
 
-// import SignInButton from "../../components/elements/SignInButton";
 
 const Home = () => {
   const [navigationState, setNavigationState] = useState(0);
   const [filter, setFilter] = useState("");
-
-  
-
 
   const bottomNavigation = () => {
     setNavigationState(!navigationState);
   };
 
   return (
-    <div className={styles.Home}>
-      <Nav/>
+    <div
+      className={styles.Home}
+      
+    >
+      <Nav />
       <Intro />
       <Search setFilter={setFilter} />
       <Patners />
       <Cities filter={filter} />
-      {/* <Link to="/login" style={{ textDecoration: "none" }}>
-        <SignInButton />
-      </Link> */}
       <BottomNavigation navigationState={navigationState} />
       <NavigationButton
         onClick={bottomNavigation}
         navigationState={navigationState}
       />
+      
     </div>
   );
 };

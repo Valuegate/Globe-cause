@@ -1,0 +1,115 @@
+.Footer{
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    padding: 3rem 0;
+    margin-top: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.Footer h2{
+    font-size: 1.5rem;
+    margin-bottom: -10px;
+    font-weight: 400;
+}
+
+.InputContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+.InputContainer input{
+    width: 85%;
+    max-width: 400px;
+    height: 3rem;
+    border-radius: 1.5rem;
+    border: none;
+    padding: 0 1rem;
+    font-size: 1rem;
+    outline: none;
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+}
+.InputContainer input::placeholder{
+    color: #fff;
+}
+.InputContainer button {
+    width: 85%;
+    max-width: 400px;
+    height: 3rem;
+    border-radius: 1.5rem;
+    border: none;
+    padding: 0 1rem;
+    font-size: 1rem;
+    outline: none;
+    margin-top: 30px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+.InputContainer button:hover{
+    background-color: #000;
+    color: #fff;
+}
+
+.FooterMain{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 85%;
+    margin-top: 60px;
+    text-align: left;
+}
+.FooterMain h3{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #00a9e1
+}
+.FooterMessage{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.FooterMessageText{
+    width: 50%;
+    text-align: left;
+}
+
+@media screen and (max-width: 768px){
+    .FooterMain{
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .FooterMain h3{
+        text-align: center;
+    }
+    .InputContainer{
+        margin-top: 30px;
+    }
+    .FooterMessage{
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .FooterMessageText{
+        width: 100%;
+        text-align: justify;
+    }
+}

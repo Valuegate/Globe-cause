@@ -7,12 +7,12 @@
     justify-content: row;
     justify-content: center;
     align-items: center;
+    color: #fff;
 }
 
 /*Home screen styles*/
 .Home {
     width: 100%;
-
 }
 .NavigationButton {
     width: 50px;
@@ -33,13 +33,16 @@
 /* Nav styles */
 
 .NavContainer {
-    width: 100%;
+    width: 95%;
     padding: 2rem;
     height: 2rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+.NavContainer:hover{
     box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
 }
 
@@ -96,10 +99,11 @@ justify-content: center;
     align-items: center;
 }
 
-@media screen and (max-width: 468px) {
+@media screen and (max-width: 768px) {
     .NavContainer {
         padding: .81rem;
         margin: auto;
+        width: 90%;
     }
         .Notification {
             display: block;
@@ -137,3 +141,4 @@ justify-content: center;
     
       
 }
+

@@ -5,14 +5,12 @@ import { useEffect, useState } from "react";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
-import img from '../../../assets/banner.png'
 import CityHeader from "../../../components/elements/CityHeader/CityHeader";
 import AboutCity from "../../../components/containers/AboutCity/AboutCity";
 import BackButton from "../../../components/elements/BackButton/BackButton";
 import Nav from "../Nav";
 
 const CityDetail = () => {
-  
   const location = useLocation();
   const [city, setCity] = useState([]);
 
@@ -22,7 +20,7 @@ const CityDetail = () => {
   const fetchPost = async () => {
     await getDoc(doc(db, `locations_${filter?.toLowerCase()}`, cityId)).then(
       (querySnapshot) => {
-        const newData = querySnapshot.data();
+        const newData = querySnapshot.data(); 
         setCity(newData);
       }
     );
@@ -32,30 +30,30 @@ const CityDetail = () => {
     fetchPost();
   }, [cityId]);
 
-  // useEffect(() => {
-  //   // const city = cities.find((city) => city.id === cityId);
-  //   // setCity(city);
-  // }, [cityId]);
+
 
   return (
     <div
       className={styles.CityDetail}
-      // style={{ backgroundImage: img }}
-      // style={{ backgroundImage: `url(${city.main_image_link})` }}
     >
-      <Nav/>
-      {console.log(city)}
+      <Nav />
       <CityHeader city={city.city} country={city.country} />
       <AboutCity
         description={city.short_description}
         photos={city.photos_links}
-        ratings={city?.rating}
         filter={filter}
         ids={cityId}
-        lat = {city?.coordinates?.lat }
-        lng = {city?.coordinates?.long }
+        lat={city?.coordinates?.lat}
+        lng={city?.coordinates?.long}
+        city={city?.city}
+        livingCost={city?.living_cost}
+        conditions={city?.conditions}
+        socialLife={city?.social_life}
+        ratings={city?.rating}
+        connectivity={city?.connectivity}
+        coordinates={city?.coordinates}
       />
-      <BackButton color="#ffffff"  />
+      <BackButton color="#ffffff" />
     </div>
   );
 };

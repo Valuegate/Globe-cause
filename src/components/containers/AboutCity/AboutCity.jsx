@@ -1,4 +1,4 @@
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./styles.module.css";
 import { db } from "../../../firebase";
@@ -18,6 +18,8 @@ import OrganizationContainer from "../OrganizationContainer/OrganizationContaine
 import ChatContainer from "../ChatContainer/ChatContainer";
 import img from "../../../assets/myPhoto.JPG";
 import InputContainer from "../InputContainer/CityInputContainer";
+import CityOrganizationsContainer from "../CityOrganizationsContainer/CityOrganizationsContainer";
+import { type } from "@testing-library/user-event/dist/type";
 // import photos from "../../../Demo/Api/Photos";
 
 const AboutCity = ({
@@ -27,20 +29,29 @@ const AboutCity = ({
   filter,
   ids,
   conditions,
-  lat,
-  lng,
+  city,
+  livingCost,
+  socialLife,
+  connectivity,
+  coordinates,
 }) => {
-  ratings?.conditions && console.log(Object.keys(ratings?.conditions));
-
   const [tab, setTab] = useState("About");
 
   const scroll = useRef();
-  const [messages, setMessages] = useState([]);
+  const [, setMessages] = useState([]);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
   });
-  const center = useMemo(() => ({ lat: 10 || lat, lng: 135 || lng }), []);
+  const lat = coordinates?.latitude;
+  const lng = coordinates?.longitude;
+  const center = useMemo(
+    () => ({
+      lat: lat || 0,
+      lng: lng || 0,
+    }),
+    [coordinates]
+  );
 
   useEffect(() => {
     const q = query(
@@ -54,7 +65,6 @@ const AboutCity = ({
         message.push({ ...doc.data(), id: doc.id });
       });
       setMessages(message);
-      console.log(message);
     });
     return () => unsubscribe;
   }, []);
@@ -66,6 +76,14 @@ const AboutCity = ({
   const pictureEnlarger = (e) => {
     console.log(e.target.src);
     const img = document.createElement("img");
+    const overflow = document.createElement("div");
+    overflow.style.width = "100%";
+    overflow.style.height = "100%";
+    overflow.style.position = "fixed";
+    overflow.style.top = "0";
+    overflow.style.left = "0";
+    overflow.style.zIndex = "999";
+    overflow.style.backgroundColor = "rgba(0,0,0,0.5)";
     img.src = e.target.src;
     img.style.width = "90%";
     img.style.height = "90%";
@@ -76,10 +94,16 @@ const AboutCity = ({
     img.style.zIndex = "1000";
     // img.style.backgroundColor = "rgba(0,0,0,0.5)";
     img.style.cursor = "pointer";
+    overflow.onclick = () => {
+      img.remove();
+      overflow.remove();
+    };
     img.onclick = () => {
       img.remove();
+      overflow.remove();
     };
     document.body.appendChild(img);
+    document.body.appendChild(overflow);
   };
 
   const Content = () => {
@@ -89,55 +113,66 @@ const AboutCity = ({
           <div className={styles.Map}>
             {isLoaded ? (
               <GoogleMap
-                mapContainerStyle={{ width: "100%", height: "400px" }}
+                mapContainerStyle={{ width: "100%", height: "300px" }}
                 zoom={10}
                 center={center}
               >
-                <Marker position={center} />
+                <MarkerF position={center} />
               </GoogleMap>
             ) : (
               <></>
             )}
           </div>
           <div className={styles.Heading}>
-            <Label text="Rating" />
+            <Label text="Rating" fontSize={"1.4rem"} />
           </div>
-
-          {ratings?.conditions &&
-            Object.keys(ratings?.conditions)?.map((rating, index) => {
+          <div className={styles.Heading}>
+            <Label text="Conditions" fontSize={"1.2rem"} />
+          </div>
+          {conditions &&
+            Object.keys(conditions)?.map((rating, index) => {
               return (
                 <RatingContainer
-                  rating={ratings?.conditions[rating]}
+                  rating={conditions[rating]}
                   title={rating}
                   key={index}
                 />
               );
             })}
-          {/* {ratings.connectivity &&
-            Object.keys(ratings?.connectivity)?.map((rating, index) => {
+          <div className={styles.Heading}>
+            <Label text="Connectivity" fontSize={"1.2rem"} />
+          </div>
+          {connectivity &&
+            Object.keys(connectivity)?.map((rating, index) => {
               return (
                 <RatingContainer
-                  rating={ratings?.connectivity[rating]}
-                  title={rating}
-                  key={index}
-                />
-              );
-            })} */}
-          {ratings?.living_cost &&
-            Object.keys(ratings?.living_cost)?.map((rating, index) => {
-              return (
-                <RatingContainer
-                  rating={ratings.living_cost[rating]}
+                  rating={connectivity[rating]}
                   title={rating}
                   key={index}
                 />
               );
             })}
-          {ratings?.social_life &&
-            Object.keys(ratings?.social_life)?.map((rating, index) => {
+          <div className={styles.Heading}>
+            <Label text="Living Cost" fontSize={"1.2rem"} />
+          </div>
+          {livingCost &&
+            Object.keys(livingCost)?.map((rating, index) => {
               return (
                 <RatingContainer
-                  rating={ratings?.social_life[rating]}
+                  rating={livingCost[rating]}
+                  title={rating}
+                  key={index}
+                />
+              );
+            })}
+          <div className={styles.Heading}>
+            <Label text="Social Life" fontSize={"1.2rem"} />
+          </div>
+          {socialLife &&
+            Object.keys(socialLife)?.map((rating, index) => {
+              return (
+                <RatingContainer
+                  rating={socialLife[rating]}
                   title={rating}
                   key={index}
                 />
@@ -166,23 +201,25 @@ const AboutCity = ({
     } else if (tab === "Organizations") {
       return (
         <div className={styles.Reviews}>
-          <OrganizationContainer />
-        </div>
-      );
-    } else if (tab === "Chat") {
-      return (
-        <div className={styles.Photos}>
-          <span ref={scroll}></span>
-          {messages?.map((message) => (
-            <ChatContainer key={message.id} message={message} />
-          ))}
-
-          <div style={{ width: "100%" }}>
-            <InputContainer filter={filter} ids={ids} scroll={scroll} />
-          </div>
+          {/* <OrganizationContainer /> */}
+          <CityOrganizationsContainer filter={filter} city={city} />
         </div>
       );
     }
+    // else if (tab === "Chat") {
+    //   return (
+    //     <div className={styles.Photos}>
+    //       <span ref={scroll}></span>
+    //       {messages?.map((message) => (
+    //         <ChatContainer key={message.id} message={message} />
+    //       ))}
+
+    //       <div style={{ width: "100%" }}>
+    //         <InputContainer filter={filter} ids={ids} scroll={scroll} />
+    //       </div>
+    //     </div>
+    //   );
+    // }
   };
 
   return (

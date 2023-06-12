@@ -1,7 +1,7 @@
 /*Bottom Navigation styles*/
 
 .BottomNavigation{
-    width: 92%;
+    width: 88%;
     height: 60px;
     max-width:  500px;
     display: flex;
@@ -41,7 +41,12 @@
     padding: 0 25px; 
 }
 
-
+@media screen and (max-width: 768px) {
+    .BottomNavigation{
+        justify-content: space-around;
+        padding-right: 20px;
+    }
+}
 
 @keyframes fadeIn {
     0% {

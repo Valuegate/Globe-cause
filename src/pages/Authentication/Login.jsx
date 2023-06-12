@@ -5,6 +5,8 @@ import { setDoc, doc } from "firebase/firestore";
 import styles from "./styles.module.css";
 
 import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
@@ -21,19 +23,14 @@ import InputLabel from "../../components/elements/InputLabel/InputLabel";
 import Label from "../../components/elements/Label/Label";
 import AuthenticationButton from "../../components/elements/AuthenticationButton/AuthenticationButton";
 
-import { flexbox } from "@mui/system";
-
-import ErrorPopup from "../../components/containers/ErrorPopup/ErrorPopup";
-
 const Login = () => {
-  const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [, setName] = useState("");
   const [error, setError] = useState("");
-  const [msg, setMsg] = useState("");
 
-  const { user } = useUserAuth();
+  // const { user } = useUserAuth();
+
+  const [user, loading] = useAuthState(auth);
 
   const { role } = useContext(UserAthorizationContext);
 
@@ -75,10 +72,8 @@ const Login = () => {
     e.preventDefault();
     try {
       await signInWithGoogle();
-      setLoading(false);
+      navigate("/home");
       await console.log("user", user);
-      setName(user.displayName);
-      setEmail(user.email);
     } catch (err) {
       setError(err.message);
     }
@@ -90,7 +85,6 @@ const Login = () => {
     setError("");
     try {
       await logIn(email, password);
-      setLoading(false);
       localStorage.setItem("user", JSON.stringify(user.displayName));
       navigate("/home");
     } catch (err) {
@@ -107,12 +101,10 @@ const Login = () => {
       }
       navigate("/home");
     }
-  }, [role]);
+  }, [role, user]);
 
   return (
     <div className={styles.Login}>
-      {/* {!loading ? <ErrorPopup message="success" color="green" /> : null} */}
-
       <HeaderText text="Login" />
       <SocialAuthButton
         text="CONTINUE WITH FACEBOOK"
@@ -164,16 +156,16 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <Label text="Forgot password?" />
+        <Label text="Forgot password?" color="#fff" />
         <AuthenticationButton
-          text={loading ? "loading..." : "Login"}
+          text={loading ? "Loading" : "Login"}
           submit={"submit"}
           onclick={handleSubmit}
         />
       </form>
       <p style={{ color: "red" }}> {error}</p>
       <div className={styles.SignupLabel}>
-        <Label text="Don't have an account?" />
+        <Label text="Don't have an account?" color={"#fff"} />
         <Link to="/signup" style={{ textDecoration: "none" }}>
           <Label text="Sign up" color="#1F4490" />
         </Link>

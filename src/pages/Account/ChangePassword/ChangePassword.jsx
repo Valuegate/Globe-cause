@@ -24,11 +24,11 @@ const ChangePassword = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       checkPassword();
-      updatePassword(currentPassword, newPassword);
+      await updatePassword(currentPassword, newPassword);
       navigate("/account");
     } catch (err) {
       console.log(err.message);
@@ -44,6 +44,7 @@ const ChangePassword = () => {
           value={currentPassword}
           type="password"
           placeholder="Current Password"
+          color="#fff"
           onChange={(e) => setCurrentPassword(e.target.value)}
         />
         <InputLabel
@@ -52,16 +53,22 @@ const ChangePassword = () => {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           placeholder="New Password"
+          color="#fff"
         />
         <InputLabel
           label="Confirm New Password"
+          color="#fff"
           type="password"
           value={confirmNewPassword}
           placeholder="Confirm New Password"
           onChange={(e) => setConfirmNewPassword(e.target.value)}
         />
       </form>
-      <AuthenticationButton submit={"submit"} text="update" />
+      <AuthenticationButton
+        submit={"submit"}
+        text="update"
+        onclick={handleSubmit}
+      />
       <BackButton color="#0E0E0F" to="/account" />
     </form>
   );
