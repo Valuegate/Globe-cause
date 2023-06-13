@@ -59,6 +59,9 @@ const EditProfile = () => {
     })
       .then(() => {
         alert("Profile updated successfully");
+         setTimeout(() => {
+           alert('success');
+        }, 1000);
       })
       .catch((error) => {
         console.error("Error writing document: ", error);

@@ -27,6 +27,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  // const [load, setLoading] = useState(true);
 
   // const { user } = useUserAuth();
 
@@ -85,7 +86,11 @@ const Login = () => {
     setError("");
     try {
       await logIn(email, password);
+      // setLoading(false);
       localStorage.setItem("user", JSON.stringify(user.displayName));
+      setTimeout(() => {
+           alert('success');
+        }, 1000);
       navigate("/home");
     } catch (err) {
       setError("Invalid email or password");
@@ -156,9 +161,11 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <Label text="Forgot password?" color="#fff" />
+        <Link to='/forgot-password'>
+        <Label color='#fff' text="Forgot password?" />
+        </Link>
         <AuthenticationButton
-          text={loading ? "Loading" : "Login"}
+          text={loading ? "Login" : "Login"}
           submit={"submit"}
           onclick={handleSubmit}
         />

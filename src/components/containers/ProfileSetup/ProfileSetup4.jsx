@@ -7,8 +7,8 @@ const ProfileSetup4 = () => {
     <div>
         <div className={styles.Finish} >
             <img src={imge} alt="" />
-            <p style={{fontSize:'20px',fontWeight:'700'}} >Congratulations</p>
-            <p style={{fontSize:'1rem',fontWeight:'400'}}>Profile has been created successfully</p>
+            <p style={{fontSize:'20px',fontWeight:'700',color:'#fff'}} >Congratulations</p>
+            <p style={{fontSize:'1rem',fontWeight:'400',color:'#fff'}}>Profile has been created successfully</p>
         </div>
     </div>
   )

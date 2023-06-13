@@ -22,6 +22,9 @@ const ProfileSetup1 = ({
   village,
   city,
 }) => {
+   const changeHandler = country => {
+    setCountry(country)
+  }
   return (
     <div className={styles.EditProfile}>
       <InputLabel
@@ -69,7 +72,8 @@ const ProfileSetup1 = ({
       <InputSelect
         label="Country"
         placeholder="Country"
-        onChange={(e) => setCountry(e.target.value)}
+        value='country'
+        onChange={changeHandler}
       />
       <InputLabel
         label="City"

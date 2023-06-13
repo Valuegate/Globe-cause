@@ -6,6 +6,7 @@ import {
   signOut,
   updateEmail,
   reauthenticateWithCredential,
+  sendPasswordResetEmail,
   EmailAuthProvider,
   updatePassword,
   GoogleAuthProvider,
@@ -35,6 +36,10 @@ export function UserAuthContextProvider({ children }) {
     return signInWithPopup(auth, provider);
   }
 
+   function reSet(email) {
+    return sendPasswordResetEmail(auth, email);
+  }
+
   function logOut() {
     return signOut(auth);
   }
@@ -62,7 +67,7 @@ export function UserAuthContextProvider({ children }) {
       });
   };
 
-  const updatePassword = (currentPassword, newPassword) => {
+  const changePassword = (currentPassword, newPassword) => {
     reauthenticate(currentPassword)
       .then(() => {
         const user = auth.currentUser;
@@ -92,8 +97,9 @@ export function UserAuthContextProvider({ children }) {
         logIn,
         signUp,
         logOut,
+        reSet,
         updateEmailAddress,
-        updatePassword,
+        changePassword,
         googleSignIn,
         verificationEmail,
       }}

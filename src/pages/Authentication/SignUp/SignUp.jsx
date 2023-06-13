@@ -147,7 +147,7 @@ const SignUp = () => {
           defaultChecked
           onClick={() => setAccountType("volunteer")}
         />
-        <label htmlFor="volunteer">Volunteer</label>
+        <label style={{color:'#fff'}} htmlFor="volunteer">Volunteer</label>
         <br />
         <input
           type="radio"
@@ -156,7 +156,7 @@ const SignUp = () => {
           value="organization"
           onClick={() => setAccountType("organization")}
         />
-        <label htmlFor="organization">Organization</label>
+        <label style={{color:'#fff'}} htmlFor="organization">Organization</label>
         <br />
       </div>
       {accountType === "volunteer" ? (
@@ -197,7 +197,9 @@ const SignUp = () => {
               onChange={(e) => setCountry(e.target.value)}
             />
           </div>
-          <Label text="Forgot password?" />
+           <Link to='/forgot-password'>
+        <Label color='#fff' text="Forgot password?" />
+        </Link>
           <AuthenticationButton text="Sign up" />
         </form>
       ) : (
@@ -234,7 +236,7 @@ const SignUp = () => {
         />
       )}
       <div className={styles.SignupLabel}>
-        <Label text="Already have an account?" />
+        <Label color='#fff' text="Already have an account?" /> &nbsp;
         <Link to="/login" style={{ textDecoration: "none" }}>
           <Label text="Login" color="#1F4490" />
         </Link>

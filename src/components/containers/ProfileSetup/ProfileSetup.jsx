@@ -98,7 +98,7 @@ const ProfileSetup = ({
     <div className={styles.ProfileContainer}>
       <p
         className={styles.Text}
-        style={{ fontSize: "1.2rem", textAlign: "left" }}
+        style={{ fontSize: "1.2rem", textAlign: "left",color:'#fff' }}
       >
         Profile Setup
       </p>

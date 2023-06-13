@@ -1,5 +1,6 @@
 import React from "react";
 import InputLabel from "../../elements/InputLabel/InputLabel";
+import InputPhone from "../../elements/InputLabel/InputPhone";
 import styles from "./styles.module.css";
 
 const ProfileSetup2 = ({
@@ -16,38 +17,37 @@ const ProfileSetup2 = ({
 }) => {
   return (
     <div className={styles.EditProfile}>
-      <InputLabel
+      <InputPhone
         label="Phone Number"
         type="text"
-        placeholder=""
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
       <InputLabel
         label="Website address"
         type="text"
-        placeholder=""
+        placeholder="Website address"
         value={website}
         onChange={(e) => setWebsite(e.target.value)}
       />
       <InputLabel
         label="LinkedIn"
         type="text"
-        placeholder=""
+        placeholder="LinkedIn"
         value={linkedin}
         onChange={(e) => setLinkedin(e.target.value)}
       />
       <InputLabel
         label="Facebook"
         type="text"
-        placeholder=""
+        placeholder="Facebook"
         value={facebook}
         onChange={(e) => setFacebook(e.target.value)}
       />
       <InputLabel
         label="Twitter"
         type="text"
-        placeholder=""
+        placeholder="Twitter"
         value={twitter}
         onChange={(e) => setTwitter(e.target.value)}
       />

@@ -41,6 +41,7 @@ import DarkMode from "./pages/Account/DarkMode/DarkMode";
 import Footer from "./components/containers/Footer/Footer";
 
 import bg from "./assets/bg-image.jpg";
+import ForgotPassword from "./pages/Authentication/ForgotPassword/ForgotPassword";
 
 function App() {
   const [role, setRole] = useState("");
@@ -128,6 +129,12 @@ function App() {
                       <ProtectedRoute>
                         <About />
                       </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/forgot-password"
+                    element={
+                        <ForgotPassword/>
                     }
                   />
                   <Route

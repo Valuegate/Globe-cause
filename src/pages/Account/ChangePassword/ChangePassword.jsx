@@ -12,9 +12,10 @@ const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  const { updatePassword } = useUserAuth();
+  const { changePassword } = useUserAuth();
 
   const checkPassword = () => {
     if (newPassword === confirmNewPassword) {
@@ -28,7 +29,11 @@ const ChangePassword = () => {
     e.preventDefault();
     try {
       checkPassword();
-      await updatePassword(currentPassword, newPassword);
+      await changePassword(currentPassword, newPassword);
+      setLoading(false);
+      setTimeout(() => {
+           alert('success');
+        }, 1000);
       navigate("/account");
     } catch (err) {
       console.log(err.message);
@@ -66,7 +71,7 @@ const ChangePassword = () => {
       </form>
       <AuthenticationButton
         submit={"submit"}
-        text="update"
+        text={loading?"update":'loading...'}
         onclick={handleSubmit}
       />
       <BackButton color="#0E0E0F" to="/account" />
