@@ -13,6 +13,10 @@ import Label from "../../../components/elements/Label/Label";
 import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
 
 import ProfileSetup from "../../../components/containers/ProfileSetup/ProfileSetup";
+import InputPhone from "../../../components/elements/InputLabel/InputPhone";
+import InputSelect from "../../../components/elements/InputLabel/InputSelect";
+
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -42,6 +46,10 @@ const SignUp = () => {
   const [accountType, setAccountType] = useState("volunteer");
 
   const { signUp, user, googleSignIn } = useUserAuth();
+
+  const changeHandler = country => {
+    setCountry(country)
+  }
 
   const createProfile = async (id) => {
     await setDoc(doc(db, "volunteers", id), {
@@ -184,18 +192,18 @@ const SignUp = () => {
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <InputLabel
-              label="Phone Number"
-              type="number"
-              placeholder="Enter your phone number"
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            <InputLabel
-              label="Country"
-              type="text"
-              placeholder="Enter your country"
-              onChange={(e) => setCountry(e.target.value)}
-            />
+            <InputPhone
+        label="Phone Number"
+        type="text"
+        value={phone}
+        onChange={setPhone}
+      />
+             <InputSelect
+        label="Country"
+        placeholder="Country"
+        value='country'
+        onChange={changeHandler}
+      />
           </div>
            <Link to='/forgot-password'>
         <Label color='#fff' text="Forgot password?" />

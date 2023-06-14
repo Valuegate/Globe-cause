@@ -21,7 +21,7 @@ const ProfileSetup2 = ({
         label="Phone Number"
         type="text"
         value={phone}
-        onChange={(e) => setPhone(e.target.value)}
+        onChange={setPhone}
       />
       <InputLabel
         label="Website address"
