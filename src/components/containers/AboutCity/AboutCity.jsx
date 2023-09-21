@@ -1,5 +1,5 @@
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.css";
 import { db } from "../../../firebase";
 import {
@@ -14,13 +14,9 @@ import SecondaryTabNavigation from "../SecondaryTabNavigation/SecondaryTabNaviga
 import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
 import Label from "../../elements/Label/Label";
 import RatingContainer from "../RatingContainer/RatingContainer";
-import OrganizationContainer from "../OrganizationContainer/OrganizationContainer";
-import ChatContainer from "../ChatContainer/ChatContainer";
-import img from "../../../assets/myPhoto.JPG";
-import InputContainer from "../InputContainer/CityInputContainer";
 import CityOrganizationsContainer from "../CityOrganizationsContainer/CityOrganizationsContainer";
-import { type } from "@testing-library/user-event/dist/type";
-// import photos from "../../../Demo/Api/Photos";
+
+import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
 
 const AboutCity = ({
   ratings,
@@ -36,8 +32,8 @@ const AboutCity = ({
   coordinates,
 }) => {
   const [tab, setTab] = useState("About");
+  const [visibleButton, setVisibleButton] = useState(false);
 
-  const scroll = useRef();
   const [, setMessages] = useState([]);
 
   const { isLoaded } = useLoadScript({
@@ -50,7 +46,7 @@ const AboutCity = ({
       lat: lat || 0,
       lng: lng || 0,
     }),
-    [coordinates]
+    [lat, lng]
   );
 
   useEffect(() => {
@@ -67,7 +63,7 @@ const AboutCity = ({
       setMessages(message);
     });
     return () => unsubscribe;
-  }, []);
+  }, [filter, ids]);
 
   const handleTabChange = (tab) => {
     setTab(tab);
@@ -77,6 +73,7 @@ const AboutCity = ({
     console.log(e.target.src);
     const img = document.createElement("img");
     const overflow = document.createElement("div");
+    img.classList.add("enlarged");
     overflow.style.width = "100%";
     overflow.style.height = "100%";
     overflow.style.position = "fixed";
@@ -87,23 +84,47 @@ const AboutCity = ({
     img.src = e.target.src;
     img.style.width = "90%";
     img.style.height = "90%";
-    img.style.objectFit = "contain";
+    img.style.objectFit = "cover";
     img.style.position = "fixed";
     img.style.top = "5%";
     img.style.left = "5%";
     img.style.zIndex = "1000";
     // img.style.backgroundColor = "rgba(0,0,0,0.5)";
     img.style.cursor = "pointer";
+    setVisibleButton(true);
     overflow.onclick = () => {
       img.remove();
       overflow.remove();
+      setVisibleButton(false);
     };
-    img.onclick = () => {
-      img.remove();
-      overflow.remove();
-    };
+    // img.onclick = () => {
+    //   img.remove();
+    //   overflow.remove();
+    // };
     document.body.appendChild(img);
     document.body.appendChild(overflow);
+  };
+
+  const NextPicture = () => {
+    const img = document.querySelector(".enlarged");
+    const src = img.src;
+    const index = photos.indexOf(src);
+    if (index === photos.length - 1) {
+      img.src = photos[0];
+    } else {
+      img.src = photos[index + 1];
+    }
+  };
+
+  const PreviousPicture = () => {
+    const img = document.querySelector(".enlarged");
+    const src = img.src;
+    const index = photos.indexOf(src);
+    if (index === 0) {
+      img.src = photos[photos.length - 1];
+    } else {
+      img.src = photos[index - 1];
+    }
   };
 
   const Content = () => {
@@ -195,6 +216,42 @@ const AboutCity = ({
                 onClick={pictureEnlarger}
               />
             ))}
+            {visibleButton && (
+              <div
+                className={styles.ArrowContainer}
+                style={{
+                  zIndex: "5000",
+                  position: "relative",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <button
+                  onClick={PreviousPicture}
+                  style={{
+                    zIndex: "5000",
+                    position: "absolute",
+                    left: "0",
+                    top: "50%",
+                  }}
+                >
+                  <FiArrowLeft className={styles.Arrow} size={"25px"} />
+                </button>
+                <button
+                  onClick={NextPicture}
+                  style={{
+                    zIndex: "5000",
+                    position: "absolute",
+                    right: "0",
+                    top: "50%",
+                  }}
+                >
+                  <FiArrowRight className={styles.Arrow} size={"25px"} />
+                </button>
+              </div>
+            )}
           </div>
         </>
       );

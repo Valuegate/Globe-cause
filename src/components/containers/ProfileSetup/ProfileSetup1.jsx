@@ -1,6 +1,6 @@
-import React from 'react'
-import InputLabel from '../../elements/InputLabel/InputLabel'
-import InputSelect from '../../elements/InputLabel/InputSelect';
+import React from "react";
+import InputLabel from "../../elements/InputLabel/InputLabel";
+import InputSelect from "../../elements/InputLabel/InputSelect";
 import styles from "./styles.module.css";
 
 const ProfileSetup1 = ({
@@ -22,9 +22,9 @@ const ProfileSetup1 = ({
   village,
   city,
 }) => {
-   const changeHandler = country => {
-    setCountry(country)
-  }
+  const changeHandler = (country) => {
+    setCountry(country);
+  };
   return (
     <div className={styles.EditProfile}>
       <InputLabel
@@ -72,7 +72,7 @@ const ProfileSetup1 = ({
       <InputSelect
         label="Country"
         placeholder="Country"
-        value='country'
+        value={country}
         onChange={changeHandler}
       />
       <InputLabel

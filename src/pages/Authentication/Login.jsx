@@ -111,12 +111,12 @@ const Login = () => {
   return (
     <div className={styles.Login}>
       <HeaderText text="Login" />
-      <SocialAuthButton
+      {/* <SocialAuthButton
         text="CONTINUE WITH FACEBOOK"
         bg="#1F4490"
         color="#ffffff"
         onclick={signInWithFacebook}
-      />
+      /> */}
       <SocialAuthButton
         text="CONTINUE WITH APPLE"
         bg="#0E0E0F"

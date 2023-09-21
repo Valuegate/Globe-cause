@@ -11,6 +11,8 @@ import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const ProfilePicture = ({ alt, placeholder, profile_image }) => {
+  const [disabled, setDisabled] = useState(true);
+
   const [image, setImage] = useState();
   const allInputs = { imgUrl: "" };
   const [imageAsFile, setImageAsFile] = useState("");
@@ -26,6 +28,7 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
     }
     const image = e.target.files[0];
     setImageAsFile((imageFile) => image);
+    setDisabled(false);
   };
 
   const handleFireBaseUpload = (e) => {
@@ -33,11 +36,25 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
     // async magic goes here...
     if (imageAsFile === "") {
       alert(`not an image, the image file is a ${typeof imageAsFile}`);
+      return;
     }
-    const uploadTask = uploadBytes(
-      ref(storage, `images/${imageAsFile.name}`),
-      imageAsFile
-    );
+    const uploadTask =
+      role === "volunteer"
+        ? uploadBytes(
+            ref(
+              storage,
+              `volunteer_profile_images/${user.uid}/${imageAsFile.name}`
+            ),
+            imageAsFile
+          )
+        : uploadBytes(
+            ref(
+              storage,
+              `organzation_${role}_profile_images/${user.uid}/${imageAsFile.name}`
+            ),
+            imageAsFile
+          );
+
     //initiates the firebase side uploading
     uploadTask.then((snapshot) => {
       console.log(snapshot);
@@ -91,7 +108,11 @@ const ProfilePicture = ({ alt, placeholder, profile_image }) => {
           onChange={handleImageAsFile}
         />
       </label>
-      <button className={styles.UploadButton} onClick={handleFireBaseUpload}>
+      <button
+        className={styles.UploadButton}
+        onClick={handleFireBaseUpload}
+        disabled={disabled}
+      >
         Upload
       </button>
     </form>

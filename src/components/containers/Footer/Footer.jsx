@@ -11,9 +11,14 @@ import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
+import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";
+import { useContext } from "react";
+
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [emailExist, setEmailExist] = useState(false);
+
+  const { theme } = useContext(WebsiteThemeContext);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -50,10 +55,17 @@ const Footer = () => {
   };
 
   return (
-    <div className={styles.Footer}>
+    <div
+      className={styles.Footer}
+      style={
+        theme === "dark" || theme === "default"
+          ? { }
+          : { backgroundColor: "rgba(0, 0, 0, 0.8)" }
+      }
+    >
       <h2>
         Always stay informed with{" "}
-        <span style={{ fontWeight: "700" }}>SIVolunttering</span>
+        <span style={{ fontWeight: "700" }}>SIVolunteering</span>
       </h2>
       <h2>
         Subscribe to our <span style={{ fontWeight: "700" }}>newsletter</span>

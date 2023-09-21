@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
 import { UserAthorizationContext } from "../../../hooks/authorization/UserAuthorizationContext";
+import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";
 
 import { db } from "../../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -20,6 +21,10 @@ const EditProfile = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+
+  const screenGreaterThan768px = window.matchMedia("(min-width: 768px)");
+
+  const { theme } = useContext(WebsiteThemeContext);
 
   const { role } = useContext(UserAthorizationContext);
 
@@ -49,7 +54,7 @@ const EditProfile = () => {
         getProfile(user.uid, `organisations_${role}`);
       }
     }
-  }, [user]);
+  }, [user, role]);
 
   const updateProfile = async ({ id, database }) => {
     await setDoc(doc(db, database, id), {
@@ -59,8 +64,8 @@ const EditProfile = () => {
     })
       .then(() => {
         alert("Profile updated successfully");
-         setTimeout(() => {
-           alert('success');
+        setTimeout(() => {
+          alert("success");
         }, 1000);
       })
       .catch((error) => {
@@ -90,9 +95,27 @@ const EditProfile = () => {
 
   return (
     <div className={styles.EditProfile}>
-      <h3 className={styles.PageHeader}>Edit Profile</h3>
+      <h3
+        className={styles.PageHeader}
+        style={
+          theme === "default" || theme === "dark"
+            ? { color: "#fff" }
+            : { color: "rgb(25, 32, 43)" }
+        }
+      >
+        Edit Profile
+      </h3>
 
-      <form className={styles.InputContainer}>
+      <form
+        className={styles.InputContainer}
+        style={
+          theme === "default" || (theme === "dark" && screenGreaterThan768px)
+            ? {}
+            : {
+                boxShadow: "0 0 3px 0 rgba(0,0,0,0.5)",
+              }
+        }
+      >
         <InputLabel
           label="Name"
           type="text"

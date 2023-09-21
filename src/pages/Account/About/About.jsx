@@ -1,12 +1,20 @@
 import React from "react";
 import styles from "./styles.module.css";
-import { Link } from "react-router-dom";
-import arrow from "../../../assets/Vectuor.png";
 import BackButton from "../../../components/elements/BackButton/BackButton";
 
+import { useContext } from "react";
+import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";
+
 const About = () => {
+  const { theme } = useContext(WebsiteThemeContext);
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container}
+      style={
+        theme === "default" || theme === "dark"
+          ? { color: "#fff" }
+          : { color: "rgb(25, 32, 43)" }
+      }
+    >
       <div className={styles.HeaderContainer}>
         <BackButton color="#fff" to="/account" />
         <p style={{ fontWeight: "700", textAlign: "center", fontSize: "20px" }}>

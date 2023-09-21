@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 //authorization context
 import { useContext } from "react";
 import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
+import { WebsiteThemeContext } from "../../hooks/theme/WebsiteThemeContext";
 
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import {  doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 import styles from "./styles.module.css";
 import accountSettings from "../../Demo/More/accountSettings";
-import photo from "../../assets/myPhoto.JPG";
 
 import BottomNavigation from "../../components/containers/BottomNavigation/BottomNavigation";
 import NavigationButton from "../../components/elements/NavigationButton/NavigationButton";
@@ -21,15 +21,17 @@ import HorizontalLine from "../../components/elements/HorizontalLine/HorizontalL
 import AccountButton from "../../components/elements/AccountButton/AccountButton";
 import LogoutButton from "../../components/elements/LogoutButton/LogoutButton";
 
+import { Link } from "react-router-dom";
+
 const Account = () => {
   const [navigationState, setNavigationState] = useState(0);
   const [userDetails, setUserDetails] = useState([]);
+  const { theme } = useContext(WebsiteThemeContext);
 
   //authorization context
-  const { role, setRole } = useContext(UserAthorizationContext);
+  const { role} = useContext(UserAthorizationContext);
 
   const { logOut, user } = useUserAuth();
-
 
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -58,13 +60,60 @@ const Account = () => {
     } else {
       fetchPost(user?.uid, `organisations_${role}`);
     }
-  }, [role]);
+  }, [role, user?.uid]);
 
   return (
-    <div className={styles.Account}>
+    <div
+      className={styles.Account}
+      style={
+        theme === "default" || theme === "dark"
+          ? { color: "#000" }
+          : { color: "rgb(25, 32, 43)" }
+      }
+    >
+      <Link
+        to="/home"
+        style={
+          theme === "default" || theme === "dark"
+            ? {
+                textDecoration: "none",
+                color: "#fff",
+                position: "fixed",
+                top: "20px",
+                left: "20px",
+                border: "1px solid #fff",
+                padding: "5px 10px",
+                borderRadius: "10px",
+              }
+            : {
+                textDecoration: "none",
+                color: "rgb(25, 32, 43)",
+                position: "fixed",
+                top: "20px",
+                left: "20px",
+                border: "1px solid rgb(25, 32, 43)",
+                padding: "5px 10px",
+                borderRadius: "10px",
+              }
+        }
+        className={styles.AditionalButton}
+      >
+        <p>Home</p>
+      </Link>
       <ProfilePicture profile_image={userDetails?.profile_image_url} />
-      <Label color="#fff" text={userDetails?.name || "Your Name"} />
-      <p style={{ marginTop: "-15px", color: "#fff" }}>
+      <Label
+        color={
+          theme === "default" || theme === "dark" ? "#fff" : "rgb(25, 32, 43)"
+        }
+        text={userDetails?.name || "Your Name"}
+      />
+      <p
+        style={
+          theme === "default" || theme === "dark"
+            ? { color: "#fff", marginTop: "-15px" }
+            : { color: "rgb(25, 32, 43)", marginTop: "-15px" }
+        }
+      >
         {userDetails?.email_address || userDetails?.email || "Your Email"}
       </p>
       <HorizontalLine width="80%" />

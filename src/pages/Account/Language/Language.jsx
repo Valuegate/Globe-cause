@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./styles.module.css";
-import { Link } from "react-router-dom";
-import arrow from "../../../assets/Vectuor.png";
 import { useTranslation } from "react-i18next";
 import BackButton from "../../../components/elements/BackButton/BackButton";
 
+import { useContext } from "react";
+import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";
+
 const Language = () => {
   const { t, i18n } = useTranslation();
+  const { theme } = useContext(WebsiteThemeContext);
 
   const language = [
     {
@@ -18,6 +20,18 @@ const Language = () => {
       abb: "en (uk)",
     },
     {
+      langu: "Portugese",
+      abb: "pg",
+    },
+    {
+      langu: "Spanish",
+      abb: "sp",
+    },
+    {
+      langu: "Romanian",
+      abb: "rm",
+    },
+    {
       langu: "Mandarin",
       abb: "mn",
     },
@@ -25,10 +39,7 @@ const Language = () => {
       langu: "Hindi",
       abb: "hindi",
     },
-    {
-      langu: "Spanish",
-      abb: "sp",
-    },
+
     {
       langu: "Arabic",
       abb: "ab",
@@ -41,10 +52,7 @@ const Language = () => {
       langu: "Germany",
       abb: "gm",
     },
-    {
-      langu: "Portugese",
-      abb: "pg",
-    },
+
     {
       langu: "Korean",
       abb: "kr",
@@ -61,11 +69,38 @@ const Language = () => {
     <div className={styles.Container}>
       <div className={styles.HeaderContainer}>
         <BackButton color="#fff" to="/account" />
-        <p style={{ fontWeight: "700", textAlign: "center", fontSize: "20px" }}>
+        <p
+          style={
+            theme === "dark" || theme === "default"
+              ? {
+                  color: "#fff",
+                  fontWeight: "700",
+                  fontSize: "20px",
+                  textAlign: "center",
+                }
+              : {
+                  color: "rgb(25, 32, 43)",
+                  fontWeight: "700",
+                  fontSize: "20px",
+                  textAlign: "center",
+                }
+          }
+        >
           {t("Example.3")}{" "}
         </p>
       </div>
-      <div styles={{ padding: "2rem" }}>
+      <div
+        styles={{ padding: "2rem" }}
+        style={
+          theme === "dark" || theme === "default"
+            ? {
+                color: "#fff",
+              }
+            : {
+                color: "rgb(25, 32, 43)",
+              }
+        }
+      >
         <p style={{ fontSize: "18px", fontWeight: "600" }}>Suggested</p>
         <form className={styles.Form} action="">
           {language.map((val, i) => {

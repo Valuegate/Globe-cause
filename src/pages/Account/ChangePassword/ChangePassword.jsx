@@ -7,12 +7,15 @@ import AuthenticationButton from "../../../components/elements/AuthenticationBut
 
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
+import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";
 
 const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const { theme } = React.useContext(WebsiteThemeContext);
 
   const navigate = useNavigate();
   const { changePassword } = useUserAuth();
@@ -32,8 +35,8 @@ const ChangePassword = () => {
       await changePassword(currentPassword, newPassword);
       setLoading(false);
       setTimeout(() => {
-           alert('success');
-        }, 1000);
+        alert("success");
+      }, 1000);
       navigate("/account");
     } catch (err) {
       console.log(err.message);
@@ -42,8 +45,27 @@ const ChangePassword = () => {
 
   return (
     <form className={styles.ChangePassword} onSubmit={handleSubmit}>
-      <h3 className={styles.PageHeader}>Change Password</h3>
-      <form onSubmit={handleSubmit} className={styles.Form}>
+      <h3
+        className={styles.PageHeader}
+        style={
+          theme === "default" || theme === "dark"
+            ? { color: "#fff" }
+            : { color: "rgb(25, 32, 43)" }
+        }
+      >
+        Change Password
+      </h3>
+      <form
+        onSubmit={handleSubmit}
+        className={styles.Form}
+        style={
+          theme === "default" || theme === "dark"
+            ? {}
+            : {
+                boxShadow: "0 0 3px 0 rgba(0,0,0,0.5)",
+              }
+        }
+      >
         <InputLabel
           label="Current Password"
           value={currentPassword}
@@ -71,7 +93,7 @@ const ChangePassword = () => {
       </form>
       <AuthenticationButton
         submit={"submit"}
-        text={loading?"update":'loading...'}
+        text={loading ? "update" : "loading..."}
         onclick={handleSubmit}
       />
       <BackButton color="#0E0E0F" to="/account" />

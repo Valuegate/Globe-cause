@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import { IoIosPerson } from "react-icons/io";
 
 import { NameContext } from "../../hooks/name/NameContext";
+import { WebsiteThemeContext } from "../../hooks/theme/WebsiteThemeContext";
 
 const Nav = () => {
+  const { theme } = useContext(WebsiteThemeContext);
   const { name } = useContext(NameContext);
   return (
     <div>
@@ -14,7 +16,11 @@ const Nav = () => {
         <div className={style.NavItems}>
           <div className={style.NavItem}>
             <Link
-              style={{ textDecoration: "none", color: "#fff" }}
+              style={
+                theme === "dark" || theme === "default"
+                  ? { textDecoration: "none", color: "#fff" }
+                  : { textDecoration: "none", color: "rgb(25, 32, 43)" }
+              }
               targer="_blank"
               to="https://sivolunteering.com/"
             >
@@ -35,9 +41,20 @@ const Nav = () => {
                 justifyContent: "center",
               }}
             >
-              <p className={style.Ptag}>Hello, {name || "Unkown"}</p>
+              <p
+                className={style.Ptag}
+                style={
+                  theme === "dark" || theme === "default"
+                    ? { color: "#fff" }
+                    : { color: "rgb(25, 32, 43)" }
+                }
+              >
+                Hello, {name || "Unkown"}
+              </p>
               &nbsp;
-              <IoIosPerson className={style.Notification} />
+              <IoIosPerson
+                className={style.Notification}
+              />
               &nbsp;
             </Link>
           </div>

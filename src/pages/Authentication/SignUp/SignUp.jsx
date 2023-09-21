@@ -7,7 +7,7 @@ import { db } from "../../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 import HeaderText from "../../../components/elements/HeaderText/HeaderText";
-import SocialAuthButton from "../../../components/elements/SocialAuthButton/SocialAuthButton";
+// import SocialAuthButton from "../../../components/elements/SocialAuthButton/SocialAuthButton";
 import InputLabel from "../../../components/elements/InputLabel/InputLabel";
 import Label from "../../../components/elements/Label/Label";
 import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
@@ -16,11 +16,9 @@ import ProfileSetup from "../../../components/containers/ProfileSetup/ProfileSet
 import InputPhone from "../../../components/elements/InputLabel/InputPhone";
 import InputSelect from "../../../components/elements/InputLabel/InputSelect";
 
-
-
 const SignUp = () => {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
+  const [, setError] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -45,11 +43,11 @@ const SignUp = () => {
 
   const [accountType, setAccountType] = useState("volunteer");
 
-  const { signUp, user, googleSignIn } = useUserAuth();
+  const { signUp, user, sendEmailVerification, googleSignIn } = useUserAuth();
 
-  const changeHandler = country => {
-    setCountry(country)
-  }
+  const changeHandler = (country) => {
+    setCountry(country);
+  };
 
   const createProfile = async (id) => {
     await setDoc(doc(db, "volunteers", id), {
@@ -104,6 +102,7 @@ const SignUp = () => {
     setError("");
     try {
       await signUp(email || orgEmail, password || orgPassword);
+      await sendEmailVerification(user);
     } catch (err) {
       setError(err.message);
       console.log(email);
@@ -155,7 +154,9 @@ const SignUp = () => {
           defaultChecked
           onClick={() => setAccountType("volunteer")}
         />
-        <label style={{color:'#fff'}} htmlFor="volunteer">Volunteer</label>
+        <label style={{ color: "#fff" }} htmlFor="volunteer">
+          Volunteer
+        </label>
         <br />
         <input
           type="radio"
@@ -164,7 +165,9 @@ const SignUp = () => {
           value="organization"
           onClick={() => setAccountType("organization")}
         />
-        <label style={{color:'#fff'}} htmlFor="organization">Organization</label>
+        <label style={{ color: "#fff" }} htmlFor="organization">
+          Organization
+        </label>
         <br />
       </div>
       {accountType === "volunteer" ? (
@@ -193,21 +196,21 @@ const SignUp = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <InputPhone
-        label="Phone Number"
-        type="text"
-        value={phone}
-        onChange={setPhone}
-      />
-             <InputSelect
-        label="Country"
-        placeholder="Country"
-        value='country'
-        onChange={changeHandler}
-      />
+              label="Phone Number"
+              type="text"
+              value={phone}
+              onChange={setPhone}
+            />
+            <InputSelect
+              label="Country"
+              placeholder="Country"
+              value={country}
+              onChange={changeHandler}
+            />
           </div>
-           <Link to='/forgot-password'>
-        <Label color='#fff' text="Forgot password?" />
-        </Link>
+          <Link to="/forgot-password">
+            <Label color="#fff" text="Forgot password?" />
+          </Link>
           <AuthenticationButton text="Sign up" />
         </form>
       ) : (
@@ -244,7 +247,7 @@ const SignUp = () => {
         />
       )}
       <div className={styles.SignupLabel}>
-        <Label color='#fff' text="Already have an account?" /> &nbsp;
+        <Label color="#fff" text="Already have an account?" /> &nbsp;
         <Link to="/login" style={{ textDecoration: "none" }}>
           <Label text="Login" color="#1F4490" />
         </Link>

@@ -20,7 +20,7 @@ const CityDetail = () => {
   const fetchPost = async () => {
     await getDoc(doc(db, `locations_${filter?.toLowerCase()}`, cityId)).then(
       (querySnapshot) => {
-        const newData = querySnapshot.data(); 
+        const newData = querySnapshot.data();
         setCity(newData);
       }
     );
@@ -30,12 +30,8 @@ const CityDetail = () => {
     fetchPost();
   }, [cityId]);
 
-
-
   return (
-    <div
-      className={styles.CityDetail}
-    >
+    <div className={styles.CityDetail}>
       <Nav />
       <CityHeader city={city.city} country={city.country} />
       <AboutCity
@@ -53,7 +49,7 @@ const CityDetail = () => {
         connectivity={city?.connectivity}
         coordinates={city?.coordinates}
       />
-      <BackButton color="#ffffff" />
+      <BackButton color="#ffffff" to={"/home"} />
     </div>
   );
 };
