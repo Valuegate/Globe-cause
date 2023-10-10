@@ -1,3 +1,4 @@
+import React from "react";
 import logo from "../../../assets/logo-siv.svg";
 import styles from "./styles.module.css";
 

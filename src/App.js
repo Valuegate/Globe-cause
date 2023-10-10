@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { UserAthorizationContext } from "./hooks/authorization/UserAuthorizationContext";
 

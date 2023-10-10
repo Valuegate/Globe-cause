@@ -16,8 +16,8 @@
 
 .FlexContainer>img{
     width: 10%;
-    height: 4rem;
-    object-fit: cover;
+    height: 5rem;
+    object-fit: contain;
 }
 
 @media screen and (max-width: 468px) {

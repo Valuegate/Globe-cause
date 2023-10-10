@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const Search = ({ setFilter }) => {
   const [search, setSearch] = useState("");

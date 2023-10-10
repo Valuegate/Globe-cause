@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const RatingIndicator = ({ rating }) => {
   const [ratingValue, setRatingValue] = useState("");

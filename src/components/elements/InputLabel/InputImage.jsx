@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import {useState} from 'react'
+import React, { useState} from 'react'
 import Label from "../Label/Label";
 import imge from '../../../assets/Group 11966.png'
 

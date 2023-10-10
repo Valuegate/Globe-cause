@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import BottomNavigation from "../../components/containers/BottomNavigation/BottomNavigation";
 import NavigationButton from "../../components/elements/NavigationButton/NavigationButton";

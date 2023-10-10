@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./styles.module.css";
 import NotificationSetting from "../../../components/elements/NotificationSetting/NotificationSetting";
 import BackButton from "../../../components/elements/BackButton/BackButton";

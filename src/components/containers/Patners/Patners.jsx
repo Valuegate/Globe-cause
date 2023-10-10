@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./styles.module.css";
 import pat1 from "../../../assets/Dese.png";
 import pat2 from "../../../assets/faju.png";
-import pat3 from "../../../assets/Log.png";
-import pat4 from "../../../assets/T4E Transpt.png";
+import pat3 from "../../../assets/formative footprint.png";
+import pat4 from "../../../assets/4team.png";
 import { useTranslation } from "react-i18next";
 
 import { useContext } from "react";

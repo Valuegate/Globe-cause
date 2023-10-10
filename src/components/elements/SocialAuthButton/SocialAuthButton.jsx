@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./styles.module.css";
 
 const SocialAuthButton = ({ text, icon, onclick, bg, color }) => {

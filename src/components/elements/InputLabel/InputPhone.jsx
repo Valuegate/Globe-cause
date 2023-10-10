@@ -1,8 +1,6 @@
+import React from "react";
 import styles from "./styles.module.css";
-import axios from "axios";
 import Label from "../Label/Label";
-import { useEffect } from "react";
-import { useState } from "react";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 

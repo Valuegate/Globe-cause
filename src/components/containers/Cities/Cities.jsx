@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams  } from "react-router-dom";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -14,6 +15,14 @@ const Cities = ({ filter }) => {
   const [cityFilter, setCityFilter] = useState("Portugal");
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams()
+  let getfilter = searchParams.get('filter');
+
+
+  // Check if query is present, then set the cityFilter to the query filter
+  useEffect(() => {
+    setCityFilter(getfilter);
+  }, [getfilter])
 
   const searchCities = (city) => {
     if (city === "") {
@@ -50,6 +59,9 @@ const Cities = ({ filter }) => {
   const NavigationActive = (country) => {
     setCityFilter(country);
     fetchPost(country);
+    setSearchParams({ filter: country })
+    // Add query params to navigation
+
   };
 
   return (

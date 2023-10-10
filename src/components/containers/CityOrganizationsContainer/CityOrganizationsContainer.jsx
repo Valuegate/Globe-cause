@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { collection, query, where } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import OrganizationCard from "../../elements/OrganizationCard/OrganizationCard";
 

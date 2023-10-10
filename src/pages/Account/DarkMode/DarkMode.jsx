@@ -1,3 +1,4 @@
+import React from "react";
 import BackButton from "../../../components/elements/BackButton/BackButton";
 import styles from "./styles.module.css";
 
