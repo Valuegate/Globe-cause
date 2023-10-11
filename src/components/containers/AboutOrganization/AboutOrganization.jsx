@@ -48,9 +48,9 @@ const AboutOrganization = ({
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
-  });
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
+  // });
   const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);
 
   const handleTabChange = (tab) => {
@@ -78,7 +78,7 @@ const AboutOrganization = ({
     if (tab === "About") {
       return (
         <div className={styles.AboutContentContainer}>
-          <div className={styles.Map}>
+          {/* <div className={styles.Map}>
             {isLoaded ? (
               <GoogleMap
                 mapContainerStyle={{ width: "100%", height: "100%" }}
@@ -96,16 +96,19 @@ const AboutOrganization = ({
                 />
               </>
             )}
-          </div>
-          <div>
+          </div> */}
+          <div className={styles.OrganizationDescription}>
             <p style={{ fontWeight: "700" }}>Short description</p>
             <p style={{ fontWeight: "400", fontSize: "14px" }}>{description}</p>
             <div className={styles.Link}>
+              <div className={styles.ContactLink} >
               {email && (
                 <a href={"mailto:" + email} target="_blank" rel="noreferrer">
                   <FiMessageSquare style={{ width: "30px", height: "30px" }} />
                 </a>
               )}
+              <p>Contact Us</p>
+              </div>
               {facebook && (
                 <a
                   href={"https://" + facebook}

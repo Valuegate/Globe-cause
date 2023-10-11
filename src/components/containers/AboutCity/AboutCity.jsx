@@ -146,6 +146,60 @@ const AboutCity = ({
             )}
           </div>
           <div className={styles.Heading}>
+            <Label text="Description" />
+          </div>
+          <div className={styles.Description}>{description}</div>
+          <div className={styles.Heading}>
+            <Label text="Photos" />
+          </div>
+          <div className={styles.ImageContainer}>
+            {photos?.map((photo, i) => (
+              <img
+                src={photo}
+                className={styles.Image}
+                key={i}
+                alt=""
+                onClick={pictureEnlarger}
+              />
+            ))}
+            {visibleButton && (
+              <div
+                className={styles.ArrowContainer}
+                style={{
+                  zIndex: "5000",
+                  position: "relative",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <button
+                  onClick={PreviousPicture}
+                  style={{
+                    zIndex: "5000",
+                    position: "absolute",
+                    left: "0",
+                    top: "50%",
+                  }}
+                >
+                  <FiArrowLeft className={styles.Arrow} size={"25px"} />
+                </button>
+                <button
+                  onClick={NextPicture}
+                  style={{
+                    zIndex: "5000",
+                    position: "absolute",
+                    right: "0",
+                    top: "50%",
+                  }}
+                >
+                  <FiArrowRight className={styles.Arrow} size={"25px"} />
+                </button>
+              </div>
+            )}
+          </div>
+          <div className={styles.Heading}>
             <Label text="Rating" fontSize={"1.4rem"} />
           </div>
           <div className={styles.Heading}>
@@ -200,60 +254,6 @@ const AboutCity = ({
                 />
               );
             })}
-          <div className={styles.Heading}>
-            <Label text="Description" />
-          </div>
-          <div className={styles.Description}>{description}</div>
-          <div className={styles.Heading}>
-            <Label text="Photos" />
-          </div>
-          <div className={styles.ImageContainer}>
-            {photos?.map((photo, i) => (
-              <img
-                src={photo}
-                className={styles.Image}
-                key={i}
-                alt=""
-                onClick={pictureEnlarger}
-              />
-            ))}
-            {visibleButton && (
-              <div
-                className={styles.ArrowContainer}
-                style={{
-                  zIndex: "5000",
-                  position: "relative",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                <button
-                  onClick={PreviousPicture}
-                  style={{
-                    zIndex: "5000",
-                    position: "absolute",
-                    left: "0",
-                    top: "50%",
-                  }}
-                >
-                  <FiArrowLeft className={styles.Arrow} size={"25px"} />
-                </button>
-                <button
-                  onClick={NextPicture}
-                  style={{
-                    zIndex: "5000",
-                    position: "absolute",
-                    right: "0",
-                    top: "50%",
-                  }}
-                >
-                  <FiArrowRight className={styles.Arrow} size={"25px"} />
-                </button>
-              </div>
-            )}
-          </div>
         </>
       );
     } else if (tab === "Organizations") {

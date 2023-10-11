@@ -103,11 +103,20 @@
     margin-bottom: 2rem;
     margin-top: 1rem;
  }
+ .ContactLink {
+    display: flex;
+    flex-direction: column;
+ }
 
  .Link>a{
     text-decoration: none;
  }
 
+
+ .OrganizationDescription {
+    margin-left: 3rem;
+    margin-right: 3rem;
+ }
  @media screen and (max-width: 468px) {
     .Container {
         display: flex;
