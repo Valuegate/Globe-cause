@@ -122,7 +122,7 @@ const AboutOrganization = ({
               <a href={"https://" + web} target="_blank" rel="noreferrer">
                 <AiFillWeiboCircle style={{ width: "30px", height: "30px" }} />
               </a>
-              <p>Website</p>
+              <p className="">Website</p>
               </div>
               {twitter && (
                 <a href={`https://${twitter}`} target="_blank" rel="noreferrer">
