@@ -118,9 +118,12 @@ const AboutOrganization = ({
                   <FiFacebook style={{ width: "30px", height: "30px" }} />
                 </a>
               )}
+              <div className={styles.ContactLink} >
               <a href={"https://" + web} target="_blank" rel="noreferrer">
                 <AiFillWeiboCircle style={{ width: "30px", height: "30px" }} />
               </a>
+              <p>Website</p>
+              </div>
               {twitter && (
                 <a href={`https://${twitter}`} target="_blank" rel="noreferrer">
                   <FiTwitter style={{ width: "30px", height: "30px" }} />

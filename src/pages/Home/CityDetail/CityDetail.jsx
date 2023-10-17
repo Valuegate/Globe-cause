@@ -36,6 +36,8 @@ const CityDetail = ({ color }) => {
     fetchPost();
   }, [cityId]);
 
+ 
+
   const goBack = () => navigate(-1);
 
   return (

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { useSearchParams  } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -9,20 +9,19 @@ import CityCard from "../../elements/CityCard/CityCard";
 import styles from "./styles.module.css";
 import TabNavigation from "../TabNavigation/TabNavigation";
 
-
-
 const Cities = ({ filter }) => {
   const [cityFilter, setCityFilter] = useState("Portugal");
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams()
-  let getfilter = searchParams.get('filter');
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  let getfilter = searchParams.get("filter");
 
   // Check if query is present, then set the cityFilter to the query filter
   useEffect(() => {
     setCityFilter(getfilter);
-  }, [getfilter])
+    const filterPostValue = getfilter;
+    console.log("FILTER", filterPostValue);
+  }, [getfilter]);
 
   const searchCities = (city) => {
     if (city === "") {
@@ -31,9 +30,7 @@ const Cities = ({ filter }) => {
     return cities.filter((cityItem) => {
       const cityName = cityItem.city?.toLowerCase();
 
-      return cityName.includes(city.toLowerCase())
-        ? cityItem
-        : null;
+      return cityName.includes(city.toLowerCase()) ? cityItem : null;
     });
   };
 
@@ -53,15 +50,14 @@ const Cities = ({ filter }) => {
   };
 
   useEffect(() => {
-    fetchPost(cityFilter);
+    getfilter ? fetchPost(getfilter) : fetchPost(cityFilter);
   }, []);
 
   const NavigationActive = (country) => {
     setCityFilter(country);
     fetchPost(country);
-    setSearchParams({ filter: country })
+    setSearchParams({ filter: country });
     // Add query params to navigation
-
   };
 
   return (
