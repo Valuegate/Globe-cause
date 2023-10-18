@@ -14,11 +14,13 @@
     justify-content: space-evenly;
 }
 
-.FlexContainer>img{
+.FlexContainer>img {
+    background-color: #ffffff;
     width: 10%;
-    height: 5rem;
+    height: 3rem;
     object-fit: contain;
 }
+
 
 @media screen and (max-width: 468px) {
     .FlexContainer>img {

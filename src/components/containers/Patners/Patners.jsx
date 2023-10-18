@@ -28,7 +28,7 @@ const Patners = () => {
       </p>
       <div className={styles.FlexContainer}>
         {images.map((img, i) => {
-          return <img src={img} key={i} alt="" />;
+          return <img src={img} key={i} alt="" />
         })}
       </div>
     </div>
