@@ -1,8 +1,8 @@
 /*OrganizationCard styles*/
 
 .OrganizationCard{
-    width: 150px;
-    height: 160px;
+    width: 160px;
+    height: 170px;
     background-color: white;
     border-radius: 15px;
     box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
@@ -15,16 +15,16 @@
     transform: scale(1.1);
     box-shadow:  0 0 5px 0 rgba(0,0,0,0.5);
 }
-.OrganizationCard h4{
-    font-size: 1rem;
-    font-weight: 600;
+.OrganizationCard h2{
+    font-size: 1.5rem;
+    font-weight: 700;
     text-align: center;
     margin: 0;
     padding: 0 5px;
 }
 .OrganizationCard p{
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: 0.8rem;
+    font-weight: 600;
     text-align: center;
     margin: 0;
     padding: 5px;

@@ -15,10 +15,10 @@
 }
 
 .FlexContainer>img {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     width: 10%;
-    height: 3rem;
-    object-fit: contain;
+    height: 5rem;
+    object-fit: cover;
 }
 
 

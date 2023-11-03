@@ -184,8 +184,8 @@ const AboutOrganization = ({
       <div className={styles.Container}>
         <img src={logo} alt="" />
         <div className={styles.Stack}>
-          <p>{name}</p>
           <p>{country}</p>
+          <p>{name}</p>
         </div>
       </div>
       <SecondaryTabNavigation onClick={handleTabChange} tab={tab} />

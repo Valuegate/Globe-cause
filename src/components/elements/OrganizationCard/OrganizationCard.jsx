@@ -8,8 +8,8 @@ const OrganizationCard = ({ name, country, image }) => {
         <img src={image} alt={name} />
       </div>
       <div className={styles.OrganizationCardText}>
-        <h4>{name}</h4>
-        <p>{country}</p>
+        <h2>{country}</h2>
+        <p>{name}</p>
       </div>
     </div>
   );
