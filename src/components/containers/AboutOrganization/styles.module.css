@@ -56,17 +56,17 @@
 }
 
 .Container{
- display: flex;
- align-items: center;
+ display: block;
+ /* align-items: center; */
  padding: 1rem;
  margin: 1rem;
  margin-left: 5rem;
- height: 10vh;
+ /* height: 10vh; */
  width: 80%;
 }
 .Container>img{
     width: 90px;
-    height: 90px;
+    /* height: 90px; */
     object-fit: contain;
 }
 .Stack{
