@@ -16,6 +16,7 @@ import AuthenticationButton from "../../../components/elements/AuthenticationBut
 import ProfileSetup from "../../../components/containers/ProfileSetup/ProfileSetup";
 import InputPhone from "../../../components/elements/InputLabel/InputPhone";
 import InputSelect from "../../../components/elements/InputLabel/InputSelect";
+import VidBg from "../../../assets/video/bgvideo.mp4"
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -122,6 +123,10 @@ const SignUp = () => {
   }, [user]);
 
   return (
+    <div className={styles.VideoContainer}>
+      <video autoPlay loop muted className={styles.VideoBackground}>
+        <source src={VidBg} type="video/mp4" />
+      </video>
     <div className={styles.SignUp}>
       <HeaderText text="Sign Up" />
       {/* <SocialAuthButton
@@ -165,6 +170,7 @@ const SignUp = () => {
           name="account_type"
           value="organization"
           onClick={() => setAccountType("organization")}
+          style={{ color: "#892246" }}
         />
         <label style={{ color: "#fff" }} htmlFor="organization">
           Organization
@@ -209,9 +215,9 @@ const SignUp = () => {
               onChange={changeHandler}
             />
           </div>
-          <Link to="/forgot-password">
+          {/* <Link to="/forgot-password">
             <Label color="#fff" text="Forgot password?" />
-          </Link>
+          </Link> */}
           <AuthenticationButton text="Sign up" />
         </form>
       ) : (
@@ -250,9 +256,10 @@ const SignUp = () => {
       <div className={styles.SignupLabel}>
         <Label color="#fff" text="Already have an account?" /> &nbsp;
         <Link to="/login" style={{ textDecoration: "none" }}>
-          <Label text="Login" color="#1F4490" />
+          <Label text="Login" color="#541A46" />
         </Link>
       </div>
+    </div>
     </div>
   );
 };

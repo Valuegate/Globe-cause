@@ -1,0 +1,62 @@
+/* NgoList.module.css */
+.NgoList {
+  position: sticky;
+  top: 0;
+  margin: 0 auto;
+  margin-top: 50px;
+  max-width: 1200px;
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  border-radius: 25px 25px 0 0;
+  /* background-color: #ffffff; */
+  background: linear-gradient(90deg, #1f1246, #892246);
+}
+
+.NgoListContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.NGOCard {
+  width: 150px;
+  height: 150px;
+  max-width: 200px;
+  max-height: 200px;
+  background-color: #fcfcfc;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 0 rgba(252, 252, 252, 0.5);
+  cursor: pointer;
+  margin-bottom: 10%;
+  margin: 0 auto; /* Center align horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.NGOCard:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 5px 0 rgba(252, 252, 252, 0.5);
+}
+
+.NGOCard h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #541a46;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .NGOCard {
+    margin: 0 10px;
+    margin-bottom: 40px;
+    width: 200px;
+    height: 200px;
+  }
+}

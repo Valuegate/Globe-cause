@@ -13,7 +13,7 @@ const InputSelect = ({ label, type, placeholder,value, onChange }) => {
 
   return (
     <div className={styles.InputLabel}>
-      <Label color='#fff' text={label}/>
+      <Label color='#1F1246' text={label}/>
       <div className={styles.Input} >
         <Select className={styles.Input} options={options} value={value} onChange={onChange} />
         {/* <select name="" id="" className={styles.Input} onChange={onChange}>

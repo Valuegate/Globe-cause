@@ -58,3 +58,22 @@ appleProvider.setCustomParameters({ prompt: "select_account" });
 export const signInWithApple = () => signInWithPopup(auth, appleProvider);
 
 export default app;
+
+
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAEf76cZIcXd_oE1UeWmhU-Al11dMz9PXM",
+//   authDomain: "sivp-7944d.firebaseapp.com",
+//   projectId: "sivp-7944d",
+//   storageBucket: "sivp-7944d.appspot.com",
+//   messagingSenderId: "526241388622",
+//   appId: "1:526241388622:web:6614ef3e71fb51a7e98b1f"
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);

@@ -27,6 +27,7 @@ const ProfileSetup1 = ({
   };
   return (
     <div className={styles.EditProfile}>
+      <div className={styles.OrganisationSetup}>
       <InputLabel
         label="Organisation name"
         type="text"
@@ -69,12 +70,12 @@ const ProfileSetup1 = ({
         value={members}
         onChange={(e) => setMembers(e.target.value)}
       />
-      <InputSelect
+      {/* <InputSelect
         label="Country"
         placeholder="Country"
         value={country}
         onChange={changeHandler}
-      />
+      /> */}
       <InputLabel
         label="City"
         type="text"
@@ -82,6 +83,7 @@ const ProfileSetup1 = ({
         value={city}
         onChange={(e) => setCity(e.target.value)}
       />
+      </div>
     </div>
   );
 };

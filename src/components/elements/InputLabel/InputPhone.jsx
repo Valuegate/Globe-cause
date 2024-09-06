@@ -11,7 +11,7 @@ const InputPhone = ({ label, onChange,value }) => {
 
   return (
     <div className={styles.InputLabel}>
-      <Label color='#fff' text={label}/>
+      <Label color='#1F1246' text={label}/>
       <div className={styles.Input} >
        <PhoneInput
       placeholder="Phone Number"

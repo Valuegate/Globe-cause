@@ -13,8 +13,8 @@ const AccountButton = ({ text, to, children }) => {
       className={styles.AccountButton}
       style={
         theme === "dark" || theme === "default"
-          ? { color: "#fff", textDecoration: "none" }
-          : { color: "rgb(25, 32, 43)", textDecoration: "none" }
+          ? { color: "#1F1246", textDecoration: "none" }
+          : { color: "#541A46", textDecoration: "none" }
       }
       to={to}
     >

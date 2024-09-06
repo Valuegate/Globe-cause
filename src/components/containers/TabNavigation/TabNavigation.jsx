@@ -1,46 +1,22 @@
 import styles from "./styles.module.css";
-
-import React, { useState, useEffect } from "react";
-
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../firebase";
-
-import countries from "../../../Demo/Api/Countries";
-
+import React from "react";
 import TabNavigationButton from "../../elements/TabNavigationButton/TabNavigationButton";
 
-const TabNavigation = ({ click, country, cityFilter }) => {
-  const [countries, setCountries] = useState([]);
+// Static list of states (or areas) for NGOs
+const ngoStates = ["Lagos", "Abuja", "Kaduna"];
 
-  const fetchPost = async () => {
-    await getDocs(collection(db, "countries")).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setCountries(newData);
-      // console.log(countries, newData[0].countriesList);
-      // console.log(countries[0]?.countriesList[0]);
-    });
-  };
-
-  useEffect(() => {
-    fetchPost();
-  }, []);
-
+const TabNavigation = ({ click, ngoFilter }) => {
   return (
     <div className={styles.TabNavigation}>
-      {countries.map((country, key) =>
-        country.countriesList.map((country, key) => (
-          <TabNavigationButton
-            text={country}
-            key={key}
-            onClick={click}
-            bg={country === cityFilter ? "#1F4490" : "#FFFFFF"}
-            color={country === cityFilter ? "#FFFFFF" : "#1F4490"}
-          />
-        ))
-      )}
+      {ngoStates.map((state, key) => (
+        <TabNavigationButton
+          text={state}
+          key={key}
+          onClick={() => click(state)}
+          bg={state === ngoFilter ? "#541A46" : "#FCFCFC"}
+          color={state === ngoFilter ? "#FCFCFC" : "#541A46"}
+        />
+      ))}
     </div>
   );
 };

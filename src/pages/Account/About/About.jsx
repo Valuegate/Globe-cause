@@ -9,19 +9,19 @@ const About = () => {
   const { theme } = useContext(WebsiteThemeContext);
   return (
     <div className={styles.Container}
-      style={
-        theme === "default" || theme === "dark"
-          ? { color: "#fff" }
-          : { color: "rgb(25, 32, 43)" }
-      }
+      // style={
+      //   theme === "default" || theme === "dark"
+      //     ? { color: "#fff" }
+      //     : { color: "rgb(25, 32, 43)" }
+      // }
     >
       <div className={styles.HeaderContainer}>
-        <BackButton color="#fff" to="/account" />
+        <BackButton color="#541A46" to="/account" />
         <p style={{ fontWeight: "700", textAlign: "center", fontSize: "20px" }}>
           About
         </p>
       </div>
-      <div className={styles.VideoResponsive}>
+      {/* <div className={styles.VideoResponsive}>
         <iframe
           src="https://sivolunteering.com/wp-content/uploads/2022/10/SIV.mp4"
           frameBorder="0"
@@ -29,35 +29,25 @@ const About = () => {
           allowFullScreen
           title="video"
         />
-      </div>
+      </div> */}
       <p style={{ fontSize: "14px", lineHeight: "2.15rem", fontWeight: "400" }}>
-        Safe & Informed Volunteering comes as a response and solution to an
-        issue that was identified as being the cause of most of the problems
-        shared in the European volunteering projects: the lack of previous
-        structured and objective information regarding the community where the
-        hosting organization is located (village/town/city – neighborhood). Most
-        of the volunteering projects involve sharing previous information
-        regarding the activities to be performed, the accommodation and only
-        general information regarding the village/town/city. This may lead to a
-        mismatch between the expectations of the volunteers and the reality that
-        they find when they reach the place. It is highly important to know all
-        the features of a community in terms of cost of life, quality of life
-        quality, leisure and free time activities (culture, sports) and some
-        other details such as the probability of people to speak english, the
-        average age of the residents and so on.
+        <strong>Globe Cause</strong> is more than just a platform; it’s a global mission. The name "Globe Cause" merges two powerful concepts. 
+        "Globe" represents the Earth, embodying a worldwide perspective and the importance of reaching across borders to connect volunteers with NGOs wherever they may be. 
+        "Cause" stands for the purpose that drives action, particularly in the realms of social good and humanitarian endeavors. 
       </p>
       <p style={{ fontSize: "14px", lineHeight: "2.15rem", fontWeight: "400" }}>
-        At an international level this problem increased due to the COVID-19
-        pandemic and related lockdown measures have produced significant
-        interruptions in young people’s lives, the impact of which is still to
-        be analysed and understood in the future. With borders closed and
-        airlines grounded for almost six months, COVID-19 effectively shut down
-        the global tourism industry at a scale never witnessed before. Besides
-        leisure travel, restriction of movement threatened to destroy the
-        international volunteer sector and NGOs, devastating the projects that
-        depend on them for support. The pandemic has especially hit hard the
-        recruitment of international volunteers, with some organisations already
-        forced to reinvent their activities.
+        Together, these words encapsulate our mission: to unite people across the globe in support of meaningful causes. Whether it’s aiding local communities, supporting sustainable development, 
+        or contributing to global humanitarian efforts, Globe Cause is here to bridge the gap between volunteers and the organizations that need them most. Our platform is dedicated to 
+        fostering volunteerism, providing the resources, connections, and support necessary for impactful action.
+      </p>
+      <p style={{ fontSize: "14px", lineHeight: "2.15rem", fontWeight: "400" }}>
+        The need for structured, reliable information has never been more evident, especially as the world navigates challenges like the COVID-19 pandemic. Volunteers must be equipped with 
+        comprehensive insights into the communities they serve, understanding everything from local culture to logistics. Globe Cause addresses this need by ensuring that volunteers have 
+        access to the most accurate and detailed information possible, helping to align their expectations with the realities of the field. 
+      </p>
+      <p style={{ fontSize: "14px", lineHeight: "2.15rem", fontWeight: "400" }}>
+        Our commitment extends beyond just matching volunteers with NGOs; we aim to build a global network of support, where every volunteer action contributes to a broader impact. 
+        Join us in our mission to make the world a better place, one cause at a time.
       </p>
     </div>
   );

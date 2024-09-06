@@ -49,6 +49,8 @@ import Footer from "./components/containers/Footer/Footer";
 
 import bg from "./assets/bg-image.jpg";
 import ForgotPassword from "./pages/Authentication/ForgotPassword/ForgotPassword";
+import NgoDetails from "./components/ngo/NgoDetails/NgoDetails";
+import NgoList from "./components/ngo/NgoList/NgoList";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -80,13 +82,13 @@ function App() {
   return (
     <div
       className="App"
-      style={
-        theme === "default"
-          ? { backgroundImage: `url(${bg})`, backgroundRepeat: "repeat" }
-          : theme === "dark"
-          ? { backgroundImage: "none" }
-          : { backgroundImage: "none", backgroundColor: "#fff" }
-      }
+      // style={
+      //   theme === "default"
+      //     ? { backgroundImage: `url(${bg})`, backgroundRepeat: "repeat" }
+      //     : theme === "dark"
+      //     ? { backgroundImage: "none" }
+      //     : { backgroundImage: "none", backgroundColor: "#fff" }
+      // }
     >
       <Suspense fallback="loading">
         <UserAuthContextProvider>
@@ -106,6 +108,8 @@ function App() {
                         </ProtectedRoute>
                       }
                     />
+                    <Route path="/ngos/:state/:id" component={<NgoDetails />} />
+                    <Route path="/ngos" element={<NgoList />} />
                     <Route
                       path="/organizations"
                       element={

@@ -7,7 +7,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import CityHeader from "../../../components/elements/CityHeader/CityHeader";
 import AboutCity from "../../../components/containers/AboutCity/AboutCity";
-import BackButton from "../../../components/elements/BackButton/BackButton";
+// import BackButton from "../../../components/elements/BackButton/BackButton";
 import Nav from "../Nav";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 

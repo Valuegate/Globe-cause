@@ -1,6 +1,6 @@
 {
-  "short_name": "SiVolunteering",
-  "name": "SiVolunteering web application",
+  "short_name": "Globe Cause",
+  "name": "Globe Cause web application",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo-siv.svg",
+      "src": "globe_cause_bg.png",
       "type": "image/svg+xml",
       "sizes": "192x192"
     },
     {
-      "src": "logo-siv.svg",
+      "src": "globe_cause_bg.png",
       "type": "image/svg+xml",
       "sizes": "512x512"
     }

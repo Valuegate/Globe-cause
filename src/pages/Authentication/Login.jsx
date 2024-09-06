@@ -23,6 +23,7 @@ import SocialAuthButton from "../../components/elements/SocialAuthButton/SocialA
 import InputLabel from "../../components/elements/InputLabel/InputLabel";
 import Label from "../../components/elements/Label/Label";
 import AuthenticationButton from "../../components/elements/AuthenticationButton/AuthenticationButton";
+import VidBg from "../../assets/video/bgvideo.mp4"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -110,6 +111,11 @@ const Login = () => {
   }, [role, user]);
 
   return (
+    <div className={styles.VideoContainer}>
+      <video autoPlay loop muted className={styles.VideoBackground}>
+        <source src={VidBg} type="video/mp4" />
+      </video>
+      <div className={styles.ColorOverlay}></div>
     <div className={styles.Login}>
       <HeaderText text="Login" />
       {/* <SocialAuthButton
@@ -118,19 +124,21 @@ const Login = () => {
         color="#ffffff"
         onclick={signInWithFacebook}
       /> */}
+      <div className={styles.LoginOption}>
       <SocialAuthButton
         text="CONTINUE WITH APPLE"
-        bg="#0E0E0F"
-        color="#ffff"
+        bg="#BF2B47"
+        color="#FCFCFC"
         onclick={signInWithApple}
       />
       <SocialAuthButton
         onclick={signInWithGoogle}
         text="CONTINUE WITH GOOGLE"
-        bg="#FFFFFF"
-        color="#0E0E0F"
+        bg="#1F1246"
+        color="#FCFCFC"
         onClick={handleGoogleLogin}
       />
+      </div>
       <form className={styles.Login}>
         <div className={styles.Inputs}>
           <InputLabel
@@ -163,7 +171,7 @@ const Login = () => {
           </div>
         </div>
         <Link to='/forgot-password'>
-        <Label color='#fff' text="Forgot password?" />
+        <Label color='#BF2B47' text="Forgot password?" />
         </Link>
         <AuthenticationButton
           text={loading ? "Login" : "Login"}
@@ -173,11 +181,12 @@ const Login = () => {
       </form>
       <p style={{ color: "red" }}> {error}</p>
       <div className={styles.SignupLabel}>
-        <Label text="Don't have an account?" color={"#fff"} />
+        <Label text="Don't have an account?" color={"##1F1246"} />
         <Link to="/signup" style={{ textDecoration: "none" }}>
-          <Label text="Sign up" color="#1F4490" />
+          <p className={styles.P}>Sign Up</p>
         </Link>
       </div>
+    </div>
     </div>
   );
 };

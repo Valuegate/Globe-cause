@@ -23,7 +23,7 @@ const InputLabel = ({
         text={label}
         color={
           theme === "default" || theme === "dark"
-            ? "#fff"
+            ? "#1F1246"
             : "rgb(25, 32, 43)"
         }
       />

@@ -33,6 +33,7 @@
 /* Nav styles */
 
 .NavContainer {
+    background-color: #FCFCFC;
     width: 95%;
     padding: 2rem;
     height: 2rem;
@@ -40,37 +41,17 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 .NavContainer:hover{
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 }
-
-.NavItems {
-    display: flex;
-    flex-direction: row;
-justify-content: center;
-    align-items: center;
-}
-
-.NavItems>img {
-    /* width: 10rem; */
-    height: 2rem;
-}
-
-.NavItem {
-    margin-right: 2rem;
-    font-size: 30px;
-    font-weight: 500;
-    color: #fff;
-}
-
 
 .Ptag {
     margin-left: 2rem;
     font-size: 30px;
     font-weight: 500;
-    color: #fff;
+    color: #541A46;
     display: flex;
 }
 
@@ -78,7 +59,7 @@ justify-content: center;
     margin-right: 2rem;
     font-size: 1rem;
     font-weight: 500;
-    color: '#fff !important';
+    color: '#541A46 !important';
 
 }
 .Notification{
@@ -91,9 +72,9 @@ justify-content: center;
     height: 2rem;
     min-height: 1rem;
     padding: .5rem;
-    background-color: #fff;
+    background-color: #1F1246;
     border-radius: 50%;
-    color:#000;
+    color: #FCFCFC;
     cursor: pointer;
     justify-content: center;
     align-items: center;
@@ -113,9 +94,9 @@ justify-content: center;
             width: .2rem;
             height: .2rem;
             padding: 0rem;
-            background-color: #fff;
+            background-color: #1F1246;
             border-radius: 50%;
-            color: #000;
+            color: #FCFCFC;
             cursor: pointer;
             justify-content: center;
             align-items: center;
@@ -135,7 +116,7 @@ justify-content: center;
             margin-left: 0rem;
             font-size: .75rem;
             font-weight: 500;
-            color: #fff;
+            color: #541A46;
             display: flex;
         }
     

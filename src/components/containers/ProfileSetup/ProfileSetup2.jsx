@@ -17,6 +17,7 @@ const ProfileSetup2 = ({
 }) => {
   return (
     <div className={styles.EditProfile}>
+      <div className={styles.Organisation2}>
       <InputPhone
         label="Phone Number"
         type="text"
@@ -51,6 +52,7 @@ const ProfileSetup2 = ({
         value={twitter}
         onChange={(e) => setTwitter(e.target.value)}
       />
+    </div>
     </div>
   );
 };

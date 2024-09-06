@@ -1,7 +1,6 @@
+/* Tab Navigation Button styles */
 
-/*Tab Navigation Button styles*/
-
-.TabNavigationButton{
+.TabNavigationButton {
     padding: 0 20px;
     border-radius: 25px;
     height: 40px;
@@ -9,13 +8,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin:  0 10px;
-    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+    margin: 0 10px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
     cursor: pointer;
     background-color: #ffffff;
-    font-weight:  600;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
 }
-.TabNavigationButton:hover{
+
+.TabNavigationButton:hover {
     transform: scale(1.1);
-    box-shadow:  0 0 5px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }

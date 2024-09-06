@@ -9,7 +9,8 @@
     height: auto;
     min-height: 100vh;
     border-radius:  25px 25px 0 0 ;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background: linear-gradient(90deg, #1F1246, #892246);
 }
 .CitiesContainer{
     width: 100%;

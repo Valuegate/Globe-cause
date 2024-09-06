@@ -2,7 +2,8 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background-color: #fff;
+    color: #FCFCFC;
+    background-color: #541A46;
     box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
     cursor: pointer;
     margin: 0 auto;
@@ -35,12 +36,12 @@
     box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
 }
 .UploadButton:hover{
-    background-color: #000;
+    background-color: #1F1246;
     color: #fff;
 }
 .UploadButton:disabled{
-    background-color: #ccc;
-    color: #000;
+    background-color: #541A46;
+    color: #FCFCFC;
     cursor: not-allowed;
 }
 .UploadButton:disabled:hover{
@@ -48,8 +49,8 @@
     color: #000;
 }
 .UploadButton:disabled:active{
-    background-color: #ccc;
-    color: #000;
+    background-color: #BF2B47;
+    color: #FCFCFC;
 }
 
 .SelectImage{

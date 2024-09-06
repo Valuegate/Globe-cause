@@ -9,7 +9,7 @@ const InputContainer = ({scroll,filter,ids}) => {
  
   const [chat, setChat] = useState("");
 
-  const {  user} = useUserAuth();
+  useUserAuth();
 
   const handleSubmit = async(e) => {
     e.preventDefault();

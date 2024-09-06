@@ -12,6 +12,6 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin: 15px 0;
-    background-image: linear-gradient(to right, #1F4490, #00A9E1);
+    background: linear-gradient(90deg, #1F1246, #892246);
     color: #fff;
 }

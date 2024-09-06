@@ -15,7 +15,7 @@ const ProfileSetup = ({
   setTagline,
   setOid,
   setMembers,
-  setOrgCountry,
+  // setOrgCountry,
   setVillage,
   setOrgCity,
   setOrgPassword,
@@ -48,7 +48,7 @@ const ProfileSetup = ({
           <ProfileSetup1
             setName={setOrgName}
             setEmail={setOrgEmail}
-            setCountry={setOrgCountry}
+            // setCountry={setOrgCountry}
             setCity={setOrgCity}
             setVillage={setVillage}
             setTagline={setTagline}

@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import style from "./styles.module.css";
-import logo from "../../assets/logo-siv.svg";
 import { Link } from "react-router-dom";
 import { IoIosPerson } from "react-icons/io";
 
 import { NameContext } from "../../hooks/name/NameContext";
 import { WebsiteThemeContext } from "../../hooks/theme/WebsiteThemeContext";
+import Logo from "../../components/elements/Logo/Logo";
 
 const Nav = () => {
   const { theme } = useContext(WebsiteThemeContext);
@@ -16,18 +16,13 @@ const Nav = () => {
         <div className={style.NavItems}>
           <div className={style.NavItem}>
             <Link
-              style={
-                theme === "dark" || theme === "default"
-                  ? { textDecoration: "none", color: "#fff" }
-                  : { textDecoration: "none", color: "rgb(25, 32, 43)" }
-              }
               targer="_blank"
-              to="https://sivolunteering.com/"
+              to="/"
             >
-              Project Website
+              <Logo />
             </Link>
           </div>
-          <img src={logo} alt="" />
+          {/* <img src={logo} alt="" /> */}
         </div>
 
         <div className={style.NavItems}>
@@ -45,11 +40,11 @@ const Nav = () => {
                 className={style.Ptag}
                 style={
                   theme === "dark" || theme === "default"
-                    ? { color: "#fff" }
-                    : { color: "rgb(25, 32, 43)" }
+                    ? { color: "#541A46" }
+                    : { color: "#1F1246" }
                 }
               >
-                Hello, {name || "Unkown"}
+                Welcome, {name || "Unkown"}
               </p>
               &nbsp;
               <IoIosPerson

@@ -77,11 +77,11 @@ const Account = () => {
           theme === "default" || theme === "dark"
             ? {
                 textDecoration: "none",
-                color: "#fff",
+                color: "#541A46",
                 position: "fixed",
                 top: "20px",
                 left: "20px",
-                border: "1px solid #fff",
+                border: "2px solid #541A46",
                 padding: "5px 10px",
                 borderRadius: "10px",
               }
@@ -103,15 +103,15 @@ const Account = () => {
       <ProfilePicture profile_image={userDetails?.profile_image_url} />
       <Label
         color={
-          theme === "default" || theme === "dark" ? "#fff" : "rgb(25, 32, 43)"
+          theme === "default" || theme === "dark" ? "#1F1246" : "#541A46"
         }
         text={userDetails?.name || "Your Name"}
       />
       <p
         style={
           theme === "default" || theme === "dark"
-            ? { color: "#fff", marginTop: "-15px" }
-            : { color: "rgb(25, 32, 43)", marginTop: "-15px" }
+            ? { color: "#541A46", marginTop: "-15px" }
+            : { color: "#1F1246", marginTop: "-15px" }
         }
       >
         {userDetails?.email_address || userDetails?.email || "Your Email"}
