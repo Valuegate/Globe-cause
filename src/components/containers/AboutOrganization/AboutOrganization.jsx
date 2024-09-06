@@ -1,5 +1,5 @@
 import React from "react";
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+// import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
 import { useMemo, useState, useRef, useEffect } from "react";
 
@@ -17,7 +17,7 @@ import {
 import SecondaryTabNavigation from "../SecondaryTabNavigation/OrganizationSecondaryTabNavigation";
 import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
 import ChatContainer from "../ChatContainer/ChatContainer";
-import imgmap from "../../../assets/IMAGE.png";
+// import imgmap from "../../../assets/IMAGE.png";
 
 import InputContainer from "../InputContainer/InputContainer";
 
@@ -51,7 +51,7 @@ const AboutOrganization = ({
   // const { isLoaded } = useLoadScript({
   //   googleMapsApiKey: "AIzaSyCICYAwY25HzDVW5daQPkxOSOKxuudJ_GE",
   // });
-  const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);
+  // const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);
 
   const handleTabChange = (tab) => {
     setTab(tab);
@@ -103,7 +103,7 @@ const AboutOrganization = ({
             <div className={styles.Link}>
               <div className={styles.ContactLink} >
               {email && (
-                <a href={"mailto:" + email} target="_blank" rel="noreferrer">
+                <a href={"mailto:" + email} target="_blank" rel="noopener noreferrer">
                   <FiMessageSquare style={{ width: "30px", height: "30px" }} />
                 </a>
               )}
@@ -113,24 +113,24 @@ const AboutOrganization = ({
                 <a
                   href={"https://" + facebook}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   <FiFacebook style={{ width: "30px", height: "30px" }} />
                 </a>
               )}
               <div className={styles.ContactLink} >
-              <a href={"https://" + web} target="_blank" rel="noreferrer">
+              <a href={"https://" + web} target="_blank" rel="noopener noreferrer">
                 <AiFillWeiboCircle style={{ width: "30px", height: "30px" }} />
               </a>
               <p className="">Website</p>
               </div>
               {twitter && (
-                <a href={`https://${twitter}`} target="_blank" rel="noreferrer">
+                <a href={`https://${twitter}`} target="_blank" rel="noopener noreferrer">
                   <FiTwitter style={{ width: "30px", height: "30px" }} />
                 </a>
               )}
               {phone && (
-                <a href={"tel:" + phone} target="_blank" rel="noreferrer">
+                <a href={"tel:" + phone} target="_blank" rel="noopener noreferrer">
                   <FiPhone style={{ width: "30px", height: "30px" }} />
                 </a>
               )}
@@ -138,7 +138,7 @@ const AboutOrganization = ({
                 <a
                   href={"https://" + linkedin}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   <FiLinkedin style={{ width: "30px", height: "30px" }} />
                 </a>

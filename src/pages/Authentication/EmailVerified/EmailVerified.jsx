@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { auth } from "../../../firebase";
 

@@ -41,11 +41,11 @@ const SignUp = () => {
   const [facebook, setFacebook] = useState("");
   const [twitter, setTwitter] = useState("");
   const [linkedin, setLinkedin] = useState("");
-  const [short_description, setShortDescription] = useState("");
+  const [short_description] = useState("");
 
   const [accountType, setAccountType] = useState("volunteer");
 
-  const { signUp, user, sendEmailVerification, googleSignIn } = useUserAuth();
+  const { signUp, user, sendEmailVerification } = useUserAuth();
 
   const changeHandler = (country) => {
     setCountry(country);

@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
-import logo from "../../../assets/globe_cause_logo.png";
-import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
+// import logo from "../../../assets/globe_cause_logo.png";
+// import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
 
 import { db } from "../../../firebase";
 import { collection, addDoc, getDocs, where, query } from "firebase/firestore";
@@ -14,7 +14,7 @@ import Logo from "../../elements/Logo/Logo";
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [emailExist, setEmailExist] = useState(false);
-  const { theme } = useContext(WebsiteThemeContext);
+  // const { theme } = useContext(WebsiteThemeContext);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -38,9 +38,6 @@ const Footer = () => {
       return;
     }
     try {
-      const docRef = await addDoc(collection(db, "newsletter"), {
-        email: email,
-      });
       alert("Thank you for subscribing to our newsletter!");
       setEmail("");
     } catch (e) {

@@ -46,8 +46,6 @@ import EmailVerification from "./pages/Authentication/EmailVerification/EmailVer
 import EmailVerified from "./pages/Authentication/EmailVerified/EmailVerified";
 import DarkMode from "./pages/Account/DarkMode/DarkMode";
 import Footer from "./components/containers/Footer/Footer";
-
-import bg from "./assets/bg-image.jpg";
 import ForgotPassword from "./pages/Authentication/ForgotPassword/ForgotPassword";
 import NgoDetails from "./components/ngo/NgoDetails/NgoDetails";
 import NgoList from "./components/ngo/NgoList/NgoList";

@@ -13,7 +13,6 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 
 import {
   signInWithGoogle,
-  signInWithFacebook,
   signInWithApple,
   db,
 } from "../../firebase";

@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";
 
 const About = () => {
-  const { theme } = useContext(WebsiteThemeContext);
+  useContext(WebsiteThemeContext);
   return (
     <div className={styles.Container}
       // style={

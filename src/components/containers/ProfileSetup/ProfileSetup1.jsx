@@ -1,6 +1,5 @@
 import React from "react";
 import InputLabel from "../../elements/InputLabel/InputLabel";
-import InputSelect from "../../elements/InputLabel/InputSelect";
 import styles from "./styles.module.css";
 
 const ProfileSetup1 = ({
@@ -18,13 +17,8 @@ const ProfileSetup1 = ({
   tagline,
   oid,
   members,
-  country,
-  village,
   city,
 }) => {
-  const changeHandler = (country) => {
-    setCountry(country);
-  };
   return (
     <div className={styles.EditProfile}>
       <div className={styles.OrganisationSetup}>

@@ -1,9 +1,5 @@
 import React from "react";
 import styles from "./styles.module.css";
-import pat1 from "../../../assets/Deses.jpg";
-import pat2 from "../../../assets/Fajub.jpg";
-import pat3 from "../../../assets/Footprint.jpg";
-import pat4 from "../../../assets/4Team.jpg";
 
 import { useContext } from "react";
 import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";

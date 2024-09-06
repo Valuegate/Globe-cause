@@ -6,22 +6,6 @@ import InputLabel from "../../../components/elements/InputLabel/InputLabel";
 
 import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
 
-const HelpContainer = ({ social, href, content, tel }) => {
-  return (
-    <a
-      href={href}
-      style={{ textDecoration: "none", color: "#fff" }}
-      target="_blank"
-      rel="noreferrer"
-      tel={tel}
-    >
-      <div className={styles.HelpContainer}>
-        <img src={social} alt="" />
-        <p style={{ fontWeight: "700" }}>{content}</p>
-      </div>
-    </a>
-  );
-};
 
 const Help = () => {
   return (

@@ -1,11 +1,10 @@
 import styles from "./styles.module.css";
-import axios from "axios";
 import Label from "../Label/Label";
-import React, { useState, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 
-const InputSelect = ({ label, type, placeholder,value, onChange }) => {
+const InputSelect = ({ label, value, onChange }) => {
     
   const options = useMemo(() => countryList().getData(), [])
 

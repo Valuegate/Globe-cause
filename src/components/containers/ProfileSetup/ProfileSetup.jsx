@@ -4,7 +4,6 @@ import styles from "./styles.module.css";
 
 import ProfileSetup1 from "./ProfileSetup1";
 import ProfileSetup2 from "./ProfileSetup2";
-import ProfileSetup3 from "./ProfileSetup3";
 import ProfileSetup4 from "./ProfileSetup4";
 import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
 
