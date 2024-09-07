@@ -1,7 +1,7 @@
 // import organizations from "../../../Demo/Api/Organizations";
 import styles from "./styles.module.css";
 import { useLocation } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -19,18 +19,20 @@ const OrganizationDetail = () => {
 
   const organizationId = location.state?.id;
 
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
+    if (!filter || !organizationId) return;
+    
     await getDoc(
       doc(db, `organizations_${filter?.toLowerCase()}`, organizationId)
     ).then((querySnapshot) => {
       const newData = querySnapshot.data();
       setOrganization(newData);
     });
-  };
+  }, [filter, organizationId]);
 
   useEffect(() => {
     fetchPost();
-  }, [organizationId]);
+  }, [fetchPost]);
 
   return (
     <div className={[styles.CityDetail]}>

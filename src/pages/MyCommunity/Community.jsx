@@ -18,7 +18,7 @@ const Community = () => {
   const [chatList, setChatList] = useState(["Hello Everyone"]);
 
     const [navigationState, setNavigationState] = useState(0);
-    // const [filter, setFilter] = useState("");
+    const [ setFilter] = useState("");
 
     const bottomNavigation = () => {
       setNavigationState(!navigationState);

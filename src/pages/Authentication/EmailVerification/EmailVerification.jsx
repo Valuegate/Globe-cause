@@ -41,7 +41,7 @@ const EmailVerification = () => {
       }
     };
     checkEmailVerification();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     setTimeout(() => {

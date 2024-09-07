@@ -30,7 +30,7 @@ const EmailVerified = () => {
     setTimeout(() => {
       checkEmailVerification();
     }, 1000);
-  }, []);
+  }, [navigate]);
 
   return (
     <div className={styles.EmailVerified}>

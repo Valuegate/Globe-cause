@@ -1,7 +1,7 @@
 import React from "react";
 // import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
-import { useMemo, useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import styles from "./styles.module.css";
 
@@ -72,7 +72,7 @@ const AboutOrganization = ({
       setMessages(message);
     });
     return () => unsubscribe;
-  }, [ids]);
+  }, [ids, filter]);
 
   const Content = ({ email, facebook, web, twitter, phone, linkedin }) => {
     if (tab === "About") {

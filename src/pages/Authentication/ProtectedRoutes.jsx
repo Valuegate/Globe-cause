@@ -2,7 +2,7 @@ import React from "react";
 import {  useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 
@@ -26,25 +26,24 @@ const ProtectedRoute = ({ children }) => {
   //name context
   const { setName } = useContext(NameContext);
 
-  const fetchIndividualAccountType = async (uid) => {
+  const fetchIndividualAccountType = useCallback(async (uid) => {
     const docRef = doc(db, "volunteers", uid);
     const docSnap = await getDoc(docRef);
-
+  
     if (docSnap.exists()) {
       setName(docSnap.data().name);
       setRole("volunteer");
-
       return true;
     } else {
       console.log("No such document!");
     }
-  };
-
-  const fetchOrganizationAccountType = async (uid) => {
+  }, [setName, setRole]);
+  
+  const fetchOrganizationAccountType = useCallback(async (uid) => {
     for (let i = 0; i < lists.length; i++) {
       const docRef = doc(db, `organisations_${lists[i]}`, uid);
       const docSnap = await getDoc(docRef);
-
+  
       if (docSnap.exists()) {
         setName(docSnap.data().name);
         setRole(lists[i]);
@@ -53,18 +52,16 @@ const ProtectedRoute = ({ children }) => {
         console.log("User not found");
       }
     }
-  };
-
+  }, [lists, setName, setRole]);
+  
   useEffect(() => {
     if (user) {
       fetchIndividualAccountType(user.uid);
-      if (role === "volunteer") {
-        return;
-      } else {
+      if (role !== "volunteer") {
         fetchOrganizationAccountType(user.uid);
       }
     }
-  }, [user]);
+  }, [user, role, fetchIndividualAccountType, fetchOrganizationAccountType]);
 
 
 

@@ -1,7 +1,7 @@
 // import cities from "../../../Demo/Api/Cities";
 import styles from "./styles.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -19,22 +19,23 @@ const CityDetail = ({ color }) => {
   const cityId = location.state?.id;
   const filter = location.state?.filter;
 
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
+    if (!filter || !cityId) return;
+
     await getDoc(doc(db, `locations_${filter?.toLowerCase()}`, cityId))
       .then((querySnapshot) => {
         const newData = querySnapshot.data();
         setCity(newData);
-
         // console.log("Getting here", querySnapshot.data());
       })
       .catch((err) => {
-        console.log("An error occured", err);
+        console.log("An error occurred", err);
       });
-  };
+  }, [filter, cityId]); // Add 'filter' and 'cityId' as dependencies
 
   useEffect(() => {
     fetchPost();
-  }, [cityId]);
+  }, [fetchPost]);
 
  
 

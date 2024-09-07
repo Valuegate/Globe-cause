@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -30,22 +30,21 @@ const OrganizationContainer = ({ filter }) => {
     });
   };
 
-  const fetchPost = async (country) => {
-    await getDocs(
+  const fetchPost = useCallback(async (country) => {
+    const querySnapshot = await getDocs(
       collection(db, `organizations_${country.toLowerCase()}`)
-    ).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setOrganizations(newData);
-      console.log(organizations);
-    });
-  };
+    );
+    const newData = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setOrganizations(newData);
+    console.log(organizations);
+  }, [organizations]);
 
   useEffect(() => {
     fetchPost(organizationFilter);
-  }, []);
+  }, [fetchPost, organizationFilter]);
 
   const NavigationActive = (country) => {
     setOrganizationFilter(country);

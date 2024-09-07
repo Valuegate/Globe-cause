@@ -3,12 +3,11 @@ import styles from "./styles.module.css";
 // import HorizontalLine from "../../elements/HorizontalLine/HorizontalLine";
 
 import { db } from "../../../firebase";
-import { collection, addDoc, getDocs, where, query } from "firebase/firestore";
+import { collection, getDocs, where, query } from "firebase/firestore";
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";
 import Logo from "../../elements/Logo/Logo";
 
 const Footer = () => {
@@ -20,17 +19,17 @@ const Footer = () => {
     setEmail(e.target.value);
   };
 
-  const CheckEmailExist = async () => {
+  const CheckEmailExist = useCallback(async () => {
     const q = query(collection(db, "newsletter"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       if (doc.data().email === email) setEmailExist(true);
     });
-  };
+  }, [email]);
 
   useEffect(() => {
     if (email) CheckEmailExist();
-  }, [email]);
+  }, [email, CheckEmailExist]);
 
   const addEmail = async () => {
     if (emailExist) {

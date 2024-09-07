@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { collection, query, where } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import OrganizationCard from "../../elements/OrganizationCard/OrganizationCard";
 
@@ -13,7 +13,7 @@ const CityOrganizationsContainer = ({ city, filter }) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   };
 
-  const fetchPost = async (country) => {
+  const fetchPost = useCallback(async (country) => {
     await getDocs(
       query(
         collection(db, `organizations_${country.toLowerCase()}`),
@@ -26,11 +26,11 @@ const CityOrganizationsContainer = ({ city, filter }) => {
       }));
       setOrganizations(newData);
     });
-  };
-
+  }, [city]);
+  
   useEffect(() => {
     fetchPost(filter);
-  }, []);
+  }, [fetchPost, filter]);
 
   return (
     <div className={styles.CityOrganizationsContainer}>
