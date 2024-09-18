@@ -31,10 +31,19 @@
   color: #fff;
 }
 
+.SignUpOption {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 5rem;
+  align-items: center;
+}
+
 .AccountSelection {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  padding-bottom: 2rem;
 }
 
 .volunteer {
@@ -86,6 +95,11 @@ input[type="radio"] {
 label {
   font-size: 16px; /* Ensure labels are readable */
   margin-right: 20px;
+}
+
+.signUPBtn {
+  display: flex;
+  justify-content: center;
 }
 
 .AuthenticationButton {

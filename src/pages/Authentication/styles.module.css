@@ -1,99 +1,107 @@
 /*Login styles */
 .VideoContainer {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .VideoBackground {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 
 .ColorOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
 }
 
 .Login {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative; /* Ensure it's not covered by other elements */
-    z-index: 1; /* Higher than .ColorOverlay */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Ensure it's not covered by other elements */
+  z-index: 1; /* Higher than .ColorOverlay */
 }
 
 .LoginOption {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.LoginOpt {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 5rem;
+  align-items: center;
 }
 
 .Inputs {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .SignupLabel {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .PasswordToggleContainer {
-    height: 45px;
-    margin-left: 20rem;
-    margin-top: 4rem;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    cursor: pointer;
-    position: absolute;
-    z-index: 2; /* Ensure it's above other elements */
+  height: 45px;
+  margin-left: 20rem;
+  margin-top: 4rem;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 2; /* Ensure it's above other elements */
 }
 
 .P {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #541A46;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #541a46;
 }
 
 @media screen and (max-width: 768px) {
-    .PasswordToggleContainer {
-        margin-left: 20rem;
-    }
+  .PasswordToggleContainer {
+    margin-left: 20rem;
+  }
 }
 
 @media screen and (max-width: 468px) {
-    .PasswordToggleContainer {
-        margin-left: 15rem;
-    }
+  .PasswordToggleContainer {
+    margin-left: 15rem;
+  }
 }
 
 @media screen and (max-width: 368px) {
-    .PasswordToggleContainer {
-        margin-left: 11rem;
-    }
+  .PasswordToggleContainer {
+    margin-left: 11rem;
+  }
 }

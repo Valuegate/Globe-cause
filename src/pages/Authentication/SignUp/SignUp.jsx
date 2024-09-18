@@ -72,7 +72,16 @@ const SignUp = () => {
         <source src={VidBg} type="video/mp4" />
       </video>
       <div className={styles.SignUp}>
+        <div className={styles.SignUpOption}>
         <HeaderText text="Sign Up" />
+
+        <div className={styles.SignupLabel}>
+          <Label color="#fff" text="Already have an account?" /> &nbsp;
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <Label text="Login" color="#541A46" />
+          </Link>
+        </div>
+        </div>
         <div className={styles.AccountSelection}>
           <div className={styles.volunteer}>
             <input
@@ -251,17 +260,13 @@ const SignUp = () => {
               className={styles.inputField}
             />
           </div>
+          <div className={styles.signUPBtn}>
           <AuthenticationButton text="Sign up" />
+          </div>
         </form>
 
         {error && <p className={styles.Error}>{error}</p>}
 
-        <div className={styles.SignupLabel}>
-          <Label color="#fff" text="Already have an account?" /> &nbsp;
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <Label text="Login" color="#541A46" />
-          </Link>
-        </div>
       </div>
     </div>
   );

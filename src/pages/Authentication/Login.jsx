@@ -98,7 +98,16 @@ const Login = () => {
       </video>
       <div className={styles.ColorOverlay}></div>
       <div className={styles.Login}>
+      <div className={styles.LoginOpt}>
         <HeaderText text="Login" />
+
+        <div className={styles.SignupLabel}>
+          <Label text="Don't have an account?" color={"##1F1246"} />
+          <Link to="/signup" style={{ textDecoration: "none" }}>
+            <p className={styles.P}>Sign Up</p>
+          </Link>
+        </div>
+        </div>
         <div className={styles.LoginOption}>
           <SocialAuthButton
             text="CONTINUE WITH APPLE"
@@ -154,12 +163,6 @@ const Login = () => {
           />
         </form>
         <p style={{ color: "red" }}> {error}</p>
-        <div className={styles.SignupLabel}>
-          <Label text="Don't have an account?" color={"##1F1246"} />
-          <Link to="/signup" style={{ textDecoration: "none" }}>
-            <p className={styles.P}>Sign Up</p>
-          </Link>
-        </div>
       </div>
     </div>
   );
