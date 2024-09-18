@@ -1,45 +1,93 @@
 .VideoContainer {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .VideoBackground {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-  }
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.VideoBackground {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
 
 .SignUp {
-    width: 100%;
-    max-height: 100vh; /* Ensure it doesn't exceed the viewport */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow-y: scroll; /* Allow vertical scrolling */
-    padding: 20px; /* Add padding if necessary */
-    box-sizing: border-box; /* Ensure padding doesn't affect width */
-    z-index: 1;
+  width: 100%;
+  max-height: 100vh; /* Ensure it doesn't exceed the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto; /* Allow vertical scrolling */
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.6); /* Added semi-transparent background for better readability */
+  color: #fff;
+}
+
+.AccountSelection {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.volunteer {
+  display: flex;
+  gap: 5px;
+}
+
+.organization {
+  display: flex;
+  gap: 5px;
+}
+
+.SignUpForm {
+  height: 50%;
+  overflow-y: scroll;
 }
 
 .Inputs {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  max-width: 370px; /* Set a max width to make form inputs more compact */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; 
+  padding: 10px; 
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.SignupLabel{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.inputField {
+  width: 350px;
+  height: 50px;
+  border-radius: 20px;
+  padding-left: 20px;
+}
+
+.SignupLabel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Add some margin to separate from form */
+}
+
+input[type="radio"] {
+  margin-right: 10px; /* Space between radio button and label */
+}
+
+label {
+  font-size: 16px; /* Ensure labels are readable */
+  margin-right: 20px;
+}
+
+.AuthenticationButton {
+  margin-top: 20px;
 }
