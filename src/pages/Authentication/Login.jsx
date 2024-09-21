@@ -100,20 +100,20 @@ const Login = () => {
           </div>
         </div>
 
-        <div className={styles.LoginOption}>
+        {/* <div className={styles.LoginOption}>
           <SocialAuthButton
             text="CONTINUE WITH APPLE"
             bg="#BF2B47"
             color="#FCFCFC"
-            onclick={() => { /* handle Apple login */ }}
+            onclick={() => { }}
           />
           <SocialAuthButton
-            onclick={() => { /* handle Google login */ }}
+            onclick={() => { }}
             text="CONTINUE WITH GOOGLE"
             bg="#1F1246"
             color="#FCFCFC"
           />
-        </div>
+        </div> */}
 
         <form className={styles.Login} onSubmit={handleSubmit}>
           <div className={styles.Inputs}>
