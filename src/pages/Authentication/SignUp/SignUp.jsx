@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 import HeaderText from "../../../components/elements/HeaderText/HeaderText";
 import Label from "../../../components/elements/Label/Label";
@@ -31,6 +32,8 @@ const SignUp = () => {
   });
 
   const [error, setError] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
 
@@ -53,15 +56,12 @@ const SignUp = () => {
     try {
       const response = await axios.post(
         "https://scoutflair.top:8081/globeCause/v1/signup",
-        formData
+        { ...formData, confirmPassword: undefined } // Backend doesn't expect confirmPassword
       );
       console.log("Sign-up successful:", response.data);
-      // Redirect or show success message
       navigate("/account");
     } catch (err) {
-      setError(
-        err.response?.data?.message || "Sign-up failed. Please try again."
-      );
+      setError(err.response?.data?.message || "Sign-up failed. Please try again.");
       console.error("Error during sign-up:", err);
     }
   };
@@ -73,14 +73,13 @@ const SignUp = () => {
       </video>
       <div className={styles.SignUp}>
         <div className={styles.SignUpOption}>
-        <HeaderText text="Sign Up" />
-
-        <div className={styles.SignupLabel}>
-          <Label color="#fff" text="Already have an account?" /> &nbsp;
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <Label text="Login" color="#541A46" />
-          </Link>
-        </div>
+          <HeaderText text="Sign Up" />
+          <div className={styles.SignupLabel}>
+            <Label color="#fff" text="Already have an account?" /> &nbsp;
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <Label text="Login" color="#541A46" />
+            </Link>
+          </div>
         </div>
         <div className={styles.AccountSelection}>
           <div className={styles.volunteer}>
@@ -94,7 +93,6 @@ const SignUp = () => {
             />
             <label htmlFor="volunteer">Volunteer</label>
           </div>
-
           <div className={styles.organization}>
             <input
               type="radio"
@@ -138,22 +136,19 @@ const SignUp = () => {
               required
               className={styles.inputField}
             />
+
             {/* Conditionally render fields based on usertype */}
             {formData.usertype === "volunteer" ? (
-              <>
-                {/* Volunteer-specific fields */}
-                <input
-                  type="text"
-                  name="nationality"
-                  placeholder="Nationality"
-                  value={formData.nationality}
-                  onChange={handleChange}
-                  className={styles.inputField}
-                />
-              </>
+              <input
+                type="text"
+                name="nationality"
+                placeholder="Nationality"
+                value={formData.nationality}
+                onChange={handleChange}
+                className={styles.inputField}
+              />
             ) : (
               <>
-                {/* Organization-specific fields */}
                 <input
                   type="text"
                   name="oidNumber"
@@ -179,33 +174,16 @@ const SignUp = () => {
                   className={styles.inputField}
                 />
                 <input
-              type="text"
-              name="tagline"
-              placeholder="Tagline"
-              value={formData.tagline}
-              onChange={handleChange}
-              className={styles.inputField}
-            />
-                {/* Add other organization-specific fields */}
+                  type="text"
+                  name="tagline"
+                  placeholder="Tagline"
+                  value={formData.tagline}
+                  onChange={handleChange}
+                  className={styles.inputField}
+                />
               </>
             )}
-            {/* Common fields */}
-            <input
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={formData.address}
-              onChange={handleChange}
-              className={styles.inputField}
-            />
-            <input
-              type="text"
-              name="city"
-              placeholder="City"
-              value={formData.city}
-              onChange={handleChange}
-              className={styles.inputField}
-            />
+
             {/* Social media fields */}
             <input
               type="text"
@@ -239,34 +217,51 @@ const SignUp = () => {
               onChange={handleChange}
               className={styles.inputField}
             />
-            
-            {/* Password and Confirm Password Fields */}
-          <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className={styles.inputField}
-            />
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              className={styles.inputField}
-            />
+
+            {/* Password Fields with Toggle */}
+            <div className={styles.passwordField}>
+              <input
+                type={passwordVisible ? "text" : "password"}
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className={styles.inputField}
+              />
+              <span
+                className={styles.eyeIcon}
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              >
+                {passwordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </span>
+            </div>
+
+            <div className={styles.passwordField}>
+              <input
+                type={confirmPasswordVisible ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="Confirm your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+                className={styles.inputField}
+              />
+              <span
+                className={styles.eyeIcon}
+                onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+              >
+                {confirmPasswordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </span>
+            </div>
           </div>
+
           <div className={styles.signUPBtn}>
-          <AuthenticationButton text="Sign up" />
+            <AuthenticationButton text="Sign up" />
           </div>
         </form>
 
         {error && <p className={styles.Error}>{error}</p>}
-
       </div>
     </div>
   );

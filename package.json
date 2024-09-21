@@ -21,7 +21,7 @@
     "react-firebase-auth-hooks": "^1.0.0",
     "react-firebase-hooks": "^5.1.1",
     "react-i18next": "^12.2.0",
-    "react-icons": "^4.8.0",
+    "react-icons": "^4.12.0",
     "react-phone-number-input": "^3.2.23",
     "react-router-dom": "^6.8.1",
     "react-scripts": "^3.0.1",

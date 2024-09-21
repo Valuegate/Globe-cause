@@ -1,7 +1,6 @@
-import React, { useCallback, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext";
-import { setDoc, doc } from "firebase/firestore";
 import styles from "./styles.module.css";
 
 import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
@@ -9,8 +8,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
-
-import { signInWithGoogle, signInWithApple, db } from "../../firebase";
 
 import HeaderText from "../../components/elements/HeaderText/HeaderText";
 import SocialAuthButton from "../../components/elements/SocialAuthButton/SocialAuthButton";
@@ -20,7 +17,7 @@ import AuthenticationButton from "../../components/elements/AuthenticationButton
 import VidBg from "../../assets/video/bgvideo.mp4";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(""); // Change to username
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [passwordType, setPasswordType] = useState("password");
@@ -29,67 +26,61 @@ const Login = () => {
   const { role } = useContext(UserAthorizationContext);
 
   const navigate = useNavigate();
-  const { logIn } = useUserAuth();
+  useUserAuth();
 
-  const handlePasswordChange = (evnt) => {
-    setPassword(evnt.target.value);
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   const togglePassword = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
-  const createProfile = useCallback(async (id) => {
-    if (user) {
-      await setDoc(doc(db, "volunteers", id), {
-        country: "",
-        date_created: new Date(),
-        email_address: user.email || "",
-        name: user.displayName || "",
-        phone_number: user.phoneNumber || "",
-        profile_image_url: "",
-      })
-        .then(() => {
-          console.log("Document successfully written!");
-        })
-        .catch((error) => {
-          console.error("Error writing document: ", error);
-        });
-    }
-  }, [user]);
-
-  const handleGoogleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      await signInWithGoogle();
-      navigate("/home");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    // Construct the authenticationRequest object
+    const authenticationRequest = {
+      username,
+      password,
+    };
+
     try {
-      await logIn(email, password);
-      localStorage.setItem("user", JSON.stringify(email)); // Or some other value
-      setTimeout(() => alert('Success'), 1000);
+      // Make the API call to backend
+      const response = await fetch('https://scoutflair.top:8081/globeCause/v1/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(authenticationRequest),
+      });
+
+      if (!response.ok) {
+        throw new Error("Invalid login credentials");
+      }
+
+      const data = await response.json();
+      // Assuming response has a token or some user data
+      localStorage.setItem("user", JSON.stringify(data));
+
+      alert('Login successful');
       navigate("/home");
+
     } catch (err) {
-      setError("Invalid email or password");
-      console.log(err.message);
+      setError(err.message || "Login failed");
+      console.log(err);
     }
   };
 
   useEffect(() => {
     if (user) {
-      if (role === "") {
-        createProfile(user.uid);
-      }
+      // if (role === "") {
+      //   // Create profile logic, if needed
+      // }
       navigate("/home");
     }
-  }, [user, role, createProfile, navigate]);
+  }, [user, role, navigate]);
 
   return (
     <div className={styles.VideoContainer}>
@@ -98,37 +89,39 @@ const Login = () => {
       </video>
       <div className={styles.ColorOverlay}></div>
       <div className={styles.Login}>
-      <div className={styles.LoginOpt}>
-        <HeaderText text="Login" />
+        <div className={styles.LoginOpt}>
+          <HeaderText text="Login" />
 
-        <div className={styles.SignupLabel}>
-          <Label text="Don't have an account?" color={"##1F1246"} />
-          <Link to="/signup" style={{ textDecoration: "none" }}>
-            <p className={styles.P}>Sign Up</p>
-          </Link>
+          <div className={styles.SignupLabel}>
+            <Label text="Don't have an account?" color={"##1F1246"} />
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              <p className={styles.P}>Sign Up</p>
+            </Link>
+          </div>
         </div>
-        </div>
+
         <div className={styles.LoginOption}>
           <SocialAuthButton
             text="CONTINUE WITH APPLE"
             bg="#BF2B47"
             color="#FCFCFC"
-            onclick={signInWithApple}
+            onclick={() => { /* handle Apple login */ }}
           />
           <SocialAuthButton
-            onclick={handleGoogleLogin}
+            onclick={() => { /* handle Google login */ }}
             text="CONTINUE WITH GOOGLE"
             bg="#1F1246"
             color="#FCFCFC"
           />
         </div>
-        <form className={styles.Login}>
+
+        <form className={styles.Login} onSubmit={handleSubmit}>
           <div className={styles.Inputs}>
             <InputLabel
               label="Email"
-              type="email"
-              placeholder="Enter your email"
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Enter your Email"
+              onChange={(e) => setUsername(e.target.value)}
             />
             <div
               style={{
@@ -153,16 +146,17 @@ const Login = () => {
               </div>
             </div>
           </div>
-          <Link to='/forgot-password'>
-            <Label color='#BF2B47' text="Forgot password?" />
+          <Link to="/forgot-password">
+            <Label color="#BF2B47" text="Forgot password?" />
           </Link>
           <AuthenticationButton
-            text={loading ? "Login" : "Login"}
+            text={loading ? "Logging in..." : "Login"}
             submit="submit"
             onclick={handleSubmit}
           />
         </form>
-        <p style={{ color: "red" }}> {error}</p>
+
+        <p style={{ color: "red" }}>{error}</p>
       </div>
     </div>
   );

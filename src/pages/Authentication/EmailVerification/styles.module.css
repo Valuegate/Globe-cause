@@ -6,6 +6,7 @@
     width: 100%;
     height: 100vh;
     color: #fff;
+    background: linear-gradient(90deg, #1f1246, #892246);
 }
 
 .VerificationButton{

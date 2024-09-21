@@ -79,6 +79,20 @@
   padding-left: 20px;
 }
 
+.eyeIcon {
+  color: black;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.passwordField {
+  position: relative;
+  width: 100%;
+}
+
+
 .SignupLabel {
   display: flex;
   flex-direction: row;

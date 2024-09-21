@@ -1,45 +1,76 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
 import styles from "./styles.module.css";
 import InputLabel from "../../../components/elements/InputLabel/InputLabel";
 import BackButton from "../../../components/elements/BackButton/BackButton";
 import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
-
 import { useNavigate } from "react-router-dom";
-import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 import { WebsiteThemeContext } from "../../../hooks/theme/WebsiteThemeContext";
 
 const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(""); // Add error state
 
-  const { theme } = React.useContext(WebsiteThemeContext);
-
+  const { theme } = useContext(WebsiteThemeContext);
   const navigate = useNavigate();
-  const { changePassword } = useUserAuth();
 
+  // Password match validation
   const checkPassword = () => {
-    if (newPassword === confirmNewPassword) {
-      console.log("passwords match");
-    } else {
-      console.log("passwords do not match");
+    if (newPassword !== confirmNewPassword) {
+      setError("Passwords do not match");
+      return false;
+    }
+    setError("");
+    return true;
+  };
+
+  // Backend API call to change password
+  const changePasswordAPI = async () => {
+    const payload = {
+      password: newPassword,
+      text: "Change Password Request", // Replace this with a relevant description if needed
+      username: "user@example.com" // Replace with the actual logged-in user's username
+    };
+
+    try {
+      const response = await fetch('https://scoutflair.top:8081/globeCause/v1/signup/changePassword', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+      
+      if (!response.ok) {
+        throw new Error("Failed to change password");
+      }
+      
+      return response.json();
+    } catch (err) {
+      throw new Error(err.message);
     }
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!checkPassword()) return; // Prevent form submission if passwords don't match
+    
     try {
-      checkPassword();
-      await changePassword(currentPassword, newPassword);
-      setLoading(false);
+      setLoading(true); // Set loading to true before request
+      await changePasswordAPI(); // Call the backend API for password change
       setTimeout(() => {
-        alert("success");
+        alert("Password updated successfully!");
+        navigate("/account"); // Redirect after successful update
       }, 1000);
-      navigate("/account");
     } catch (err) {
       console.log(err.message);
+      setError(err.message); // Show error if the API fails
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -55,15 +86,13 @@ const ChangePassword = () => {
       >
         Change Password
       </h3>
-      <form
-        onSubmit={handleSubmit}
+
+      <div
         className={styles.Form}
         style={
           theme === "default" || theme === "dark"
             ? {}
-            : {
-                boxShadow: "0 0 3px 0 rgba(0,0,0,0.5)",
-              }
+            : { boxShadow: "0 0 3px 0 rgba(0,0,0,0.5)" }
         }
       >
         <InputLabel
@@ -90,12 +119,15 @@ const ChangePassword = () => {
           placeholder="Confirm New Password"
           onChange={(e) => setConfirmNewPassword(e.target.value)}
         />
-      </form>
+        
+        {error && <p className={styles.Error}>{error}</p>} {/* Show error if any */}
+      </div>
+
       <AuthenticationButton
-        submit={"submit"}
-        text={loading ? "update" : "loading..."}
-        onclick={handleSubmit}
+        submit="submit"
+        text={loading ? "Loading..." : "Update Password"} // Show loading state on button
       />
+      
       <BackButton color="#0E0E0F" to="/account" />
     </form>
   );

@@ -101,12 +101,12 @@ function App() {
                     <Route
                       path="/home"
                       element={
-                        <ProtectedRoute>
+                        // <ProtectedRoute>
                           <Home />
-                        </ProtectedRoute>
+                          // </ProtectedRoute>
                       }
                     />
-                    <Route path="/ngos/:state/:id" component={<NgoDetails />} />
+                    <Route path="/ngos/:state/:id" element={<NgoDetails />} />
                     <Route path="/ngos" element={<NgoList />} />
                     <Route
                       path="/organizations"
