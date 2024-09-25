@@ -1,108 +1,71 @@
-import React from "react";
-import { createContext, useContext, useEffect, useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  updateEmail,
-  reauthenticateWithCredential,
-  sendPasswordResetEmail,
-  EmailAuthProvider,
-  updatePassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  sendEmailVerification,
-} from "firebase/auth";
-import { auth } from "../../firebase";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null); // Store user data
+  const [accessToken, setAccessToken] = useState(null); // Store access token
 
-  function logIn(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
-  }
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
-  }
-
-  function verificationEmail() {
-    return sendEmailVerification(auth.currentUser);
-  }
-
-  function googleSignIn() {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
-  }
-
-   function reSet(email) {
-    return sendPasswordResetEmail(auth, email);
-  }
-
-  function logOut() {
-    return signOut(auth);
-  }
-
-  const reauthenticate = (currentPassword) => {
-    const user = auth.currentUser;
-    const cred = EmailAuthProvider.credential(user.email, currentPassword);
-    return reauthenticateWithCredential(user, cred);
-  };
-
-  // function updateEmailAddress(email) {
-  //   return updateEmail(auth.currentUser, email);
-  // }
-
-  const updateEmailAddress = (email, currentPassword) => {
-    reauthenticate(currentPassword)
-      .then(() => {
-        const user = auth.currentUser;
-        updateEmail(user, email).then(() => {
-          console.log("Email updated!");
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+  // Function to log in user
+  const logIn = async (email, password) => {
+    try {
+      const response = await axios.post("https://scoutflair.top:8081/globeCause/v1/signin", {
+        email,
+        password,
       });
+      const { token, user } = response.data;
+      setUser(user); // Store user data
+      setAccessToken(token); // Store JWT token
+
+      // Optionally, store the token in local storage or session storage
+      localStorage.setItem("token", token);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
-  const changePassword = (currentPassword, newPassword) => {
-    reauthenticate(currentPassword)
-      .then(() => {
-        const user = auth.currentUser;
-        updatePassword(user, newPassword).then(() => {
-          console.log("Password updated!");
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+  // Function to sign up a new user
+  const signUp = async (email, password) => {
+    try {
+      const response = await axios.post("https://scoutflair.top:8081/globeCause/v1/signup", {
+        email,
+        password,
       });
+      const { token, user } = response.data;
+      setUser(user);
+      setAccessToken(token);
+
+      localStorage.setItem("token", token);
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
   };
 
+  // Function to log out user
+  const logOut = () => {
+    setUser(null);
+    setAccessToken(null);
+    localStorage.removeItem("token"); // Remove token from local storage
+  };
+
+  // Check for existing token on app load
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-      setUser(currentuser);
-    });
-
-    return () => {
-      unsubscribe();
-    };
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAccessToken(token);
+      // Optionally, fetch the user data with the token
+    }
   }, []);
 
   return (
     <userAuthContext.Provider
       value={{
         user,
+        accessToken,
         logIn,
         signUp,
         logOut,
-        reSet,
-        updateEmailAddress,
-        changePassword,
-        googleSignIn,
-        verificationEmail,
       }}
     >
       {children}

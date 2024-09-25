@@ -3,8 +3,7 @@ import { useUserAuth } from "../../hooks/auth/UserAuthContext";
 import { useNavigate } from "react-router-dom";
 import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
 import { WebsiteThemeContext } from "../../hooks/theme/WebsiteThemeContext";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import axios from "axios"; // Add axios for API calls
 import styles from "./styles.module.css";
 import accountSettings from "../../Demo/More/accountSettings";
 import BottomNavigation from "../../components/containers/BottomNavigation/BottomNavigation";
@@ -18,9 +17,9 @@ import { Link } from "react-router-dom";
 
 const Account = () => {
   const [navigationState, setNavigationState] = useState(0);
-  const [userDetails, setUserDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
   const { theme } = useContext(WebsiteThemeContext);
-  const { role } = useContext(UserAthorizationContext);
+  useContext(UserAthorizationContext); // Get accessToken from context
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
 
@@ -37,28 +36,38 @@ const Account = () => {
     setNavigationState(!navigationState);
   };
 
-  const fetchPost = async (id, database) => {
+ // Function to fetch profile data
+ useEffect(() => {
+  // Function to fetch profile data from the endpoint
+  const fetchProfile = async () => {
     try {
-      const querySnapshot = await getDoc(doc(db, database, id));
-      const newData = querySnapshot.data();
-      setUserDetails(newData);
-    } catch (error) {
-      console.error("Error fetching document: ", error);
-    }
-  };
+      // Retrieve the token from local storage (or another source)
+      const token = localStorage.getItem('token');
 
-  // Extract complex expression to variable
-  const uid = user?.uid;
-
-  useEffect(() => {
-    if (uid) {
-      if (role === "volunteer") {
-        fetchPost(uid, "volunteers");
-      } else {
-        fetchPost(uid, `organisations_${role}`);
+      if (!token) {
+        console.error("No token found. User may not be authenticated.");
+        return;
       }
-    }
-  }, [role, uid]);
+    const response = await axios.get("https://scoutflair.top:8081/api/v1/profile/getProfile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("Profile Data:", response.data); // Log the entire response
+    const profile = response.data?.data?.obj;
+    console.log("Profile Object:", profile); // Log the profile object
+    setUserDetails(profile);
+  } catch (error) {
+    console.error("Error fetching profile data:", error);
+  }
+};
+fetchProfile();
+  }, []);
+
+// Check if userDetails is being updated
+useEffect(() => {
+  console.log("Updated userDetails:", userDetails);
+}, [userDetails]);
 
   return (
     <div
@@ -100,10 +109,8 @@ const Account = () => {
       </Link>
       <ProfilePicture profile_image={userDetails?.profile_image_url} />
       <Label
-        color={
-          theme === "default" || theme === "dark" ? "#1F1246" : "#541A46"
-        }
-        text={userDetails?.name || "Your Name"}
+        color={theme === "default" || theme === "dark" ? "#1F1246" : "#541A46"}
+        text={userDetails?.first_name || userDetails?.name || "Your Name"}
       />
       <p
         style={

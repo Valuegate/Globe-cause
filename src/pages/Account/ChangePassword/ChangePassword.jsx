@@ -29,24 +29,23 @@ const ChangePassword = () => {
   // Backend API call to change password
   const changePasswordAPI = async () => {
     const payload = {
-      password: newPassword,
-      text: "Change Password Request", // Replace this with a relevant description if needed
-      username: "user@example.com" // Replace with the actual logged-in user's username
+      oldPassword: currentPassword, // Use the current password from the form
+      newPassword: newPassword, // Use the new password from the form
     };
 
     try {
-      const response = await fetch('https://scoutflair.top:8081/globeCause/v1/signup/changePassword', {
+      const response = await fetch('https://scoutflair.top:8081/api/v1/profile/changePassword', {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
-      
+
       if (!response.ok) {
         throw new Error("Failed to change password");
       }
-      
+
       return response.json();
     } catch (err) {
       throw new Error(err.message);
@@ -56,9 +55,9 @@ const ChangePassword = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!checkPassword()) return; // Prevent form submission if passwords don't match
-    
+
     try {
       setLoading(true); // Set loading to true before request
       await changePasswordAPI(); // Call the backend API for password change
@@ -98,14 +97,14 @@ const ChangePassword = () => {
         <InputLabel
           label="Current Password"
           value={currentPassword}
-          type="password"
+          type="text"
           placeholder="Current Password"
           color="#fff"
           onChange={(e) => setCurrentPassword(e.target.value)}
         />
         <InputLabel
           label="New Password"
-          type="password"
+          type="text"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           placeholder="New Password"
@@ -114,12 +113,12 @@ const ChangePassword = () => {
         <InputLabel
           label="Confirm New Password"
           color="#fff"
-          type="password"
+          type="text"
           value={confirmNewPassword}
           placeholder="Confirm New Password"
           onChange={(e) => setConfirmNewPassword(e.target.value)}
         />
-        
+
         {error && <p className={styles.Error}>{error}</p>} {/* Show error if any */}
       </div>
 
@@ -127,7 +126,7 @@ const ChangePassword = () => {
         submit="submit"
         text={loading ? "Loading..." : "Update Password"} // Show loading state on button
       />
-      
+
       <BackButton color="#0E0E0F" to="/account" />
     </form>
   );

@@ -56,7 +56,7 @@ const SignUp = () => {
     try {
       const response = await axios.post(
         "https://scoutflair.top:8081/globeCause/v1/signup",
-        { ...formData, confirmPassword: undefined } // Backend doesn't expect confirmPassword
+        { ...formData, confirmPassword: undefined }
       );
       console.log("Sign-up successful:", response.data);
       navigate("/account");
