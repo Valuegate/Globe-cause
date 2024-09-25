@@ -34,9 +34,17 @@ const ChangePassword = () => {
     };
 
     try {
+      const token = localStorage.getItem('token');
+
+        if (!token) {
+          console.error("No token found. User may not be authenticated.");
+          return;
+        }
+        
       const response = await fetch('https://scoutflair.top:8081/api/v1/profile/changePassword', {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
