@@ -3,7 +3,6 @@ import InputLabel from "../../../components/elements/InputLabel/InputLabel";
 import BackButton from "../../../components/elements/BackButton/BackButton";
 import styles from "./styles.module.css";
 import AuthenticationButton from "../../../components/elements/AuthenticationButton/AuthenticationButton";
-import Label from "../../../components/elements/Label/Label";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 

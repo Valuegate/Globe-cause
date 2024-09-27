@@ -20,7 +20,7 @@ const Account = () => {
   const [userDetails, setUserDetails] = useState({});
   const { theme } = useContext(WebsiteThemeContext);
   useContext(UserAthorizationContext); // Get accessToken from context
-  const { logOut, user } = useUserAuth();
+  const { logOut } = useUserAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {

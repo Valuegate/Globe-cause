@@ -2,8 +2,8 @@ import PersonOutline from "@mui/icons-material/PersonOutline";
 import LockIcon from "@mui/icons-material/Lock";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import InfoIcon from "@mui/icons-material/Info";
-import LanguageIcon from "@mui/icons-material/Language";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+// import LanguageIcon from "@mui/icons-material/Language";
+// import DarkModeIcon from "@mui/icons-material/DarkMode";
 import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
 

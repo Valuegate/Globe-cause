@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import imge from "../../../assets/Group 11966.png";
 import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
 import { UserAthorizationContext } from "../../../hooks/authorization/UserAuthorizationContext";
@@ -16,7 +16,7 @@ const ProfilePicture = ({ alt, placeholder }) => {
   const { token } = useContext(UserAthorizationContext); // Ensure the token is fetched from the context
 
   // Function to fetch the profile data (e.g., profile picture)
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = useCallback(async () => {
     try {
       const response = await axios.get("https://scoutflair.top:8081/api/v1/profile/getProfile", {
         headers: {
@@ -30,14 +30,14 @@ const ProfilePicture = ({ alt, placeholder }) => {
     } catch (error) {
       console.error("Error fetching profile data:", error);
     }
-  };
+  }, [token]); // Add 'token' as a dependency to ensure fetchUserProfile updates when the token changes
 
   // Fetch the profile image when the component mounts
   useEffect(() => {
     if (user && token) {
       fetchUserProfile();
     }
-  }, [user, token]);
+  }, [user, token, fetchUserProfile]);
 
   // Function to handle file input changes
   const handleImageAsFile = (e) => {
