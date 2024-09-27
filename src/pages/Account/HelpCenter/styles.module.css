@@ -40,3 +40,29 @@
     margin-left: .5rem;
     margin-right: .5rem;
 }
+
+.FeedbackMessage {
+    color: red;
+}
+
+.Button {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    height: 50px;
+    max-width: 400px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+    cursor: pointer;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 15px 0;
+    background: linear-gradient(90deg, #1F1246, #892246);
+    color: #fff;
+}
+
+.FeedbackMessage {
+    color: #1F1246;
+}

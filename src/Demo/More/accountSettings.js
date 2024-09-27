@@ -33,17 +33,17 @@ const accountSettings = [
     icon: LockIcon,
     link: "/account/privacy",
   },
-  {
-    title: "Language",
+  // {
+  //   title: "Language",
 
-    icon: LanguageIcon,
-    link: "/account/language",
-  },
-  {
-    title: "Dark Mode",
-    icon: DarkModeIcon,
-    link: "/account/dark-mode",
-  },
+  //   icon: LanguageIcon,
+  //   link: "/account/language",
+  // },
+  // {
+  //   title: "Dark Mode",
+  //   icon: DarkModeIcon,
+  //   link: "/account/dark-mode",
+  // },
   {
     title: "Help Center",
     icon: HelpIcon,

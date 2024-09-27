@@ -11,7 +11,7 @@ const NotificationSetting = ({ text }) => {
       <p
         style={
           theme === "dark" || theme === "default"
-            ? { color: "#fff" }
+            ? { color: "#000" }
             : { color: "rgb(25, 32, 43)" }
         }
       >

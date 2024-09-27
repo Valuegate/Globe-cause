@@ -1,35 +1,44 @@
-import React from 'react'
-import styles from './styles.module.css'
-import InputLabel from '../../../components/elements/InputLabel/InputLabel'
-import AuthenticationButton from '../../../components/elements/AuthenticationButton/AuthenticationButton'
-import { useNavigate } from 'react-router-dom'
-import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
+import React from 'react';
+import styles from './styles.module.css';
+import InputLabel from '../../../components/elements/InputLabel/InputLabel';
+import AuthenticationButton from '../../../components/elements/AuthenticationButton/AuthenticationButton';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import axios for API requests
 
 const ForgotPassword = () => {
-    const [email, setEmail] = React.useState();
-    const [loading, setLoading] = React.useState(true)
+  const [email, setEmail] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null); // Error state
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-  const { reSet } = useUserAuth();
-   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setLoading(true);
+    setLoading(true);
+    setError(null); // Reset error before the request
+
     try {
-      await reSet(email);
-      setLoading(false);
-      setTimeout(() => {
-           alert('success');
-        }, 1000);
-      navigate("/login");
+      // Call the recoverFirst API with the user's email
+      const response = await axios.get(
+        `https://scoutflair.top:8081/globeCause/v1/signup/recover/first/${email}/`
+      );
+
+      if (response.data.success) {
+        setLoading(false);
+        alert('A recovery code has been sent to your email.');
+        navigate(`/reset-password`); // Redirect to the reset password page
+      } else {
+        throw new Error('Failed to send recovery email');
+      }
     } catch (err) {
-      // setLoading(false);
-      console.log(err.message);
+      console.error('Error:', err.message);
+      setError('Failed to send recovery email. Please try again.'); // Set error message
+      setLoading(false);
     }
   };
+
   return (
     <div>
-         <form className={styles.Login}>
+      <form className={styles.Login} onSubmit={handleSubmit}>
         <div className={styles.Inputs}>
           <InputLabel
             label="Email"
@@ -39,13 +48,13 @@ const ForgotPassword = () => {
           />
         </div>
         <AuthenticationButton
-          text={loading ? "Reset Password" : "loading..."}
-          submit={"submit"}
-          onclick={handleSubmit}
+          text={loading ? "Loading..." : "Reset Password"}
+          submit="submit"
         />
       </form>
+      {error && <p className={styles.Error}>{error}</p>} {/* Display error message */}
     </div>
-  )
-}
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;

@@ -14,6 +14,7 @@ const NgoDetails = () => {
 
   return (
     <div className={styles.container}>
+    <div className={styles.subContainer}>
       <h1 className={styles.heading}>{ngo.name}</h1>
       <p><strong>Phone:</strong> {ngo.phone}</p>
       <p>
@@ -23,6 +24,7 @@ const NgoDetails = () => {
         </a>
       </p>
       <p><strong>Email:</strong> {ngo.email}</p>
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import Intro from "../../components/elements/Intro/Intro";
 import Search from "../../components/elements/Search/Search";
 import Patners from "../../components/containers/Patners/Patners";
 import Nav from "./Nav";
+import Footer from "../../components/containers/Footer/Footer";
 
 const Home = () => {
   const [navigationState, setNavigationState] = useState(0);
@@ -17,6 +18,7 @@ const Home = () => {
   };
 
   return (
+    <>
     <div className={styles.Home}>
       <Nav />
       <Intro />
@@ -29,6 +31,8 @@ const Home = () => {
         navigationState={navigationState}
       />
     </div>
+      <Footer />
+      </>
   );
 };
 
