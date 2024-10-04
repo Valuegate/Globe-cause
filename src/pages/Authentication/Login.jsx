@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../hooks/auth/UserAuthContext"; // Keep if needed
 import styles from "./styles.module.css";
 
-import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
+// import { UserAthorizationContext } from "../../hooks/authorization/UserAuthorizationContext";
 
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
@@ -19,9 +19,9 @@ const Login = () => {
   const [error, setError] = useState("");
   const [passwordType, setPasswordType] = useState("password");
 
-  const { role } = useContext(UserAthorizationContext); // Keep if needed
+  // const { role } = useContext(UserAthorizationContext);
   const navigate = useNavigate();
-  useUserAuth(); // Keep if needed
+  const { logIn, success, loading } = useUserAuth();
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -35,45 +35,21 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    const authenticationRequest = {
-      username,
-      password,
-    };
-
-    try {
-      const response = await fetch('https://scoutflair.top:8081/globeCause/v1/signin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(authenticationRequest),
-      });
-
-      if (!response.ok) {
-        throw new Error("Invalid login credentials");
-      }
-
-      const data = await response.json();
-
-      // Assuming response has a token, store it
-      const token = data.jwtToken;
-      localStorage.setItem("token", token);
-
-      alert('Login successful');
-      navigate("/home");
-
-    } catch (err) {
-      setError(err.message || "Login failed");
-      console.log(err);
-    }
+    logIn(username, password)
   };
 
-  useEffect(() => {
-    // If you need to handle navigation or other logic based on role
-    if (role) {
+  useEffect (() => {
+    if (!loading && success) {
+      alert('Login successful');
       navigate("/home");
     }
-  }, [role, navigate]);
+  }, [success, navigate, loading])
+
+  // useEffect(() => {
+  //   if (role) {
+  //     navigate("/home");
+  //   }
+  // }, [role, navigate]);
 
   return (
     <div className={styles.VideoContainer}>

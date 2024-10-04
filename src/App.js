@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import React, { useState, useEffect } from "react";
 
-import { UserAthorizationContext } from "./hooks/authorization/UserAuthorizationContext";
+// import { UserAthorizationContext } from "./hooks/authorization/UserAuthorizationContext";
 import { UserAuthContextProvider } from "./hooks/auth/UserAuthContext";
 import { NameProvider } from "./hooks/name/NameContext";
 import { WebsiteThemeContext } from "./hooks/theme/WebsiteThemeContext";
@@ -58,7 +58,7 @@ const ScrollToTop = () => {
 };
 
 function App() {
-  const [role, setRole] = useState("");
+  const [role] = useState("");
   const [theme, setTheme] = useState("default");
 
   // Replace useAuthState with your custom authentication logic
@@ -77,7 +77,7 @@ function App() {
     <div className="App">
       <Suspense fallback="loading">
         <UserAuthContextProvider>
-          <UserAthorizationContext.Provider value={{ role, setRole }}>
+          {/* <UserAthorizationContext.Provider value={{ role, setRole }}> */}
             <NameProvider>
               <WebsiteThemeContext.Provider value={{ theme, setTheme }}>
                 <Router>
@@ -214,7 +214,7 @@ function App() {
                 </Router>
               </WebsiteThemeContext.Provider>
             </NameProvider>
-          </UserAthorizationContext.Provider>
+          {/* </UserAthorizationContext.Provider> */}
         </UserAuthContextProvider>
       </Suspense>
     </div>

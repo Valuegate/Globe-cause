@@ -1,45 +1,153 @@
+// import styles from "./styles.module.css";
+// import React, { useState } from "react";
+// import imge from "../../../assets/Group 11966.png";
+// import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
+// import axios from "axios";
+
+// const ProfilePicture = ({ alt, placeholder, profile_image }) => {
+//   const [disabled, setDisabled] = useState(true);
+//   const [image, setImage] = useState();
+//   const [imageAsFile, setImageAsFile] = useState("");
+//   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
+//   const [uploadError, setUploadError] = useState("");
+
+//   const { user } = useUserAuth();
+//   console.log(user)
+
+//   const handleImageAsFile = (e) => {
+//     if (e.target.files && e.target.files[0]) {
+//       setImage(URL.createObjectURL(e.target.files[0]));
+//     }
+//     const image = e.target.files[0];
+//     setImageAsFile(image);
+//     setDisabled(false);
+//   };
+
+//   const handleUpload = async (e) => {
+//     e.preventDefault();
+    
+//     if (!imageAsFile) {
+//       alert("Please select an image file.");
+//       return;
+//     }
+  
+//     // Check if user is defined
+//     if (!user) {
+//       console.error("User is not authenticated or user data is unavailable.");
+//       setUploadError("User not authenticated. Please log in.");
+//       return;
+//     }
+  
+//     const formData = new FormData();
+//     formData.append("file", imageAsFile);
+//     // formData.append("uid", user.uid);
+  
+//     try {
+//       const token = localStorage.getItem('token');
+  
+//       if (!token) {
+//         console.error("No token found");
+//         return;
+//       }
+  
+//       const response = await axios.post("https://scoutflair.top:8081/globeCause/v1/file/picture/upload", formData, {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
+  
+//       const uploadedImageUrl = response.data.url; 
+  
+//       setImageAsUrl({ imgUrl: uploadedImageUrl });
+//       alert("Image uploaded successfully");
+//     } catch (error) {
+//       console.error("Error uploading image:", error);
+//       setUploadError("Failed to upload image. Please try again.");
+//     }
+//   };
+  
+
+//   return (
+//     <form>
+//       <label htmlFor="inputTag" style={{ cursor: "pointer" }}>
+//         <div className={styles.ProfilePicture}>
+//           <img
+//             src={image || profile_image || imageAsUrl.imgUrl || imge}
+//             alt={alt}
+//           />
+//           <div className={styles.SelectImage}>
+//             <p>Select Image</p>
+//           </div>
+//         </div>
+//         <input
+//           id="inputTag"
+//           accept="image/*"
+//           style={{ display: "none" }}
+//           type="file"
+//           placeholder={placeholder}
+//           onChange={handleImageAsFile}
+//         />
+//       </label>
+//       <button
+//         className={styles.UploadButton}
+//         onClick={handleUpload}
+//         disabled={disabled}
+//       >
+//         Upload
+//       </button>
+//       {uploadError && <p className={styles.Error}>{uploadError}</p>}
+//     </form>
+//   );
+// };
+
+// export default ProfilePicture;
+
+
 import styles from "./styles.module.css";
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import imge from "../../../assets/Group 11966.png";
-import { useUserAuth } from "../../../hooks/auth/UserAuthContext";
-import { UserAthorizationContext } from "../../../hooks/authorization/UserAuthorizationContext";
-import axios from "axios"; // Import axios for HTTP requests
+import axios from "axios";
 
-const ProfilePicture = ({ alt, placeholder }) => {
+const ProfilePicture = ({ alt, placeholder, profile_image }) => {
   const [disabled, setDisabled] = useState(true);
-  const [image, setImage] = useState(); // Holds the preview image
-  const [imageAsFile, setImageAsFile] = useState(""); // Holds the uploaded file
-  const [imageAsUrl, setImageAsUrl] = useState(""); // Holds the uploaded image URL from the server
-  const [uploadError, setUploadError] = useState(""); // Error state for upload errors
+  const [image, setImage] = useState(null); // State for selected image preview
+  const [imageAsFile, setImageAsFile] = useState(""); // State for image file to upload
+  const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" }); // State for the uploaded image URL
+  const [uploadError, setUploadError] = useState(""); // State for error handling
 
-  const { user } = useUserAuth();
-  const { token } = useContext(UserAthorizationContext); // Ensure the token is fetched from the context
-
-  // Function to fetch the profile data (e.g., profile picture)
-  const fetchUserProfile = useCallback(async () => {
-    try {
-      const response = await axios.get("https://scoutflair.top:8081/api/v1/profile/getProfile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const profileImageUrl = response.data.data.obj.profile_image_url; // Adjust based on the API response structure
-      if (profileImageUrl) {
-        setImageAsUrl(profileImageUrl); // Set the existing profile image
-      }
-    } catch (error) {
-      console.error("Error fetching profile data:", error);
-    }
-  }, [token]); // Add 'token' as a dependency to ensure fetchUserProfile updates when the token changes
-
-  // Fetch the profile image when the component mounts
+  // Fetch profile image on mount
   useEffect(() => {
-    if (user && token) {
-      fetchUserProfile();
-    }
-  }, [user, token, fetchUserProfile]);
+    const fetchProfileImage = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.error("No token found");
+          return;
+        }
 
-  // Function to handle file input changes
+        // Fetch the user profile with image URL
+        const response = await axios.get(
+          "https://scoutflair.top:8081/api/v1/profile/getProfile", // Adjust the API endpoint if necessary
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const userProfile = response.data.data.obj;
+        if (userProfile.imageUrl) {
+          setImageAsUrl({ imgUrl: userProfile.imageUrl });
+        }
+      } catch (error) {
+        console.error("Error fetching profile image:", error);
+      }
+    };
+
+    fetchProfileImage();
+  }, []);
+
   const handleImageAsFile = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
@@ -49,22 +157,29 @@ const ProfilePicture = ({ alt, placeholder }) => {
     setDisabled(false);
   };
 
-  // Function to handle image upload
   const handleUpload = async (e) => {
     e.preventDefault();
 
     if (!imageAsFile) {
-      alert(`Please select an image file.`);
+      alert("Please select an image file.");
+      return;
+    }
+
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+      console.error("User is not authenticated or user data is unavailable.");
+      setUploadError("User not authenticated. Please log in.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", imageAsFile); // Append the file to FormData
-    formData.append("uid", user.uid); // Append the user ID or any additional data needed
+    formData.append("file", imageAsFile);
 
     try {
+
       const response = await axios.post(
-        "https://scoutflair.top:8081/globeCause/v1/globeCause/v1/file/picture/upload",
+        "https://scoutflair.top:8081/globeCause/v1/file/picture/upload",
         formData,
         {
           headers: {
@@ -74,27 +189,13 @@ const ProfilePicture = ({ alt, placeholder }) => {
         }
       );
 
-      // Assuming your API returns the URL of the uploaded image
       const uploadedImageUrl = response.data.url;
 
-      setImageAsUrl(uploadedImageUrl);
-      await createProfile(user.uid, uploadedImageUrl); // Call the profile update function
+      setImageAsUrl({ imgUrl: uploadedImageUrl });
       alert("Image uploaded successfully");
     } catch (error) {
       console.error("Error uploading image:", error);
       setUploadError("Failed to upload image. Please try again.");
-    }
-  };
-
-  // Function to update the profile with the new profile image URL
-  const createProfile = async (id, image) => {
-    try {
-      await axios.put(`https://api-endpoint/profile/${id}`, {
-        profile_image_url: image,
-      });
-      console.log("Successfully updated profile image");
-    } catch (error) {
-      console.error("Error updating profile image:", error);
     }
   };
 
@@ -103,7 +204,7 @@ const ProfilePicture = ({ alt, placeholder }) => {
       <label htmlFor="inputTag" style={{ cursor: "pointer" }}>
         <div className={styles.ProfilePicture}>
           <img
-            src={image || imageAsUrl || imge} // Prioritize the preview image, then the uploaded image URL, and finally the default image
+            src={image || imageAsUrl.imgUrl || profile_image || imge}
             alt={alt}
           />
           <div className={styles.SelectImage}>

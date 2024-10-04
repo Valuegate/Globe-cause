@@ -28,4 +28,17 @@
   .link:hover {
     text-decoration: underline;
   }
+
+  .ngoImage {
+    width: 500px;
+    height: 100px;
+    object-fit: contain;
+  }
+
+  .ngoData {
+    margin: 18rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   

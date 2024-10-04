@@ -129,7 +129,7 @@ const EditProfile = () => {
         <InputLabel label="Email" type="email" value={email} placeholder="Change email" onChange={(e) => setEmail(e.target.value)} />
         <InputLabel label="Phone Number" type="text" value={phone} placeholder="Edit phone" onChange={(e) => setPhone(e.target.value)} />
         <InputLabel label="Address" type="text" value={address} placeholder="Edit address" onChange={(e) => setAddress(e.target.value)} />
-        <InputLabel label="City" type="text" value={city} placeholder="Edit city" onChange={(e) => setCity(e.target.value)} />
+        {/* <InputLabel label="State" type="text" value={city} placeholder="Edit State" onChange={(e) => setCity(e.target.value)} /> */}
         <InputLabel label="Tagline" type="text" value={tagline} placeholder="Edit tagline" onChange={(e) => setTagline(e.target.value)} />
         <InputLabel label="Website" type="text" value={website} placeholder="Edit website" onChange={(e) => setWebsite(e.target.value)} />
         <InputLabel label="Facebook URL" type="text" value={facebookUrl} placeholder="Edit Facebook URL" onChange={(e) => setFacebookUrl(e.target.value)} />

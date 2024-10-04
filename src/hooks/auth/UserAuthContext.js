@@ -4,49 +4,64 @@ import axios from "axios";
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
-  const [user, setUser] = useState(null); // Store user data
   const [accessToken, setAccessToken] = useState(null); // Store access token
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Function to log in user
-  const logIn = async (email, password) => {
+  const logIn = async (username, password) => {
+    if (loading) {
+      return;
+    } setLoading(true);
+
     try {
       const response = await axios.post("https://scoutflair.top:8081/globeCause/v1/signin", {
-        email,
+        username,
         password,
       });
-      const { token, user } = response.data;
-      setUser(user); // Store user data
-      setAccessToken(token); // Store JWT token
+      const { jwtToken } = response.data;
+      setSuccess(true);
+      setAccessToken(jwtToken); // Store JWT token
+      setLoading(false);
 
-      // Optionally, store the token in local storage or session storage
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", jwtToken);
     } catch (error) {
       console.error("Login error:", error);
+      setSuccess(false);
+      setLoading(false);
     }
   };
 
   // Function to sign up a new user
   const signUp = async (email, password) => {
+    if (loading) {
+      return;
+    } setLoading(true);
+
     try {
       const response = await axios.post("https://scoutflair.top:8081/globeCause/v1/signup", {
         email,
         password,
       });
-      const { token, user } = response.data;
-      setUser(user);
-      setAccessToken(token);
+      const { jwtToken } = response.data;
+      setSuccess(true);
+      setAccessToken(jwtToken); // Store JWT token
+      setLoading(false);
 
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", jwtToken);
     } catch (error) {
+      setSuccess(false)
       console.error("Signup error:", error);
+      setLoading(false);
     }
   };
 
   // Function to log out user
   const logOut = () => {
-    setUser(null);
     setAccessToken(null);
-    localStorage.removeItem("token"); // Remove token from local storage
+    setSuccess(false);
+    setLoading(false);
+    localStorage.removeItem("token");
   };
 
   // Check for existing token on app load
@@ -56,16 +71,18 @@ export function UserAuthContextProvider({ children }) {
       setAccessToken(token);
       // Optionally, fetch the user data with the token
     }
+    
   }, []);
 
   return (
     <userAuthContext.Provider
       value={{
-        user,
         accessToken,
         logIn,
         signUp,
         logOut,
+        success,
+        loading,
       }}
     >
       {children}

@@ -59,9 +59,12 @@ const SignUp = () => {
         { ...formData, confirmPassword: undefined }
       );
       console.log("Sign-up successful:", response.data);
-      navigate("/account");
+      alert('Sign-up successful! Please check your email to verify your account.');
+      navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.message || "Sign-up failed. Please try again.");
+      setError(
+        err.response?.data?.message || "Sign-up failed. Please try again."
+      );
       console.error("Error during sign-up:", err);
     }
   };
@@ -181,6 +184,19 @@ const SignUp = () => {
                   onChange={handleChange}
                   className={styles.inputField}
                 />
+                <select
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className={styles.selectField}
+                >
+                  <option value="" disabled>
+                    Select State
+                  </option>
+                  <option value="Lagos">Lagos</option>
+                  <option value="Abuja">Abuja</option>
+                  <option value="Kano">Kano</option>
+                </select>
               </>
             )}
 
@@ -249,9 +265,15 @@ const SignUp = () => {
               />
               <span
                 className={styles.eyeIcon}
-                onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+                onClick={() =>
+                  setConfirmPasswordVisible(!confirmPasswordVisible)
+                }
               >
-                {confirmPasswordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+                {confirmPasswordVisible ? (
+                  <AiFillEyeInvisible />
+                ) : (
+                  <AiFillEye />
+                )}
               </span>
             </div>
           </div>
