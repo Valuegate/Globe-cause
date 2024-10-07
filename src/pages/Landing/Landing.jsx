@@ -19,9 +19,11 @@ const LandingPage = () => {
           <p className={styles.Subheadline}>
             Join our platform to support and collaborate with NGOs making a difference.
           </p>
+          <div className={styles.CTABtn}>
           <Link to="/signup" className={styles.CTAButton}>
             Get Started
           </Link>
+          </div>
         </div>
       </section>
 

@@ -32,8 +32,13 @@
   border-radius: 10px;
 }
 
+.CTABtn {
+  margin-bottom: 2rem;
+}
+
 .Headline {
-  font-size: 3rem;
+  font-size: 2rem;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -223,6 +228,9 @@
 
 /* Responsive Design */
 @media (min-width: 768px) {
+  .Headline {
+    font-size: 1rem;
+  }
   .FeaturesContainer {
     justify-content: space-around;
   }
@@ -246,6 +254,14 @@
 
   .FlipCardBack p {
     font-size: 1.1rem;
+  }
+
+  .Headline {
+    font-size: 3rem;
+  }
+
+  .CTABtn {
+    margin-bottom: 1rem;
   }
 }
 

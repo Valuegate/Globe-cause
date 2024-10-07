@@ -26,7 +26,7 @@ const Account = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      navigate("/login");
+      navigate("/landing");
     } catch (error) {
       console.log(error.message);
     }
