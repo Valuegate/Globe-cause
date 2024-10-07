@@ -45,6 +45,7 @@ import ForgotPassword from "./pages/Authentication/ForgotPassword/ForgotPassword
 import NgoDetails from "./components/ngo/NgoDetails/NgoDetails";
 import NgoList from "./components/ngo/NgoList/NgoList";
 import ResetPassword from "./pages/Authentication/ResetPassword/ResetPassword";
+import LandingPage from "./pages/Landing/Landing";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -85,6 +86,7 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Splash />} />
                     <Route path="/signup" element={<SignUp />} />
+                    <Route path="/landing" element={<LandingPage />} />
                     <Route
                       path="/home"
                       element={
