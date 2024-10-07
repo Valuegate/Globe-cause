@@ -1,191 +1,255 @@
 /* src/components/LandingPage/LandingPage.module.css */
 
 .LandingPage {
-    font-family: Arial, sans-serif;
-    color: #333;
-  }
-  
-  /* Hero Section */
-  .HeroSection {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-  }
-  
-  .VideoBackground {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-  
-  .HeroContent {
-    padding: 50px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-  }
-  
-  .Headline {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-  
-  .Subheadline {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-  }
-  
-  .CTAButton {
-    padding: 15px 30px;
-    background-color: #541a46;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .CTAButton:hover {
-    background-color: #1f1246;
-  }
-  
-  /* Features Section */
-  .FeaturesSection {
-    padding: 60px 20px;
-    background-color: #f9f9f9;
-    text-align: center;
-  }
-  
-  .SectionTitle {
-    font-size: 2rem;
-    margin-bottom: 40px;
-  }
-  
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Hero Section */
+.HeroSection {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.VideoBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.HeroContent {
+  padding: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.Headline {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.Subheadline {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.CTAButton {
+  padding: 15px 30px;
+  background-color: #541a46;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.CTAButton:hover {
+  background-color: #1f1246;
+}
+
+/* Features Section */
+.FeaturesSection {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.SectionTitle {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.FeaturesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Space between flip cards */
+}
+
+/* Flip Card Styles */
+.FlipCard {
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  perspective: 1000px; /* Enables 3D space for children */
+}
+
+.FlipCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.FlipCard:hover .FlipCardInner {
+  transform: rotateY(180deg);
+}
+
+.FlipCardFront, .FlipCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.FlipCardFront {
+  background-color: #541a46; /* Front side color */
+  color: white;
+}
+
+.FlipCardBack {
+  background-color: #1f1246; /* Back side color */
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.FlipCardFront h3, .FlipCardBack h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.FlipCardBack p {
+  font-size: 1rem;
+  padding: 0 10px;
+}
+
+.FeatureIcon {
+  margin-bottom: 10px;
+  color: white;
+}
+
+/* About Us Section */
+.AboutSection {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.AboutText {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Testimonials Section */
+.TestimonialsSection {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.TestimonialsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Testimonial {
+  max-width: 600px;
+  margin: 20px 0;
+  font-style: italic;
+  color: #666;
+}
+
+.Testimonial h4 {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Call to Action Section */
+.CTASection {
+  padding: 60px 20px;
+  background-color: #1f1246;
+  color: white;
+  text-align: center;
+}
+
+.CTASection h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.CTASection .CTAButton {
+  background-color: #541a46;
+}
+
+.CTASection .CTAButton:hover {
+  background-color: #892246;
+}
+
+/* Footer */
+.Footer {
+  padding: 20px;
+  background-color: #BF2B47;
+  color: white;
+  text-align: center;
+}
+
+.FooterContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SocialMedia a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.SocialMedia a:hover {
+  color: #541a46;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
   .FeaturesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
   }
-  
-  .Feature {
-    width: 300px;
-    margin: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .Feature h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-  
-  .Feature p {
-    font-size: 1rem;
-    color: #666;
-  }
-  
-  /* About Us Section */
-  .AboutSection {
-    padding: 60px 20px;
-    text-align: center;
-  }
-  
-  .AboutText {
-    max-width: 800px;
-    margin: 0 auto;
-    font-size: 1.2rem;
-    color: #555;
-  }
-  
-  /* Testimonials Section */
-  .TestimonialsSection {
-    padding: 60px 20px;
-    background-color: #f9f9f9;
-    text-align: center;
-  }
-  
-  .TestimonialsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
+
   .Testimonial {
-    max-width: 600px;
-    margin: 20px 0;
-    font-style: italic;
-    color: #666;
+    max-width: 800px;
   }
-  
-  .Testimonial h4 {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #333;
+
+  .FlipCard {
+    width: 250px;
+    height: 250px;
   }
-  
-  /* Call to Action Section */
-  .CTASection {
-    padding: 60px 20px;
-    background-color: #1f1246;
-    color: white;
-    text-align: center;
+
+  .FlipCardFront, .FlipCardBack {
+    border-radius: 15px;
   }
-  
-  .CTASection h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+
+  .FlipCardFront h3, .FlipCardBack h3 {
+    font-size: 1.8rem;
   }
-  
-  .CTASection .CTAButton {
-    background-color: #541a46;
+
+  .FlipCardBack p {
+    font-size: 1.1rem;
   }
-  
-  .CTASection .CTAButton:hover {
-    background-color: #892246;
-  }
-  
-  /* Footer */
-  .Footer {
-    padding: 20px;
-    background-color: #BF2B47;
-    color: white;
-    text-align: center;
-  }
-  
-  .FooterContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .SocialMedia a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .SocialMedia a:hover {
-    color: #541a46;
-  }
-  
-  /* Responsive Design */
-  @media (min-width: 768px) {
-    .FeaturesContainer {
-      justify-content: space-around;
-    }
-  
-    .Testimonial {
-      max-width: 800px;
-    }
-  }
-  
+}
+
+.Paragraph {
+  color:#fcfcfc;
+  margin-top: 12rem;
+}

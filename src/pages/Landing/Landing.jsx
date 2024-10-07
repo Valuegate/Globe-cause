@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import VidBg from "../../assets/video/bgvideo.mp4"; // Optional: Background video
+import { FaHandsHelping, FaProjectDiagram, FaChartLine } from 'react-icons/fa'; // Import icons
 
 const LandingPage = () => {
   return (
@@ -28,17 +29,46 @@ const LandingPage = () => {
       <section className={styles.FeaturesSection}>
         <h2 className={styles.SectionTitle}>Why Choose Us?</h2>
         <div className={styles.FeaturesContainer}>
-          <div className={styles.Feature}>
-            <h3>Connect with NGOs</h3>
-            <p>Find and collaborate with organizations dedicated to various causes.</p>
+          {/* Flip Card 1 */}
+          <div className={styles.FlipCard}>
+            <div className={styles.FlipCardInner}>
+              <div className={styles.FlipCardFront}>
+                <FaHandsHelping className={styles.FeatureIcon} size={50} />
+                <h3>GLO</h3>
+              </div>
+              <div className={styles.FlipCardBack}>
+                <h3>Connect with NGOs</h3>
+                <p>Find and collaborate with organizations dedicated to various causes.</p>
+              </div>
+            </div>
           </div>
-          <div className={styles.Feature}>
-            <h3>Manage Projects</h3>
-            <p>Organize and oversee projects to ensure effective implementation.</p>
+
+          {/* Flip Card 2 */}
+          <div className={styles.FlipCard}>
+            <div className={styles.FlipCardInner}>
+              <div className={styles.FlipCardFront}>
+                <FaProjectDiagram className={styles.FeatureIcon} size={50} />
+                <h3>BE</h3>
+              </div>
+              <div className={styles.FlipCardBack}>
+                <h3>Manage Projects</h3>
+                <p>Organize and oversee projects to ensure effective implementation.</p>
+              </div>
+            </div>
           </div>
-          <div className={styles.Feature}>
-            <h3>Track Impact</h3>
-            <p>Monitor the real-world impact of your contributions and efforts.</p>
+
+          {/* Flip Card 3 */}
+          <div className={styles.FlipCard}>
+            <div className={styles.FlipCardInner}>
+              <div className={styles.FlipCardFront}>
+                <FaChartLine className={styles.FeatureIcon} size={50} />
+                <h3>CAUSE</h3>
+              </div>
+              <div className={styles.FlipCardBack}>
+                <h3>Track Impact</h3>
+                <p>Monitor the real-world impact of your contributions and efforts.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
