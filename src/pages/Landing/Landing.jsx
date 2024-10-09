@@ -15,14 +15,16 @@ const LandingPage = () => {
           <source src={VidBg} type="video/mp4" />
         </video>
         <div className={styles.HeroContent}>
-          <h1 className={styles.Headline}>Empower Communities, Transform Lives</h1>
-          <p className={styles.Subheadline}>
+          <h1 className={`${styles.Headline} ${styles.animatedHeadline}`}>
+            Empower Communities, Transform Lives
+          </h1>
+          <p className={`${styles.Subheadline} ${styles.animatedSubheadline}`}>
             Join our platform to support and collaborate with NGOs making a difference.
           </p>
           <div className={styles.CTABtn}>
-          <Link to="/signup" className={styles.CTAButton}>
-            Get Started
-          </Link>
+            <Link to="/signup" className={styles.CTAButton}>
+              Get Started
+            </Link>
           </div>
         </div>
       </section>

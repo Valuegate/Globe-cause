@@ -14,6 +14,7 @@
   justify-content: center;
   color: white;
   text-align: center;
+  overflow: hidden; /* Prevent scrollbars during animation */
 }
 
 .VideoBackground {
@@ -32,8 +33,25 @@
   border-radius: 10px;
 }
 
-.CTABtn {
-  margin-bottom: 2rem;
+/* Animation Classes */
+.animatedHeadline {
+  animation: fallIn 1s ease-out forwards;
+}
+
+.animatedSubheadline {
+  animation: fallIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes fallIn {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .Headline {
@@ -45,6 +63,10 @@
 .Subheadline {
   font-size: 1.5rem;
   margin-bottom: 30px;
+}
+
+.CTABtn {
+  margin-bottom: 2rem;
 }
 
 .CTAButton {
@@ -228,9 +250,6 @@
 
 /* Responsive Design */
 @media (min-width: 768px) {
-  .Headline {
-    font-size: 1rem;
-  }
   .FeaturesContainer {
     justify-content: space-around;
   }
