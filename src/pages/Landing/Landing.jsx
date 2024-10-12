@@ -1,6 +1,6 @@
 // src/components/LandingPage/LandingPage.jsx
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import VidBg from "../../assets/video/bgvideo.mp4"; // Video to be displayed in Hero Section
@@ -16,7 +16,6 @@ const LandingPage = () => {
 
   // Reference to the video element
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   // Helper to split text into spans for animation
   const wrapLetters = (text) =>
@@ -29,18 +28,6 @@ const LandingPage = () => {
         {char === " " ? "\u00A0" : char} {/* Keeps spaces between words */}
       </span>
     ));
-
-  // Toggle play/pause for the video
-  const handleVideoClick = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
 
   useEffect(() => {
     const currentSection = aboutSectionRef.current; // Store the ref value in a variable
@@ -87,13 +74,11 @@ const LandingPage = () => {
             ref={videoRef}
             src={VidBg}
             className={styles.HeroVideo}
-            onClick={handleVideoClick}
-            // Optional: Display controls if you want
-            // controls
+            autoPlay
+            muted
+            loop
+            playsInline // Ensures compatibility with mobile browsers
           />
-          <div className={styles.VideoOverlay}>
-            {isPlaying ? "Pause" : "Play"}
-          </div>
         </div>
       </section>
 
