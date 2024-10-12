@@ -7,6 +7,7 @@ export function UserAuthContextProvider({ children }) {
   const [accessToken, setAccessToken] = useState(null); // Store access token
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Function to log in user
   const logIn = async (username, password) => {
@@ -26,7 +27,8 @@ export function UserAuthContextProvider({ children }) {
 
       localStorage.setItem("token", jwtToken);
     } catch (error) {
-      console.error("Login error:", error);
+      console.log(error)
+      setError(`Login error: ${error.response.data}`);
       setSuccess(false);
       setLoading(false);
     }
@@ -83,6 +85,7 @@ export function UserAuthContextProvider({ children }) {
         logOut,
         success,
         loading,
+        error,
       }}
     >
       {children}

@@ -1,0 +1,125 @@
+/* src/components/Navbar/Navbar.module.css */
+
+.Navbar {
+    width: 100%;
+    background-color: white; /* Changed to white */
+    /* padding: 1rem 2rem; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  }
+  
+  /* .NavLogo {
+    width: 100%;
+  } */
+  
+  .NavLinks {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .NavLink {
+    color: #333; /* Dark gray color */
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .NavLink:hover {
+    color: #007BFF; /* Change to blue on hover */
+  }
+  
+  .NavIcons {
+    padding-right: 3rem;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .NavIconLink {
+    color: #333; /* Dark gray color */
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  .NavIconLink:hover {
+    color: #007BFF; /* Change to blue on hover */
+  }
+  
+  .MobileMenuIcon {
+    display: none; /* Hidden on desktop */
+    font-size: 3rem;
+    color: #333;
+    cursor: pointer;
+    padding-right: 2rem;
+  }
+  
+  /* Drawer Styles */
+  .DrawerHeader {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+  
+  .CloseIcon {
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .signInButton {
+    padding: 10px 20px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #1F1246;
+    color: #FCFCFC;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+}
+.signInButton:hover{
+    background-color: #FCFCFC;
+    color: #1F1246;
+}
+
+.signUpButton {
+    padding: 10px 20px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #BF2B47;
+    color: #FCFCFC;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow:  0 0 3px 0 rgba(0,0,0,0.5);
+}
+.signUpButton:hover{
+    background-color: #FCFCFC;
+    color: #BF2B47;
+}
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .NavLinks {
+      display: none; /* Hide desktop links on mobile */
+    }
+  
+    .NavIcons {
+      display: none; /* Hide icons on mobile */
+    }
+  
+    .MobileMenuIcon {
+      display: block; /* Show hamburger menu on mobile */
+    }
+  }
+  

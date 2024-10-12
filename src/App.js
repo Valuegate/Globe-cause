@@ -34,7 +34,7 @@ import {
 import About from "./pages/Account/About/About";
 import PrivacyPolicy from "./pages/Account/PrivacyPolicy/PrivacyPolicy";
 import Help from "./pages/Account/HelpCenter/Help";
-import ProfileSetup from "./components/containers/ProfileSetup/ProfileSetup";
+// import ProfileSetup from "./components/containers/ProfileSetup/ProfileSetup";
 import Language from "./pages/Account/Language/Language";
 import Community from "./pages/MyCommunity/Community";
 import EmailVerification from "./pages/Authentication/EmailVerification/EmailVerification";
@@ -87,6 +87,7 @@ function App() {
                     <Route path="/" element={<Splash />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/landing" element={<LandingPage />} />
+                    {/* <Route path="/navbar" element={<NavBar />} /> */}
                     <Route
                       path="/home"
                       element={
@@ -209,7 +210,7 @@ function App() {
                       }
                     />
 
-                    <Route path="/profile" element={<ProfileSetup />} />
+                    {/* <Route path="/profile" element={<ProfileSetup />} /> */}
                     <Route path="/notifications" element={<Notifications />} />
                   </Routes>
                   {user && !loading ? <Footer /> : null}
