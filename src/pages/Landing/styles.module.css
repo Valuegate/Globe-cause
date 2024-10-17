@@ -193,6 +193,11 @@
 .AboutSection {
   padding: 60px 20px;
   text-align: center;
+  background-image: url('../../assets/Assets/landingbanner.png'); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the whole section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  color: white; /* Optional: adjust text color for better readability */
 }
 
 .AboutSection::after {
@@ -208,7 +213,7 @@
   max-width: 800px;
   margin: 0 auto;
   font-size: 1.2rem;
-  color: #555;
+  color: white; /* Adjust text color to stand out against the background */
   line-height: 1.6;
   opacity: 0;
   transform: translateX(100%); /* Initially offscreen */
@@ -220,6 +225,7 @@
   opacity: 1;
   transform: translateX(0); /* Slide into place */
 }
+
 
 .PartnersSection {
   padding: 60px 20px;
@@ -262,7 +268,7 @@
 
 /* Testimonials Section */
 .TestimonialsSection {
-  padding: 80px 20px;
+  padding: 80px 7rem;
   background-color: #f9f9f9;
   text-align: center;
   position: relative;

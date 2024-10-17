@@ -140,16 +140,16 @@ const LandingPage = () => {
       </section>
 
       {/* About Us Section */}
-      <section className={styles.AboutSection} ref={aboutSectionRef}>
-        <h2 className={styles.SectionTitle}>About Us</h2>
-        <p className={styles.AboutText}>
-          We are committed to bridging the gap between individuals and NGOs to
-          create a more impactful and collaborative environment. Our mission is
-          to empower communities by facilitating meaningful connections and
-          providing the tools necessary for effective project management and
-          impact tracking.
-        </p>
-      </section>
+        <section className={styles.AboutSection} ref={aboutSectionRef}>
+          <h2 className={styles.SectionTitle}>About Us</h2>
+          <p className={styles.AboutText}>
+            We are committed to bridging the gap between individuals and NGOs to
+            create a more impactful and collaborative environment. Our mission is
+            to empower communities by facilitating meaningful connections and
+            providing the tools necessary for effective project management and
+            impact tracking.
+          </p>
+        </section>
 
       {/* Partners Section */}
       <section className={styles.PartnersSection}>

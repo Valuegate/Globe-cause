@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/globe_cause_logo.png";
+import logo from "../../../assets/globe_cause_bg-removebg-preview.png";
 import styles from "./styles.module.css";
 
 const Logo = () => {

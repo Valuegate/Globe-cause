@@ -13,9 +13,9 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
   }
   
-  /* .NavLogo {
-    width: 100%;
-  } */
+  .NavLogo {
+    padding-left: 4rem;
+  }
   
   .NavLinks {
     list-style: none;
